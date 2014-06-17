@@ -29,3 +29,4 @@ Be sure that the following lines are in your
     filetype on
     filetype plugin indent on
 
+[Pathogen]: https://github.com/tpope/vim-pathogen
