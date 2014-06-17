@@ -61,9 +61,14 @@ function! GethaskellIndent()
   endif
 
   if prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
-    let s = match(prevline, '[:=]')
+    let s = match(prevline, '=')
     if s > 0
       return s + 2
+    endif
+
+    let s = match(prevline, ':')
+    if s > 0
+      return s + 3
     else
       return match(prevline, '\S')
     endif
