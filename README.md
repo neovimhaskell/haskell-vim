@@ -1,9 +1,9 @@
 Haskell Syntax/Indentation
 ==========================
 
-I was unhappy with the Haskell script that are
+I was unhappy with the Haskell scripts that are
 shipped with vim, therefore I decided to make my
-own based on idris-vim.
+own based on [idris-vim][].
 
 I hope you find this useful.
 
@@ -30,3 +30,4 @@ Be sure that the following lines are in your
     filetype plugin indent on
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
+[idris-vim]: https://github.com/idris-hackers/idris-vim
