@@ -78,7 +78,7 @@ function! GethaskellIndent()
     return match(prevline, '[{([]')
   endif
 
-  if prevline =~ '\<let\>\s\+.\+\<in\>\s*$'
+  if prevline =~ '\<let\>\s\+.\+\(\<in\>\)\?\s*$'
     return match(prevline, 'let') + g:haskell_indent_let
   endif
 
