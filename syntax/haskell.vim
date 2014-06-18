@@ -15,7 +15,8 @@ endif
 syn match haskellModule "\<module\>"
 syn match haskellImport "\<\(import\|hiding\)\>"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
-syn match haskellStructure "\<\(class\|data\|instance\|where\|type\|newtype\|family\|deriving\)\>"
+syn match haskellStructure "\<\(class\|instance\|where\|newtype\|deriving\)\>"
+syn match haskellDatatypes "\<\(data\|type\)\>\(\s\+\<family\>\)\?"
 syn match haskellStatement "\<\(do\|case\|of\|let\|in\)\>"
 syn match haskellConditional "\<\(if\|then\|else\)\>"
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
@@ -36,6 +37,7 @@ highlight def link haskellImport Structure
 highlight def link haskellQualifiedImport Structure
 highlight def link haskellModule Structure
 highlight def link haskellStructure Structure
+highlight def link haskellDatatypes Structure
 highlight def link haskellStatement Statement
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
