@@ -13,7 +13,8 @@ elseif exists("b:current_syntax")
 endif
 
 syn match haskellModule "\<module\>"
-syn match haskellImport "\<\(foreign\|import\(\s\+safe\)\?\|hiding\)\>"
+syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
+syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
 syn match haskellStructure "\<\(class\|instance\|where\|newtype\|deriving\)\>"
 syn match haskellDatatypes "\<\(data\|type\)\>\(\s\+\<family\>\)\?"
@@ -34,6 +35,7 @@ syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment
 
 highlight def link haskellImport Structure
+highlight def link haskellForeign Structure
 highlight def link haskellQualifiedImport Structure
 highlight def link haskellModule Structure
 highlight def link haskellStructure Structure
