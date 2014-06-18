@@ -24,6 +24,7 @@ syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|_\|{\|}"
 syn match haskellInfix "\<\(prefix\|infix\|infixl\|infixr\)\>"
 syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
 syn match haskellDot "\."
+syn match haskellQuantification "\(forall\|exists\)"
 syn match haskellType "\<\([A-Z][a-zA-Z0-9_]*\|_|_\)\>"
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
@@ -43,6 +44,7 @@ highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
 highlight def link haskellDot Operator
+highlight def link haskellQuantification Operator
 highlight def link haskellType Include
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
