@@ -49,10 +49,28 @@ if !exists('g:haskell_indent_do')
 endif
 
 setlocal indentexpr=GethaskellIndent()
-setlocal indentkeys=!^F,o,O,}
+setlocal indentkeys=!^F,o,O,},=where,=in
 
 function! GethaskellIndent()
   let prevline = getline(v:lnum - 1)
+  let line = getline(v:lnum)
+
+  if line =~ '^\s*\<where\>'
+    let s = match(prevline, '\S')
+    return s + 2
+  endif
+
+  if line =~ '^\s*\<in\>'
+    let n = v:lnum
+    let s = 0
+
+    while s <= 0
+      let n = n - 1
+      let s = match(getline(n),'\<let\>')
+    endwhile
+
+    return s + 1
+  endif
 
   if prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
     let s = match(prevline, '=')
@@ -111,8 +129,6 @@ function! GethaskellIndent()
   if prevline =~ '^\s*\<\data\>\s\+\S\+\s*$'
     return match(prevline, '\<data\>') + &shiftwidth
   endif
-
-  let line = getline(v:lnum)
 
   if (line =~ '^\s*}\s*' && prevline !~ '^\s*;')
     return match(prevline, '\S') - &shiftwidth
