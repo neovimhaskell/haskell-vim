@@ -9,6 +9,13 @@ I hope you find this useful.
 
 ![Screenshot](http://raichoo.github.io/images/haskell-vim.png)
 
+## Features
+
+* Covers a broader spectrum of keywords
+* Highlighting for new features like type families
+* More contextual highlighting (e.g. highlight 'as' or 'family' only in approriate places)
+* Smarter indentation
+
 ## Installation
 
 I recommend using [Pathogen][] for installation. Simply clone
