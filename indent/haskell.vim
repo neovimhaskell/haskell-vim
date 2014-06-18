@@ -73,7 +73,7 @@ function! GethaskellIndent()
   endif
 
   if prevline =~ '\<let\>\s\+.\+\(\<in\>\)\?\s*$'
-    return match(prevline, 'let') + g:haskell_indent_let
+    return match(prevline, '\<let\>') + g:haskell_indent_let
   endif
 
   if prevline !~ '\<else\>'
@@ -105,7 +105,7 @@ function! GethaskellIndent()
   endif
 
   if prevline =~ '\<case\>\s\+.\+\<of\>\s*$'
-    return match(prevline, 'case') + g:haskell_indent_case
+    return match(prevline, '\<case\>') + g:haskell_indent_case
   endif
 
   if prevline =~ '^\s*\<\data\>\s\+\S\+\s*$'
