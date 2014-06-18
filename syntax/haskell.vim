@@ -14,7 +14,7 @@ endif
 
 syn match haskellModule "\<module\>"
 syn match haskellImport "\<\(import\|hiding\)\>"
-syn region haskellQualifiedImport start="\s*\<import\>\s\+\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
+syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
 syn match haskellStructure "\<\(class\|data\|instance\|where\|type\|newtype\|family\|deriving\)\>"
 syn match haskellStatement "\<\(do\|case\|of\|let\|in\)\>"
 syn match haskellConditional "\<\(if\|then\|else\)\>"
