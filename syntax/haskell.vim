@@ -13,7 +13,7 @@ elseif exists("b:current_syntax")
 endif
 
 syn match haskellModule "\<module\>"
-syn match haskellImport "\<\(import\|hiding\)\>"
+syn match haskellImport "\<\(foreign\|import\|hiding\)\>"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
 syn match haskellStructure "\<\(class\|instance\|where\|newtype\|deriving\)\>"
 syn match haskellDatatypes "\<\(data\|type\)\>\(\s\+\<family\>\)\?"
