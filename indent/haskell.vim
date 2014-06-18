@@ -54,12 +54,6 @@ setlocal indentkeys=!^F,o,O,}
 function! GethaskellIndent()
   let prevline = getline(v:lnum - 1)
 
-  if prevline =~ '\s\+(\s*.\+\s\+:\s\+.\+\s*)\s\+->\s*$'
-    return match(prevline, '(')
-  elseif prevline =~ '\s\+{\s*.\+\s\+:\s\+.\+\s*}\s\+->\s*$'
-    return match(prevline, '{')
-  endif
-
   if prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
     let s = match(prevline, '=')
     if s > 0
