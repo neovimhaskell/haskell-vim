@@ -3,7 +3,7 @@
 " Based on idris indentation
 "
 " author: raichoo (raichoo@googlemail.com)
-" date: Jun 17 2014
+" date: Jun 18 2014
 "
 " Modify g:haskell_indent_if and g:haskell_indent_case to
 " change indentation for `if'(default 3) and `case'(default 5).
