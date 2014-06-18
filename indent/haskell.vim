@@ -64,7 +64,7 @@ function! GethaskellIndent()
     let n = v:lnum
     let s = 0
 
-    while s < 0 && n > 0
+    while s <= 0 && n > 0
       let n = n - 1
       let s = match(getline(n),'\<let\>')
     endwhile
