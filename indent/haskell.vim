@@ -25,19 +25,19 @@ endif
 
 if !exists('g:haskell_indent_case')
   " case xs of
-  " >>>>>[]      => ...
-  " >>>>>(y::ys) => ...
+  " >>>>>[]      -> ...
+  " >>>>>(y:ys) -> ...
   let g:haskell_indent_case = 5
 endif
 
 if !exists('g:haskell_indent_let')
-  " let x : Nat = O in
+  " let x = 0 in
   " >>>>x
   let g:haskell_indent_let = 4
 endif
 
 if !exists('g:haskell_indent_where')
-  " where f : Nat -> Nat
+  " where f :: Int -> Int
   " >>>>>>f x = x
   let g:haskell_indent_where = 6
 endif
