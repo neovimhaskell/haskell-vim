@@ -49,7 +49,7 @@ if !exists('g:haskell_indent_do')
 endif
 
 setlocal indentexpr=GethaskellIndent()
-setlocal indentkeys=!^F,o,O,},=where,=in
+setlocal indentkeys=!^F,o,O,},0=where,0=in,<CR>
 
 function! GethaskellIndent()
   let prevline = getline(v:lnum - 1)
@@ -60,7 +60,7 @@ function! GethaskellIndent()
     return s + 2
   endif
 
-  if line =~ '^\s*\<in\>'
+  if line =~ '^\s+\<in\>'
     let n = v:lnum
     let s = 0
 
