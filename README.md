@@ -35,6 +35,41 @@ Be sure that the following lines are in your
     syntax on
     filetype on
     filetype plugin indent on
+    
+## Configuration
+
+### Indentation
+
+To configure indentation in `haskell-vim` you can use the following variables:
+
+* `let g:haskell_indent_if = 3`
+
+        if bool
+        >>>then ...
+        >>>else ...
+  
+* `let g:haskell_indent_case = 5`
+
+        case xs of
+        >>>>>[]     -> ...
+        >>>>>(y:ys) -> ...
+    
+* `let g:haskell_indent_let = 4`
+
+        let x = 0 in
+        >>>>x
+  
+* `let g:haskell_indent_where = 6`
+
+        where f :: Int -> Int
+        >>>>>>f x = x
+  
+* `let g:haskell_indent_do = 3`
+        
+        do x <- a
+        >>>y <- b
+  
+
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
