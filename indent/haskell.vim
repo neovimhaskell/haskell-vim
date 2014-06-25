@@ -60,7 +60,7 @@ function! GethaskellIndent()
     return s + 2
   endif
 
-  if line =~ '^\s+\<in\>'
+  if line =~ '^\s\+\<in\>'
     let n = v:lnum
     let s = 0
 
