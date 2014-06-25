@@ -4,7 +4,6 @@
 " highlighter to support haskell.
 "
 " author: raichoo (raichoo@googlemail.com)
-" date: Jun 18 2014
 
 if version < 600
   syn clear
