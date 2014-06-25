@@ -34,7 +34,7 @@ syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment
 
 if exists('g:haskell_enable_quantification')
-  syn match haskellQuantification "\<\(forall\|exists\)\>"
+  syn match haskellQuantification "\<\(forall\|exists\)\>\s\+[^.=]*\."
 endif
 if exists('g:haskell_enable_recursivedo')
   syn keyword haskellRecursiveDo mdo rec
