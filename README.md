@@ -38,6 +38,12 @@ Be sure that the following lines are in your
     
 ## Configuration
 
+### Features
+
+* `let g:haskell_enable_quantification = 1` to enable highlighting of `forall` and `exists`
+* `let g:haskell_enable_recursivedo = 1` to enable highlighting of `mdo` and `rec`
+* `let g:haskell_enable_arrowsyntax = 1` to enable highlighting of `proc`
+
 ### Indentation
 
 To configure indentation in `haskell-vim` you can use the following variables:
