@@ -12,18 +12,18 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn match haskellModule "\<module\>"
+syn keyword haskellModule module
 syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
-syn match haskellStructure "\<\(class\|instance\|where\|newtype\|deriving\)\>"
+syn keyword haskellStructure class instance where newtype deriving"
 syn match haskellDatatypes "\<\(data\|type\)\>\(\s\+\<family\>\)\?"
-syn match haskellStatement "\<\(do\|case\|of\|let\|in\)\>"
-syn match haskellConditional "\<\(if\|then\|else\)\>"
+syn keyword haskellStatement do case of let in
+syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|{\|}"
-syn match haskellInfix "\<\(infix\|infixl\|infixr\)\>"
+syn keyword haskellInfix infix infixl infixr
 syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
 syn match haskellDot "\."
 syn match haskellType "\<\([A-Z][a-zA-Z0-9_]*\|_|_\)\>"
@@ -37,10 +37,10 @@ if exists('g:haskell_enable_quantification')
   syn match haskellQuantification "\<\(forall\|exists\)\>"
 endif
 if exists('g:haskell_enable_recursivedo')
-  syn match haskellRecursiveDo "\<\(mdo\|rec\)\>"
+  syn keyword haskellRecursiveDo mdo rec
 endif
 if exists('g:haskell_enable_arrowsyntax')
-  syn match haskellArrowSyntax "\<proc\>"
+  syn keyword haskellArrowSyntax proc
 endif
 
 highlight def link haskellImport Structure
