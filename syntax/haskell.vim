@@ -26,13 +26,22 @@ syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|_\|{\|}"
 syn match haskellInfix "\<\(infix\|infixl\|infixr\)\>"
 syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
 syn match haskellDot "\."
-syn match haskellQuantification "\<\(forall\|exists\)\>"
 syn match haskellType "\<\([A-Z][a-zA-Z0-9_]*\|_|_\)\>"
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
 syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_]*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment
+
+if exists('g:haskell_enable_quantification')
+  syn match haskellQuantification "\<\(forall\|exists\)\>"
+endif
+if exists('g:haskell_enable_recursivedo')
+  syn match haskellRecursiveDo "\<\(mdo\|rec\)\>"
+endif
+if exists('g:haskell_enable_arrowsyntax')
+  syn match haskellArrowSyntax "\<proc\>"
+endif
 
 highlight def link haskellImport Structure
 highlight def link haskellForeign Structure
@@ -48,12 +57,21 @@ highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
 highlight def link haskellDot Operator
-highlight def link haskellQuantification Operator
 highlight def link haskellType Include
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
 highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
+
+if exists('g:haskell_enable_quantification')
+  highlight def link haskellQuantification Operator
+endif
+if exists('g:haskell_enable_recursivedo')
+  highlight def link haskellRecursiveDo Operator
+endif
+if exists('g:haskell_enable_arrowsyntax')
+  highlight def link haskellArrowSyntax Operator
+endif
 
 let b:current_syntax = "haskell"
