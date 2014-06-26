@@ -26,11 +26,11 @@ syn keyword haskellInfix infix infixl infixr
 syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
 syn match haskellDot "\."
 syn match haskellType "\<[A-Z][a-zA-Z0-9_]*\>"
-syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
+syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
 syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_]*`"
-syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
-syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment
+syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
+syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
 
 if exists('g:haskell_enable_quantification')
   syn match haskellQuantification "\<\(forall\|exists\)\>\s\+[^.=]*\."
