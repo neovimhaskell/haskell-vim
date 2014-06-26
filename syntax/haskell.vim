@@ -31,6 +31,8 @@ syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
 syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_]*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
+syn match haskellIdentifier "[a-z][a-zA-z0-9_]*\('\)*" contained
+syn match haskellTopLevelDecl "\s*[a-z][a-zA-z0-9_]*\('\)*\s*::" contains=haskellIdentifier,haskellOperators
 
 if exists('g:haskell_enable_quantification')
   syn match haskellQuantification "\<\(forall\|exists\)\>\s\+[^.=]*\."
@@ -42,6 +44,7 @@ if exists('g:haskell_enable_arrowsyntax')
   syn keyword haskellArrowSyntax proc
 endif
 
+highlight def link haskellIdentifier Identifier
 highlight def link haskellImport Structure
 highlight def link haskellForeign Structure
 highlight def link haskellQualifiedImport Structure
