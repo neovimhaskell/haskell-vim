@@ -35,7 +35,9 @@ syn match haskellIdentifier "[a-z][a-zA-z0-9_]*\('\)*" contained
 syn match haskellTopLevelDecl "\s*[a-z][a-zA-z0-9_]*\('\)*\s*::" contains=haskellIdentifier,haskellOperators
 
 if exists('g:haskell_enable_quantification')
+  syn keyword haskellQuantifiers forall exists contained
   syn match haskellQuantification "\<\(forall\|exists\)\>\s\+[^.=]*\."
+    \ contains=haskellQuantifiers,haskellOperators,haskellDot,haskellDelimiter
 endif
 if exists('g:haskell_enable_recursivedo')
   syn keyword haskellRecursiveDo mdo rec
@@ -67,7 +69,7 @@ highlight def link haskellChar String
 highlight def link haskellBacktick Operator
 
 if exists('g:haskell_enable_quantification')
-  highlight def link haskellQuantification Operator
+  highlight def link haskellQuantifiers Operator
 endif
 if exists('g:haskell_enable_recursivedo')
   highlight def link haskellRecursiveDo Operator
