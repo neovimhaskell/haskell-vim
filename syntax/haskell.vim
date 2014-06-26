@@ -15,7 +15,7 @@ syn keyword haskellModule module
 syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
-syn keyword haskellStructure class instance where newtype deriving"
+syn keyword haskellStructure class instance where newtype deriving
 syn match haskellDatatypes "\<\(data\|type\)\>\(\s\+\<family\>\)\?"
 syn keyword haskellStatement do case of let in
 syn keyword haskellConditional if then else
