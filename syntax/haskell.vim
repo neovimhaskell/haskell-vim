@@ -28,7 +28,7 @@ syn match haskellDot "\."
 syn match haskellType "\<[A-Z][a-zA-Z0-9_]*\>"
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
-syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_]*`"
+syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_]*\('\)*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
 syn match haskellIdentifier "[a-z][a-zA-z0-9_]*\('\)*" contained
