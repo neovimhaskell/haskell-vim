@@ -11,13 +11,17 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn keyword haskellModule module
+syn keyword haskellBlockKeywords data type family module where class instance contained
+syn region haskellBlock start="\<\(module\|class\|instance\)\>"
+  \ end="\<where\>" contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
+syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?"
+  \ end="\([=]\|\<where\>\)" contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
+
 syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
-syn keyword haskellStructure class instance where newtype deriving
-syn match haskellDatatypes "\<\(data\|type\)\>\(\s\+\<family\>\)\?"
-syn keyword haskellStatement do case of let in
+syn keyword haskellStructure newtype deriving
+syn keyword haskellStatement do case of let in where
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
@@ -46,13 +50,12 @@ if exists('g:haskell_enable_arrowsyntax')
   syn keyword haskellArrowSyntax proc
 endif
 
+highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellImport Structure
 highlight def link haskellForeign Structure
 highlight def link haskellQualifiedImport Structure
-highlight def link haskellModule Structure
 highlight def link haskellStructure Structure
-highlight def link haskellDatatypes Structure
 highlight def link haskellStatement Statement
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
