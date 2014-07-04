@@ -12,10 +12,12 @@ elseif exists("b:current_syntax")
 endif
 
 syn keyword haskellBlockKeywords data type family module where class instance contained
-syn region haskellBlock start="\<\(module\|class\|instance\)\>"
-  \ end="\<where\>" contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
-syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?"
-  \ end="\([=]\|\<where\>\)" contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
+syn region haskellModuleBlock start="\<module\>" end="\<where\>"
+  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
+syn region haskellBlock start="\<\(class\|instance\)\>" \ end="\(\<where\>\|[\n]\)"
+  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
+syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" \ end="\([=\n]\|\<where\>\)"
+  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 
 syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
