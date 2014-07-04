@@ -51,100 +51,103 @@ setlocal indentexpr=GethaskellIndent()
 setlocal indentkeys=!^F,o,O,},0=where,0=in,0=let,<CR>
 
 function! GethaskellIndent()
-  let prevline = getline(v:lnum - 1)
-  let line = getline(v:lnum)
+  let l:prevline = getline(v:lnum - 1)
+  let l:line = getline(v:lnum)
 
-  if line =~ '^\s*\<where\>'
-    let s = match(prevline, '\S')
-    return s + 2
+  if l:line =~ '^\s*\<where\>'
+    let l:s = match(l:prevline, '\S')
+    return l:s + 2
   endif
 
-  if line =~ '^\s*\<let\>'
-    let s = match(prevline, '\<let\>')
-    if s != 0
-      return s
+  if l:line =~ '^\s*\<let\>'
+    let l:s = match(l:prevline, '\<let\>')
+    if l:s != 0
+      return l:s
     endif
   endif
 
-  if line =~ '^\s\+\<in\>'
-    let n = v:lnum
-    let s = 0
+  if l:line =~ '^\s\+\<in\>'
+    let l:n = v:lnum
+    let l:s = 0
+    let l:stop = 0
 
-    while s <= 0 && n > 0
-      let n = n - 1
-      let l = getline(n)
+    while l:s <= 0 && l:n > 0 && l:stop == 0
+      let l:n = l:n - 1
+      let l:l = getline(l:n)
 
-      if l =~ '^\S'
-        return 0
+      if match(l:l, '\<in\>') > 0 || match(l:l, '\S') == 0
+        let l:stop = 1
+      else
+        let l:s = match(l:l, '\<let\>')
       endif
-
-      let s = match(l,'\<let\>')
     endwhile
 
-    return s + 1
+    if l:stop == 0 && l:n > 0
+      return l:s + 1
+    endif
   endif
 
-  if prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
-    let s = match(prevline, '=')
-    if s > 0
-      return s + 2
+  if l:prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
+    let l:s = match(l:prevline, '=')
+    if l:s > 0
+      return l:s + 2
     endif
 
-    let s = match(prevline, ':')
-    if s > 0
-      return s + 3
+    let l:s = match(l:prevline, ':')
+    if l:s > 0
+      return l:s + 3
     else
-      return match(prevline, '\S')
+      return match(l:prevline, '\S')
     endif
   endif
 
-  if prevline =~ '[{([][^})\]]\+$'
-    return match(prevline, '[{([]')
+  if l:prevline =~ '[{([][^})\]]\+$'
+    return match(l:prevline, '[{([]')
   endif
 
-  if prevline =~ '\<let\>\s\+.\+\(\<in\>\)\?\s*$'
-    return match(prevline, '\<let\>') + g:haskell_indent_let
+  if l:prevline =~ '\<let\>\s\+.\+\(\<in\>\)\?\s*$'
+    return match(l:prevline, '\<let\>') + g:haskell_indent_let
   endif
 
-  if prevline !~ '\<else\>'
-    let s = match(prevline, '\<if\>.*\&.*\zs\<then\>')
-    if s > 0
-      return s
+  if l:prevline !~ '\<else\>'
+    let l:s = match(l:prevline, '\<if\>.*\&.*\zs\<then\>')
+    if l:s > 0
+      return l:s
     endif
 
-    let s = match(prevline, '\<if\>')
-    if s > 0
-      return s + g:haskell_indent_if
+    let l:s = match(l:prevline, '\<if\>')
+    if l:s > 0
+      return l:s + g:haskell_indent_if
     endif
   endif
 
-  if prevline =~ '\(\<where\>\|\<do\>\|=\|[{([]\)\s*$'
-    return match(prevline, '\S') + &shiftwidth
+  if l:prevline =~ '\(\<where\>\|\<do\>\|=\|[{([]\)\s*$'
+    return match(l:prevline, '\S') + &shiftwidth
   endif
 
-  if prevline =~ '\<where\>\s\+\S\+.*$'
-    return match(prevline, '\<where\>') + g:haskell_indent_where
+  if l:prevline =~ '\<where\>\s\+\S\+.*$'
+    return match(l:prevline, '\<where\>') + g:haskell_indent_where
   endif
 
-  if prevline =~ '\<do\>\s\+\S\+.*$'
-    return match(prevline, '\<do\>') + g:haskell_indent_do
+  if l:prevline =~ '\<do\>\s\+\S\+.*$'
+    return match(l:prevline, '\<do\>') + g:haskell_indent_do
   endif
 
-  if prevline =~ '^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
-    return match(prevline, '=')
+  if l:prevline =~ '^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
+    return match(l:prevline, '=')
   endif
 
-  if prevline =~ '\<case\>\s\+.\+\<of\>\s*$'
-    return match(prevline, '\<case\>') + g:haskell_indent_case
+  if l:prevline =~ '\<case\>\s\+.\+\<of\>\s*$'
+    return match(l:prevline, '\<case\>') + g:haskell_indent_case
   endif
 
-  if prevline =~ '^\s*\<\data\>\s\+\S\+\s*$'
-    return match(prevline, '\<data\>') + &shiftwidth
+  if l:prevline =~ '^\s*\<\data\>\s\+\S\+\s*$'
+    return match(l:prevline, '\<data\>') + &shiftwidth
   endif
 
-  if (line =~ '^\s*}\s*' && prevline !~ '^\s*;')
-    return match(prevline, '\S') - &shiftwidth
+  if (l:line =~ '^\s*}\s*' && l:prevline !~ '^\s*;')
+    return match(l:prevline, '\S') - &shiftwidth
   endif
 
-  return match(prevline, '\S')
+  return match(l:prevline, '\S')
 endfunction
