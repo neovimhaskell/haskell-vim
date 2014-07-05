@@ -29,6 +29,7 @@ syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|{\|}"
 syn keyword haskellInfix infix infixl infixr
+syn keyword haskellBottom undefined error
 syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
 syn match haskellDot "\."
 syn match haskellType "\<[A-Z][a-zA-Z0-9_]*\>"
@@ -52,6 +53,7 @@ if exists('g:haskell_enable_arrowsyntax')
   syn keyword haskellArrowSyntax proc
 endif
 
+highlight def link haskellBottom Macro
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellImport Structure
