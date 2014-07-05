@@ -48,7 +48,7 @@ if !exists('g:haskell_indent_do')
 endif
 
 setlocal indentexpr=GethaskellIndent()
-setlocal indentkeys=!^F,o,O,},0=where,0=in,0=let,<CR>
+setlocal indentkeys=!^F,o,O,},0=where,0=in,0=let,0=deriving,<CR>
 
 function! GethaskellIndent()
   let l:prevline = getline(v:lnum - 1)
@@ -57,6 +57,13 @@ function! GethaskellIndent()
   if l:line =~ '^\s*\<where\>'
     let l:s = match(l:prevline, '\S')
     return l:s + 2
+  endif
+
+  if l:line =~ '^\s*\<deriving\>'
+    let l:s = match(l:prevline, '\<\(newtype\|data\)\>')
+    if l:s >= 0
+      return l:s + 2
+    endif
   endif
 
   if l:line =~ '^\s*\<let\>'
