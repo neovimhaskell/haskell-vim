@@ -12,7 +12,7 @@ I hope you find this useful.
 ## Features
 
 * Covers a broader spectrum of keywords
-* Highlighting for new features like type families
+* Highlighting for new features like type families, pattern synonyms, arrow syntax, recursive do
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in approriate places)
 * Smarter indentation
 
@@ -43,6 +43,7 @@ Be sure that the following lines are in your
 * `let g:haskell_enable_quantification = 1` to enable highlighting of `forall` and `exists`
 * `let g:haskell_enable_recursivedo = 1` to enable highlighting of `mdo` and `rec`
 * `let g:haskell_enable_arrowsyntax = 1` to enable highlighting of `proc`
+* `let g:haskell_enable_pattern_synonyms = 1` to enable highlighting of `pattern`
 
 ### Indentation
 

@@ -52,7 +52,9 @@ endif
 if exists('g:haskell_enable_arrowsyntax')
   syn keyword haskellArrowSyntax proc
 endif
-
+if exists('g:haskell_enable_pattern_synonyms')
+  syn keyword haskellPatternSynonyms pattern
+endif
 highlight def link haskellBottom Macro
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
@@ -83,6 +85,9 @@ if exists('g:haskell_enable_recursivedo')
 endif
 if exists('g:haskell_enable_arrowsyntax')
   highlight def link haskellArrowSyntax Operator
+endif
+if exists('g:haskell_enable_pattern_synonyms')
+  highlight def link haskellPatternSynonyms Structure
 endif
 
 let b:current_syntax = "haskell"
