@@ -152,9 +152,5 @@ function! GethaskellIndent()
     return match(l:prevline, '\<data\>') + &shiftwidth
   endif
 
-  if (l:line =~ '^\s*}\s*' && l:prevline !~ '^\s*;')
-    return match(l:prevline, '\S') - &shiftwidth
-  endif
-
   return match(l:prevline, '\S')
 endfunction
