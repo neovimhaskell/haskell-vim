@@ -146,6 +146,18 @@ function! GethaskellIndent()
     endif
   endif
 
+  if l:line =~ '^\s*|'
+    let l:n = v:lnum - 1
+    let l:s = 0
+
+    while l:s <= 0 && l:n > 0
+      let l:s = match(getline(l:n), '\S')
+      let l:n = l:n - 1
+    endwhile
+
+    return l:s
+  endif
+
   if l:prevline =~ '\<case\>\s\+.\+\<of\>\s*$'
     return match(l:prevline, '\<case\>') + g:haskell_indent_case
   endif
