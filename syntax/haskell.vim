@@ -22,7 +22,7 @@ syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="
 syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
-syn keyword haskellStructure newtype deriving
+syn keyword haskellStructure newtype deriving default
 syn keyword haskellStatement do case of let in where
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
