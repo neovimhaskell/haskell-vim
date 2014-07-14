@@ -54,26 +54,26 @@ function! GethaskellIndent()
   let l:prevline = getline(v:lnum - 1)
   let l:line = getline(v:lnum)
 
-  if l:line =~ '^\s*\<where\>'
+  if l:line =~ '\C^\s*\<where\>'
     let l:s = match(l:prevline, '\S')
     return l:s + 2
   endif
 
-  if l:line =~ '^\s*\<deriving\>'
-    let l:s = match(l:prevline, '\<\(newtype\|data\)\>')
+  if l:line =~ '\C^\s*\<deriving\>'
+    let l:s = match(l:prevline, '\C\<\(newtype\|data\)\>')
     if l:s >= 0
       return l:s + 2
     endif
   endif
 
-  if l:line =~ '^\s*\<let\>'
-    let l:s = match(l:prevline, '\<let\>')
+  if l:line =~ '\C^\s*\<let\>'
+    let l:s = match(l:prevline, '\C\<let\>')
     if l:s != 0
       return l:s
     endif
   endif
 
-  if l:line =~ '^\s\+\<in\>'
+  if l:line =~ '\C^\s\+\<in\>'
     let l:n = v:lnum
     let l:s = 0
     let l:stop = 0
@@ -82,10 +82,10 @@ function! GethaskellIndent()
       let l:n = l:n - 1
       let l:l = getline(l:n)
 
-      if match(l:l, '\<in\>') > 0 || match(l:l, '\S') == 0
+      if match(l:l, '\C\<in\>') > 0 || match(l:l, '\S') == 0
         let l:stop = 1
       else
-        let l:s = match(l:l, '\<let\>')
+        let l:s = match(l:l, '\C\<let\>')
       endif
     endwhile
 
@@ -112,35 +112,35 @@ function! GethaskellIndent()
     return match(l:prevline, '[{([]')
   endif
 
-  if l:prevline =~ '\<let\>\s\+.\+\(\<in\>\)\?\s*$'
-    return match(l:prevline, '\<let\>') + g:haskell_indent_let
+  if l:prevline =~ '\C\<let\>\s\+.\+\(\<in\>\)\?\s*$'
+    return match(l:prevline, '\C\<let\>') + g:haskell_indent_let
   endif
 
-  if l:prevline !~ '\<else\>'
-    let l:s = match(l:prevline, '\<if\>.*\&.*\zs\<then\>')
+  if l:prevline !~ '\C\<else\>'
+    let l:s = match(l:prevline, '\C\<if\>.*\&.*\zs\<then\>')
     if l:s > 0
       return l:s
     endif
 
-    let l:s = match(l:prevline, '\<if\>')
+    let l:s = match(l:prevline, '\C\<if\>')
     if l:s > 0
       return l:s + g:haskell_indent_if
     endif
   endif
 
-  if l:prevline =~ '\(\<where\>\|\<do\>\|=\|[{([]\)\s*$'
+  if l:prevline =~ '\C\(\<where\>\|\<do\>\|=\|[{([]\)\s*$'
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
-  if l:prevline =~ '\<where\>\s\+\S\+.*$'
-    return match(l:prevline, '\<where\>') + g:haskell_indent_where
+  if l:prevline =~ '\C\<where\>\s\+\S\+.*$'
+    return match(l:prevline, '\C\<where\>') + g:haskell_indent_where
   endif
 
-  if l:prevline =~ '\<do\>\s\+\S\+.*$'
-    return match(l:prevline, '\<do\>') + g:haskell_indent_do
+  if l:prevline =~ '\C\<do\>\s\+\S\+.*$'
+    return match(l:prevline, '\C\<do\>') + g:haskell_indent_do
   endif
 
-  if l:prevline =~ '^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
+  if l:prevline =~ '\C^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
     if l:line =~ '^\s*|'
       return match(l:prevline, '=')
     endif
@@ -158,12 +158,12 @@ function! GethaskellIndent()
     return l:s
   endif
 
-  if l:prevline =~ '\<case\>\s\+.\+\<of\>\s*$'
-    return match(l:prevline, '\<case\>') + g:haskell_indent_case
+  if l:prevline =~ '\C\<case\>\s\+.\+\<of\>\s*$'
+    return match(l:prevline, '\C\<case\>') + g:haskell_indent_case
   endif
 
-  if l:prevline =~ '^\s*\<\data\>\s\+\S\+\s*$'
-    return match(l:prevline, '\<data\>') + &shiftwidth
+  if l:prevline =~ '\C^\s*\<\data\>\s\+\S\+\s*$'
+    return match(l:prevline, '\C\<data\>') + &shiftwidth
   endif
 
   return match(l:prevline, '\S')
