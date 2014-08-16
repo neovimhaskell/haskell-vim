@@ -18,7 +18,6 @@ syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|[\n]\)
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=\n]\|\<where\>\)"
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
-
 syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
 syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
@@ -41,6 +40,11 @@ syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*\('\)*" contained
 syn match haskellTopLevelDecl "\s*[_a-z][a-zA-z0-9_]*\('\)*\s*::" contains=haskellIdentifier,haskellOperators
 
+if exists('g:haskell_enable_typeroles')
+  syn keyword haskellTypeRoles type role phantom representational nominal contained
+  syn region haskellTypeRoleBlock start="type\s\+role" end="[\n]"
+    \ contains=haskellType,haskellTypeRoles keepend
+endif
 if exists('g:haskell_enable_quantification')
   syn keyword haskellQuantifiers forall exists contained
   syn match haskellQuantification "\<\(forall\|exists\)\>\s\+[^.=]*\."
@@ -55,6 +59,7 @@ endif
 if exists('g:haskell_enable_pattern_synonyms')
   syn keyword haskellPatternSynonyms pattern
 endif
+
 highlight def link haskellBottom Macro
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
@@ -88,6 +93,9 @@ if exists('g:haskell_enable_arrowsyntax')
 endif
 if exists('g:haskell_enable_pattern_synonyms')
   highlight def link haskellPatternSynonyms Structure
+endif
+if exists('g:haskell_enable_typeroles')
+  highlight def link haskellTypeRoles Structure
 endif
 
 let b:current_syntax = "haskell"
