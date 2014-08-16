@@ -40,6 +40,9 @@ Be sure that the following lines are in your
 
 ### Features
 
+To enable the features you would like to use, just add the according line to your
+`.vimrc`.
+
 * `let g:haskell_enable_quantification = 1` to enable highlighting of `forall` and `exists`
 * `let g:haskell_enable_recursivedo = 1` to enable highlighting of `mdo` and `rec`
 * `let g:haskell_enable_arrowsyntax = 1` to enable highlighting of `proc`
