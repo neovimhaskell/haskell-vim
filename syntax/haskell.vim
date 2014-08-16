@@ -46,9 +46,9 @@ if exists('g:haskell_enable_typeroles')
     \ contains=haskellType,haskellTypeRoles keepend
 endif
 if exists('g:haskell_enable_quantification')
-  syn keyword haskellQuantifiers forall exists contained
-  syn match haskellQuantification "\<\(forall\|exists\)\>\s\+[^.=]*\."
-    \ contains=haskellQuantifiers,haskellOperators,haskellDot,haskellDelimiter
+  syn keyword haskellForall forall contained
+  syn match haskellQuantification "\<\(forall\)\>\s\+[^.=]*\."
+    \ contains=haskellForall,haskellOperators,haskellDot,haskellDelimiter
 endif
 if exists('g:haskell_enable_recursivedo')
   syn keyword haskellRecursiveDo mdo rec
@@ -83,7 +83,7 @@ highlight def link haskellChar String
 highlight def link haskellBacktick Operator
 
 if exists('g:haskell_enable_quantification')
-  highlight def link haskellQuantifiers Operator
+  highlight def link haskellForall Operator
 endif
 if exists('g:haskell_enable_recursivedo')
   highlight def link haskellRecursiveDo Operator
