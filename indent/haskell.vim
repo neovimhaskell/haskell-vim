@@ -83,7 +83,7 @@ function! GethaskellIndent()
     let l:s = match(l:prevline, '\C\<let\>')
     if l:s >= 0
       return l:s + g:haskell_indent_in
-    else
+    elseif match(l:prevline, '=') > 0
       let l:s = match(l:prevline, '\S')
       return l:s - (4 - g:haskell_indent_in)
     endif
