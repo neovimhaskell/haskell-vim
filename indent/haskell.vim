@@ -89,6 +89,17 @@ function! GethaskellIndent()
     endif
   endif
 
+  if l:line =~ '^\s*|'
+    if match(l:prevline, '^\s*|') >= 0
+      return match(l:prevline, '|')
+    else
+      let l:s = match(l:prevline, '\S')
+      if l:s >= 0
+        return l:s + 2
+      endif
+    endif
+  endif
+
   if l:prevline =~ '[=-]>\s*$'
     let l:s = match(l:prevline, ':')
     if l:s > 0
@@ -96,7 +107,7 @@ function! GethaskellIndent()
     else
       return match(l:prevline, '\S')
     endif
-  elseif l:prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
+  elseif l:prevline =~ '\s\+[!#$%&*+./<>?@\\^|~-]\+\s*$'
     let l:s = match(l:prevline, '=')
     if l:s > 0
       return l:s + 2
@@ -105,7 +116,10 @@ function! GethaskellIndent()
     let l:s = match(l:prevline, ':')
     if l:s > 0
       return l:s + 3
-    else
+    endif
+
+    let l:s = match(l:prevline, '|')
+    if l:s > 0
       return match(l:prevline, '\S')
     endif
   endif
@@ -145,15 +159,6 @@ function! GethaskellIndent()
   if l:prevline =~ '\C^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
     if l:line =~ '^\s*|'
       return match(l:prevline, '=')
-    endif
-  endif
-
-  if l:line =~ '^|'
-    let l:s match(l:prevline, '\S')
-    if l:s > 0
-      return l:s + 2
-    else
-      return 2
     endif
   endif
 
