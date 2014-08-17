@@ -90,12 +90,14 @@ function! GethaskellIndent()
   endif
 
   if l:line =~ '^\s*|'
-    if match(l:prevline, '^\s*|') >= 0
-      return match(l:prevline, '|')
-    else
-      let l:s = match(l:prevline, '\S')
-      if l:s >= 0
-        return l:s + 2
+    if match(l:prevline, '^\s*data') < 0
+      if match(l:prevline, '^\s*|\s') >= 0
+        return match(l:prevline, '|')
+      else
+        let l:s = match(l:prevline, '\S')
+        if l:s >= 0
+          return l:s + 2
+        endif
       endif
     endif
   endif
