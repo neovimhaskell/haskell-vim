@@ -80,7 +80,7 @@ To configure indentation in `haskell-vim` you can use the following variables:
         do x <- a
         >>>y <- b
 
-* `let g:haskell_indent_in`
+* `let g:haskell_indent_in = 1`
 
         let x = 1
         >in x
