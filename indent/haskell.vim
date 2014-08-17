@@ -148,16 +148,13 @@ function! GethaskellIndent()
     endif
   endif
 
-  if l:line =~ '^\s*|'
-    let l:n = v:lnum - 1
-    let l:s = 0
-
-    while l:s <= 0 && l:n > 0
-      let l:s = match(getline(l:n), '\S')
-      let l:n = l:n - 1
-    endwhile
-
-    return l:s
+  if l:line =~ '^|'
+    let l:s match(l:prevline, '\S')
+    if l:s > 0
+      return l:s + 2
+    else
+      return 2
+    endif
   endif
 
   if l:prevline =~ '\C\<case\>\s\+.\+\<of\>\s*$'
