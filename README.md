@@ -51,7 +51,7 @@ To enable the features you would like to use, just add the according line to you
 
 ### Indentation
 
-To configure indentation in `haskell-vim` you can use the following variables:
+To configure indentation in `haskell-vim` you can use the following variables to change indentation depth, just add the according line to your `.vimrc`.
 
 * `let g:haskell_indent_if = 3`
 
