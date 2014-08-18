@@ -106,23 +106,13 @@ function! GethaskellIndent()
     let l:s = match(l:prevline, ':')
     if l:s > 0
       return l:s + 3
-    else
-      return match(l:prevline, '\S')
     endif
-  elseif l:prevline =~ '\s\+[!#$%&*+./<>?@\\^|~-]\+\s*$'
-    let l:s = match(l:prevline, '=')
+  endif
+
+  if l:prevline =~ '\s\+[!#$%&*+./<>?@\\^|~-]\+\s*$'
+    let l:s = match(l:prevline, '\S')
     if l:s > 0
       return l:s + 2
-    endif
-
-    let l:s = match(l:prevline, ':')
-    if l:s > 0
-      return l:s + 3
-    endif
-
-    let l:s = match(l:prevline, '|')
-    if l:s > 0
-      return match(l:prevline, '\S')
     endif
   endif
 
