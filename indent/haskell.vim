@@ -102,7 +102,7 @@ function! GethaskellIndent()
     endif
   endif
 
-  if l:line =~ '^\s*[=->]'
+  if l:line =~ '^\s*[=-]>'
     let l:s = match(l:prevline, ' :: ')
     if l:s >= 0
       return l:s + 1
