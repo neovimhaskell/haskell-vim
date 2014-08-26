@@ -18,9 +18,9 @@ syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|[\n]\)
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=\n]\|\<where\>\)"
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
-syn match haskellImport "\(\<import\>\(\s\+safe\)\?\|\<hiding\>\)"
+syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn match haskellForeign "\<foreign\>\s\+\<\(export\|import\)\>\(\s\+\(\<ccall\>\(\s\+\<\(\(un\)\?safe\|interruptible\)\>\)\?\|\<capi\>\|\<prim\>\)\>\)\?"
-syn region haskellQualifiedImport start="\<qualified\>" contains=haskellType,haskellDot end="\<as\>"
+syn region haskellImport start="\<import\>" contains=haskellDelimiter,haskellType,haskellDot,haskellImportKeywords end="\((\|$\)" keepend
 syn keyword haskellStructure newtype deriving default
 syn keyword haskellStatement do case of let in where
 syn keyword haskellConditional if then else
@@ -63,9 +63,8 @@ endif
 highlight def link haskellBottom Macro
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
-highlight def link haskellImport Structure
+highlight def link haskellImportKeywords Structure
 highlight def link haskellForeign Structure
-highlight def link haskellQualifiedImport Structure
 highlight def link haskellStructure Structure
 highlight def link haskellStatement Statement
 highlight def link haskellConditional Conditional
