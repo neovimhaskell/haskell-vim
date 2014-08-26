@@ -39,7 +39,7 @@ syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_\.]*\('\)*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*\('\)*" contained
-syn match haskellTopLevelDecl "\s*[_a-z][a-zA-z0-9_]*\('\)*\s*::" contains=haskellIdentifier,haskellOperators
+syn match haskellTopLevelDecl "^\s*[_a-z][a-zA-z0-9_]*\('\)*\s*::" contains=haskellIdentifier,haskellOperators
 
 if exists('g:haskell_enable_typeroles')
   syn keyword haskellTypeRoles type role phantom representational nominal contained
