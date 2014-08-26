@@ -14,9 +14,9 @@ endif
 syn keyword haskellBlockKeywords data type family module where class instance contained
 syn region haskellModuleBlock start="\<module\>" end="\<where\>"
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment keepend
-syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|[\n]\)"
+syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^$\)"
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
-syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=\n]\|\<where\>\)"
+syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^$\)" keepend
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
