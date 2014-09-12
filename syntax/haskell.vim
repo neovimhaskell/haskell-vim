@@ -18,6 +18,9 @@ syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\)" keepend
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
+syn keyword haskellStandaloneDerivingKeywords deriving instance
+syn region haskellStandaloneDeriving start="deriving\s\+instance" end="$"
+  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
 syn region haskellForeignImport start="\<foreign\>" contains=haskellString,haskellOperators,haskellForeignKeywords,haskellIdentifier end="::" keepend
@@ -63,6 +66,7 @@ endif
 
 highlight def link haskellBottom Macro
 highlight def link haskellBlockKeywords Structure
+highlight def link haskellStandaloneDerivingKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellImportKeywords Structure
 highlight def link haskellForeignKeywords Structure
