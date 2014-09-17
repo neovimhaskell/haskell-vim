@@ -18,7 +18,7 @@ syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\)" keepend
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
-syn keyword haskellStandaloneDerivingKeywords deriving instance
+syn keyword haskellStandaloneDerivingKeywords deriving instance contained
 syn region haskellStandaloneDeriving start="deriving\s\+instance" end="$"
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators
 syn keyword haskellImportKeywords import qualified safe as hiding contained
