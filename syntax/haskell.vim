@@ -43,8 +43,8 @@ syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
 syn match haskellType "[A-Z][a-zA-Z0-9_]*'*"
 syn match haskellTopLevelDecl "^\s*[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators
-syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators
-syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}"
+syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
+syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField
 
 if exists('g:haskell_enable_typeroles')
