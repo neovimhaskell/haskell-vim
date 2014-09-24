@@ -12,8 +12,13 @@ elseif exists("b:current_syntax")
 endif
 
 syn keyword haskellBlockKeywords data type family module where class instance contained
-syn region haskellModuleBlock start="\<module\>" end="\<where\>"
-  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment keepend
+if exists('g:haskell_enable_pattern_synonyms')
+  syn region haskellModuleBlock start="\<module\>" end="\<where\>"
+    \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment,haskellPatternSynonyms keepend
+else
+  syn region haskellModuleBlock start="\<module\>" end="\<where\>"
+    \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment keepend
+endif
 syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\)"
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\)" keepend
