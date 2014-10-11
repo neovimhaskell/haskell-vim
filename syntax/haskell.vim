@@ -24,13 +24,13 @@ syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\
 syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\)" keepend
   \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords keepend
 syn keyword haskellStandaloneDerivingKeywords deriving instance contained
-syn region haskellStandaloneDeriving start="deriving\s\+instance" end="$"
-  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators
+syn keyword haskellStructure newtype deriving default
+syn region haskellStandaloneDeriving start="\<deriving\>\s\+\<instance\>" end="$"
+  \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellStandaloneDerivingKeywords
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
 syn region haskellForeignImport start="\<foreign\>" contains=haskellString,haskellOperators,haskellForeignKeywords,haskellIdentifier end="::" keepend
 syn region haskellImport start="\<import\>" contains=haskellDelimiter,haskellType,haskellDot,haskellImportKeywords end="\((\|$\)" keepend
-syn keyword haskellStructure newtype deriving default
 syn keyword haskellStatement do case of let in where
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
@@ -47,7 +47,7 @@ syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
 syn match haskellType "'\?\<[A-Z][a-zA-Z0-9_]*'*\>"
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
-syn match haskellTopLevelDecl "^\s*[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators
+syn match haskellTopLevelDecl "^\s*\([_a-z][a-zA-z0-9_]*'*,\?\s*\)\+::" contains=haskellIdentifier,haskellOperators,haskellDelimiter
 syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField
