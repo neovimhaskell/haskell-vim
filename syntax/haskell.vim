@@ -50,7 +50,9 @@ syn match haskellChar "\s\+'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\s\+"
 syn match haskellTopLevelDecl "^\s*\([_a-z][a-zA-z0-9_]*'*,\?\s*\)\+::" contains=haskellIdentifier,haskellOperators,haskellDelimiter
 syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
-  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField
+  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement
+syn region haskellRecordUpdate start="[a-z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
+  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement
 
 if exists('g:haskell_enable_typeroles')
   syn keyword haskellTypeRoles type role phantom representational nominal contained
