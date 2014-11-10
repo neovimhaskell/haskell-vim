@@ -58,6 +58,11 @@ setlocal indentkeys=!^F,o,O,\|,0=where,0=in,0=let,0=deriving,0=->,0=\=>,<CR>
 
 function! GethaskellIndent()
   let l:prevline = getline(v:lnum - 1)
+
+  if l:prevline =~ '^\s*--'
+    return 0
+  endif
+
   let l:line = getline(v:lnum)
 
   if l:line =~ '\C^\s*\<where\>'
