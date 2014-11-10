@@ -45,8 +45,8 @@ syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_\.]*'*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
-syn match haskellType "'\?\<[A-Z][a-zA-Z0-9_]*'*\>"
-syn match haskellChar "\s\+'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\s\+"
+syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
+syn match haskellType "\(\<[A-Z][a-zA-Z0-9_]*\>\|'\<[A-Z][a-zA-Z0-9_]*\>\)'*"
 syn match haskellTopLevelDecl "^\s*\([_a-z][a-zA-z0-9_]*'*,\?\s*\)\+::" contains=haskellIdentifier,haskellOperators,haskellDelimiter
 syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
