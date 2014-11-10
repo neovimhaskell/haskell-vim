@@ -11,7 +11,7 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn keyword haskellBlockKeywords data type family module where class instance contained
+syn keyword haskellBlockKeywords data type family module where class instance deriving contained
 if exists('g:haskell_enable_pattern_synonyms')
   syn region haskellModuleBlock start="\<module\>" end="\<where\>"
     \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment,haskellPatternSynonyms keepend
