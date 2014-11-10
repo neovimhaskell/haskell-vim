@@ -12,7 +12,7 @@ I hope you find this useful.
 ## Features
 
 * Covers a broader spectrum of keywords
-* Highlighting for new features like type families, pattern synonyms, arrow syntax, recursive do
+* Highlighting for new features like type families, pattern synonyms, arrow syntax, recursive do, role annotations
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in approriate places)
 * Smarter indentation
 
