@@ -44,7 +44,7 @@ syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=
 syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_\.]*'*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
-syn region haskellPragma start="{-#" end="#-}" contains=haskellPragma
+syn region haskellPragma start="{-#" end="#-}"
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
 syn match haskellType "\(\<[A-Z][a-zA-Z0-9_]*\>\|'\<[A-Z][a-zA-Z0-9_]*\>\)'*"
@@ -95,7 +95,7 @@ highlight def link haskellDot Operator
 highlight def link haskellType Include
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
-highlight def link haskellPragma PreProc
+highlight def link haskellPragma SpecialComment
 highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
