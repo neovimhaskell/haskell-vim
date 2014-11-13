@@ -60,7 +60,7 @@ function! GethaskellIndent()
   let l:prevline = getline(v:lnum - 1)
 
   if l:prevline =~ '^\s*--'
-    return 0
+    return match(l:prevline, '\S')
   endif
 
   let l:line = getline(v:lnum)
