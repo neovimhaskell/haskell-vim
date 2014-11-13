@@ -53,6 +53,7 @@ syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement
 syn region haskellRecordUpdate start="[a-z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement
+syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_]*'*|" end="|\]" keepend
 
 if exists('g:haskell_enable_typeroles')
   syn keyword haskellTypeRoles type role phantom representational nominal contained
@@ -75,6 +76,7 @@ if exists('g:haskell_enable_pattern_synonyms')
 endif
 
 highlight def link haskellBottom Macro
+highlight def link haskellQuasiQuote String
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellStandaloneDerivingKeywords Structure
 highlight def link haskellIdentifier Identifier
