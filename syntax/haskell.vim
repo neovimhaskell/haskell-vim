@@ -12,7 +12,7 @@ elseif exists("b:current_syntax")
 endif
 
 syn keyword haskellBlockKeywords data type family module where class instance deriving contained
-if exists('g:haskell_enable_pattern_synonyms')
+if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellModuleBlock start="\<module\>" end="\<where\>"
     \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment,haskellPragma,haskellPatternSynonyms keepend
 else
@@ -56,23 +56,23 @@ syn region haskellRecordUpdate start="[a-z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement
 syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_]*'*|" end="|\]" keepend
 
-if exists('g:haskell_enable_typeroles')
+if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles type role phantom representational nominal contained
   syn region haskellTypeRoleBlock start="type\s\+role" end="[\n]"
     \ contains=haskellType,haskellTypeRoles keepend
 endif
-if exists('g:haskell_enable_quantification')
+if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   syn keyword haskellForall forall contained
   syn match haskellQuantification "\<\(forall\)\>\s\+[^.=]*\."
     \ contains=haskellForall,haskellOperators,haskellDot,haskellDelimiter
 endif
-if exists('g:haskell_enable_recursivedo')
+if exists('g:haskell_enable_recursivedo') && g:haskell_enable_recursivedo == 1
   syn keyword haskellRecursiveDo mdo rec
 endif
-if exists('g:haskell_enable_arrowsyntax')
+if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   syn keyword haskellArrowSyntax proc
 endif
-if exists('g:haskell_enable_pattern_synonyms')
+if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn keyword haskellPatternSynonyms pattern
 endif
 
@@ -100,19 +100,19 @@ highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
 
-if exists('g:haskell_enable_quantification')
+if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
 endif
-if exists('g:haskell_enable_recursivedo')
+if exists('g:haskell_enable_recursivedo') && g:haskell_enable_recursivedo == 1
   highlight def link haskellRecursiveDo Operator
 endif
-if exists('g:haskell_enable_arrowsyntax')
+if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   highlight def link haskellArrowSyntax Operator
 endif
-if exists('g:haskell_enable_pattern_synonyms')
+if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   highlight def link haskellPatternSynonyms Structure
 endif
-if exists('g:haskell_enable_typeroles')
+if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   highlight def link haskellTypeRoles Structure
 endif
 
