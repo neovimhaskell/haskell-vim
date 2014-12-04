@@ -58,6 +58,7 @@ syn region haskellRecordUpdate start="[a-z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement,haskellWhere
 syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_]*'*|\||\]" contained
 syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_]*'*|" end="|\]" contains=haskellQuasiQuoteDelimiters keepend
+syn match haskellTHQuasiQuotes "\[||\|||\]\|\[|\||\]\|\[\(d\|t\|p\)|"
 syn region haskellPreProc start="^#" end="$"
 
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
@@ -82,6 +83,7 @@ endif
 
 highlight def link haskellBottom Macro
 highlight def link haskellQuasiQuoteDelimiters Boolean
+highlight def link haskellTHQuasiQuotes Boolean
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellStandaloneDerivingKeywords Structure
 highlight def link haskellIdentifier Identifier
