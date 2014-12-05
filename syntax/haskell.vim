@@ -78,7 +78,7 @@ if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   syn keyword haskellArrowSyntax proc
 endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  syn region haskellPatternSynonyms start="^\s*pattern\s\+[A-Z][A-za-z0-9_]*\s*" end="[=]" keepend contains=haskellPatternKeyword,haskellType,haskellOperators
+  syn region haskellPatternSynonyms start="^\s*pattern\s\+[A-Z][A-za-z0-9_]*\s*" end="=\|<-\|$" keepend contains=haskellPatternKeyword,haskellType,haskellOperators
   syn keyword haskellPatternKeyword pattern contained
 endif
 
