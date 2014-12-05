@@ -14,7 +14,7 @@ endif
 syn keyword haskellBlockKeywords data type family module where class instance deriving contained
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellModuleBlock start="\<module\>" end="\<where\>"
-    \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment,haskellPragma,haskellPatternSynonyms keepend
+    \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment,haskellPragma,haskellPatternKeyword keepend
 else
   syn region haskellModuleBlock start="\<module\>" end="\<where\>"
     \ contains=haskellType,haskellDelimiter,haskellDot,haskellOperators,haskellModule,haskellBlockKeywords,haskellLineComment,haskellBlockComment,haskellPragma keepend
@@ -78,7 +78,8 @@ if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   syn keyword haskellArrowSyntax proc
 endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  syn keyword haskellPatternSynonyms pattern
+  syn region haskellPatternSynonyms start="^\s*pattern\s\+[A-Z][A-za-z0-9_]*\s*" end="[=]" keepend contains=haskellPatternKeyword,haskellType,haskellOperators
+  syn keyword haskellPatternKeyword pattern contained
 endif
 
 highlight def link haskellBottom Macro
@@ -119,7 +120,7 @@ if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   highlight def link haskellArrowSyntax Operator
 endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  highlight def link haskellPatternSynonyms Structure
+  highlight def link haskellPatternKeyword Structure
 endif
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   highlight def link haskellTypeRoles Structure
