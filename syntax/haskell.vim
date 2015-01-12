@@ -32,8 +32,9 @@ syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
 syn region haskellForeignImport start="\<foreign\>" contains=haskellString,haskellOperators,haskellForeignKeywords,haskellIdentifier end="::" keepend
 syn region haskellImport start="\<import\>" contains=haskellDelimiter,haskellType,haskellDot,haskellImportKeywords end="\((\|$\)" keepend
-syn keyword haskellStatement do case of let in
+syn keyword haskellStatement do case of in
 syn keyword haskellWhere where
+syn keyword haskellLet let
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
@@ -50,12 +51,12 @@ syn region haskellPragma start="{-#" end="#-}"
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
 syn match haskellType "\(\<[A-Z][a-zA-Z0-9_]*\>\|'\<[A-Z][a-zA-Z0-9_]*\>\)'*"
-syn match haskellTopLevelDecl "^\s*\([_a-z][a-zA-z0-9_]*'*,\?\s*\)\+::" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellDefault
+syn match haskellTopLevelDecl "^\s*\([_a-z][a-zA-z0-9_]*'*,\?\s*\)\+::" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellLet,haskellDefault
 syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
-  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellPragma,haskellBottom,haskellConditional,haskellStatement,haskellWhere
+  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellPragma,haskellBottom,haskellConditional,haskellStatement,haskellWhere,haskellLet
 syn region haskellRecordUpdate start="[a-z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
-  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement,haskellWhere
+  \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellBottom,haskellConditional,haskellStatement,haskellWhere,haskellLet
 syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_]*'*|\||\]" contained
 syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_]*'*|" end="|\]" contains=haskellQuasiQuoteDelimiters keepend
 syn match haskellTHQuasiQuotes "\[||\|||\]\|\[|\||\]\|\[\(d\|t\|p\)|"
@@ -93,6 +94,7 @@ highlight def link haskellForeignKeywords Structure
 highlight def link haskellStructure Structure
 highlight def link haskellStatement Statement
 highlight def link haskellWhere Statement
+highlight def link haskellLet Statement
 highlight def link haskellDefault Statement
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
