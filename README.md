@@ -24,10 +24,6 @@ this repo into your `~/.vim/bundle` directory and you are ready to go.
     cd ~/.vim/bundle
     git clone https://github.com/raichoo/haskell-vim.git
 
-### Manual Installation
-
-Copy content into your `~/.vim` directory.
-
 Be sure that the following lines are in your
 `.vimrc`
 
@@ -35,6 +31,10 @@ Be sure that the following lines are in your
     syntax on
     filetype on
     filetype plugin indent on
+
+### Manual Installation
+
+Copy content into your `~/.vim` directory.
 
 ## Configuration
 
