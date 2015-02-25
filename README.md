@@ -94,11 +94,11 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
 `haskell-vim` comes with a few helpful commands for working with Cabal
 
-* `CabalAddExecutable name`: Adds a new executable section to the end of your cabal file
+* `CabalAddExecutable name Main.hs`: Adds a new executable section to the end of your cabal file
 
         executable name
           -- ghc-options:
-          main-is:
+          main-is:             Main.hs
           -- other-modules:
           -- other-extensions:
           build-depends:       base
