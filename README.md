@@ -15,6 +15,7 @@ I hope you find this useful.
 * Highlighting for new features like type families, pattern synonyms, arrow syntax, recursive do, role annotations, QuasiQuotation
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in approriate places)
 * Smarter indentation
+* Better Cabal highlighting (WIP)
 
 ## Installation
 
@@ -88,3 +89,11 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
+
+### Cabal
+
+`haskell-vim` comes with a few helpful commands for working with Cabal
+
+* `CabalAddExecutable`: Adds a new executable section to the end of your cabal file
+* `CabalAddLibrary`: Adds a new library section to the end of your cabal file
+* `CabalAddFlag`: Adds a new flag section to the end of your cabal file
