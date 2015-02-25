@@ -41,18 +41,18 @@ function! s:flagTmpl(name)
   return join(l:flagtmpl, "\n")
 endfunction
 
-function! haskellvim#addExecutable(name, src)
+function! cabal#addExecutable(name, src)
   exe "normal Go" . s:exeTmpl(a:name, a:src)
 endfunction
 
-function! haskellvim#addLibrary(name)
+function! cabal#addLibrary(name)
   exe "normal Go" . s:libTmpl(a:name)
 endfunction
 
-function! haskellvim#addFlag(name)
+function! cabal#addFlag(name)
   exe "normal Go" . s:flagTmpl(a:name)
 endfunction
 
-command! -nargs=* CabalAddExecutable call haskellvim#addExecutable(<f-args>)
-command! -nargs=1 CabalAddLibrary call haskellvim#addLibrary(<f-args>)
-command! -nargs=1 CabalAddFlag call haskellvim#addFlag(<f-args>)
+command! -buffer -nargs=* CabalAddExecutable call cabal#addExecutable(<f-args>)
+command! -buffer -nargs=1 CabalAddLibrary call cabal#addLibrary(<f-args>)
+command! -buffer -nargs=1 CabalAddFlag call cabal#addFlag(<f-args>)
