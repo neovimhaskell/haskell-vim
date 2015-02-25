@@ -4,10 +4,10 @@ endif
 
 let g:loaded_haskellvim_cabal = 1
 
-function! s:exeTmpl(name)
+function! s:exeTmpl(name, src)
   let l:exetmpl = [ "\nexecutable " . a:name,
                   \ "  -- ghc-options:",
-                  \ "  main-is:",
+                  \ "  main-is:             " . a:src,
                   \ "  -- other-modules:",
                   \ "  -- other-extensions:",
                   \ "  build-depends:       base",
@@ -41,8 +41,8 @@ function! s:flagTmpl(name)
   return join(l:flagtmpl, "\n")
 endfunction
 
-function! haskellvim#addExecutable(name)
-  exe "normal Go" . s:exeTmpl(a:name)
+function! haskellvim#addExecutable(name, src)
+  exe "normal Go" . s:exeTmpl(a:name, a:src)
 endfunction
 
 function! haskellvim#addLibrary(name)
@@ -53,6 +53,6 @@ function! haskellvim#addFlag(name)
   exe "normal Go" . s:flagTmpl(a:name)
 endfunction
 
-command! -nargs=1 CabalAddExecutable call haskellvim#addExecutable(<f-args>)
+command! -nargs=* CabalAddExecutable call haskellvim#addExecutable(<f-args>)
 command! -nargs=1 CabalAddLibrary call haskellvim#addLibrary(<f-args>)
 command! -nargs=1 CabalAddFlag call haskellvim#addFlag(<f-args>)
