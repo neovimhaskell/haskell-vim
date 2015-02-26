@@ -4,41 +4,45 @@ endif
 
 let g:loaded_haskellvim_cabal = 1
 
+function! s:makeSection(content)
+  return "\n" . join(a:content, "\n")
+endfunction
+
 function! s:exeTmpl(name, src)
-  let l:exetmpl = [ "\nexecutable " . a:name,
-                  \ "  -- ghc-options:",
-                  \ "  main-is:             " . a:src,
-                  \ "  -- other-modules:",
-                  \ "  -- other-extensions:",
-                  \ "  build-depends:       base",
-                  \ "  -- hs-source-dirs:",
-                  \ "  default-language:    Haskell2010"
+  let l:exetmpl = [ 'executable ' . a:name,
+                  \ '-- ghc-options:',
+                  \ 'main-is:             ' . a:src,
+                  \ '-- other-modules:',
+                  \ '-- other-extensions:',
+                  \ 'build-depends:       base',
+                  \ '-- hs-source-dirs:',
+                  \ 'default-language:    Haskell2010'
                   \ ]
 
-  return join(l:exetmpl, "\n")
+  return s:makeSection(l:exetmpl)
 endfunction
 
 function! s:libTmpl(name)
-  let l:libtmpl = [ "\nlibrary " . a:name,
-                  \ "  -- ghc-options:",
-                  \ "  -- other-modules:",
-                  \ "  -- other-extensions:",
-                  \ "  build-depends:       base",
-                  \ "  -- hs-source-dirs:",
-                  \ "  default-language:    Haskell2010"
+  let l:libtmpl = [ 'library ' . a:name,
+                  \ '-- ghc-options:',
+                  \ '-- other-modules:',
+                  \ '-- other-extensions:',
+                  \ 'build-depends:       base',
+                  \ '-- hs-source-dirs:',
+                  \ 'default-language:    Haskell2010'
                   \ ]
 
-  return join(l:libtmpl, "\n")
+  return s:makeSection(l:libtmpl)
 endfunction
 
 function! s:flagTmpl(name)
-  let l:flagtmpl = [ "\nflag " . a:name,
-                   \ "  description:",
-                   \ "  default:      False",
-                   \ "  manual:       True",
+  let l:flagtmpl = [ 'flag ' . a:name,
+                   \ 'description:',
+                   \ 'default:      False',
+                   \ 'manual:       True',
                    \ ]
 
-  return join(l:flagtmpl, "\n")
+  return s:makeSection(l:flagtmpl)
 endfunction
 
 function! cabal#addExecutable(name, src)
