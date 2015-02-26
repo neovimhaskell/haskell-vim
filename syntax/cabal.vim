@@ -14,12 +14,12 @@ syn match cabalOperator "[<=>&]"
 syn match cabalColon ":" contained
 syn match cabalNumber "\<[0-9][0-9\.]*\>"
 syn match cabalDelimiter ","
-syn match cabalSection "^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\)"
-syn match cabalEntry "^\s\{0,2}[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
 syn keyword cabalBool True False
 syn keyword cabalConditional if
 syn match cabalCompilerFlag "\s\+-[^ -][^ ]*"
 syn match cabalBulletPoint "^\s\+\*"
+syn match cabalSection "^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\)"
+syn match cabalEntry "^\s\{0,2}[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
 
 syn region cabalDescription start="^\s\{0,2}[dD]escription:" end="^\s\{0,2}[A-Za-z][a-zA-Z\-]*:" contains=cabalEntry,cabalLineComment,cabalBulletPoint keepend
 
