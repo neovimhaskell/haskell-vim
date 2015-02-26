@@ -20,6 +20,8 @@ syn keyword cabalBool True False
 syn keyword cabalConditional if
 syn match cabalCompilerFlag "\s\+-[^ -][^ ]*"
 
+syn region cabalDescription start="[dD]escription:" end="^\([^ ]\|$\)" contains=cabalEntry keepend
+
 highlight def link cabalIdentifier Identifier
 highlight def link cabalLineComment Comment
 highlight def link cabalOperator Operator
