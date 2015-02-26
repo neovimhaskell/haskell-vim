@@ -12,7 +12,7 @@ syn match cabalLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@S
 syn match cabalIdentifier "[A-Za-z\-]*" contained
 syn match cabalOperator "[<=>&]"
 syn match cabalColon ":" contained
-syn match cabalNumber "\<[0-9\.]*\>"
+syn match cabalNumber "\<[0-9][0-9\.]*\>"
 syn match cabalDelimiter ","
 syn match cabalSection "^\(executable\|Executable\|library\|Library\|flag\|Flag\|source-repository\)"
 syn match cabalEntry "^\s*[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
