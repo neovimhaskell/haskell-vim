@@ -99,7 +99,7 @@ To configure indentation in `haskell-vim` you can use the following variables to
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
 
-### Cabal
+### Cabal Support
 
 `haskell-vim` comes with a few helpful commands for working with Cabal
 
