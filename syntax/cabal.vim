@@ -14,7 +14,7 @@ syn match cabalOperator "[<=>&]"
 syn match cabalColon ":" contained
 syn match cabalNumber "\<[0-9][0-9\.]*\>"
 syn match cabalDelimiter ","
-syn match cabalSection "^\(executable\|Executable\|library\|Library\|flag\|Flag\|source-repository\)"
+syn match cabalSection "^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\)"
 syn match cabalEntry "^\s*[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
 syn keyword cabalBool True False
 syn keyword cabalConditional if
