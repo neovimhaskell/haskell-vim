@@ -53,10 +53,10 @@ if !exists('g:haskell_indent_in')
   let g:haskell_indent_in = 1
 endif
 
-setlocal indentexpr=GethaskellIndent()
+setlocal indentexpr=GetHaskellIndent()
 setlocal indentkeys=!^F,o,O,0\|,0=where,0=in,0=let,0=deriving,0=->,0=\=>,<CR>
 
-function! GethaskellIndent()
+function! GetHaskellIndent()
   let l:prevline = getline(v:lnum - 1)
 
   if l:prevline =~ '^\s*--'
