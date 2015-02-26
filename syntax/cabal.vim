@@ -15,12 +15,13 @@ syn match cabalColon ":" contained
 syn match cabalNumber "\<[0-9][0-9\.]*\>"
 syn match cabalDelimiter ","
 syn match cabalSection "^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\)"
-syn match cabalEntry "^\s*[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
+syn match cabalEntry "^\s\{0,2}[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
 syn keyword cabalBool True False
 syn keyword cabalConditional if
 syn match cabalCompilerFlag "\s\+-[^ -][^ ]*"
+syn match cabalBulletPoint "^\s\+\*"
 
-syn region cabalDescription start="[dD]escription:" end="^\([^ ]\|$\)" contains=cabalEntry keepend
+syn region cabalDescription start="^\s\{0,2}[dD]escription:" end="^\s\{0,2}[A-Za-z][a-zA-Z\-]*:" contains=cabalEntry,cabalLineComment,cabalBulletPoint keepend
 
 highlight def link cabalIdentifier Identifier
 highlight def link cabalLineComment Comment
@@ -32,5 +33,6 @@ highlight def link cabalDelimiter Delimiter
 highlight def link cabalBool Boolean
 highlight def link cabalCompilerFlag Macro
 highlight def link cabalConditional Conditional
+highlight def link cabalBulletPoint Structure
 
 let b:current_syntax = "cabal"
