@@ -90,7 +90,7 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
 #### Cabal
 
-*  `let g:cabal_indent_section = 2`
+*  `let g:cabal_indent_section = 2` (limited to max. 4 spaces)
 
         executable name
         >>main-is:             Main.hs
