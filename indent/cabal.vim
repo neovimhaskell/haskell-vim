@@ -15,8 +15,6 @@ if !exists('g:cabal_indent_section')
   let g:cabal_indent_section = 2
 elseif exists('g:cabal_indent_section') && g:cabal_indent_section > 4
   let g:cabal_indent_section = 4
-else
-  let g:cabal_indent_section = 2
 endif
 
 setlocal indentexpr=GetCabalIndent()
