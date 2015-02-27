@@ -88,6 +88,14 @@ To configure indentation in `haskell-vim` you can use the following variables to
         let x = 1
         >in x
 
+#### Cabal
+
+*  `let g:cabal_indent_section = 2`
+
+        executable name
+        >>main-is:             Main.hs
+
+
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
 
