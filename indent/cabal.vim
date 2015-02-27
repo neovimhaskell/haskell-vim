@@ -25,7 +25,7 @@ setlocal indentkeys=!^F,o,O,<CR>
 function! GetCabalIndent()
   let l:prevline = getline(v:lnum - 1)
 
-  if l:prevline =~ '^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\)'
+  if l:prevline =~ '^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\|[tT]est-suite\)'
     return g:cabal_indent_section
   else
     return match(l:prevline, '\S')
