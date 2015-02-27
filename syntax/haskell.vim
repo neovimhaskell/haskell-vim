@@ -11,6 +11,8 @@ elseif exists("b:current_syntax")
   finish
 endif
 
+syn match haskellTopLevelDecl "^\s*[_a-z][a-zA-z0-9_,' ]*\s*::" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellLet,haskellDefault
+syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn keyword haskellBlockKeywords data type family module where class instance deriving contained
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellModuleBlock start="\<module\>" end="\<where\>"
@@ -51,8 +53,6 @@ syn region haskellPragma start="{-#" end="#-}"
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
 syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
 syn match haskellType "\<[A-Z][a-zA-Z0-9_]*\>'*"
-syn match haskellTopLevelDecl "^\s*[_a-z][a-zA-z0-9_,' ]*\s*::" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellLet,haskellDefault
-syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellPragma,haskellBottom,haskellConditional,haskellStatement,haskellWhere,haskellLet
 syn region haskellRecordUpdate start="[a-z][a-zA-Z0-9]*'*\s\+{" end="}" keepend
