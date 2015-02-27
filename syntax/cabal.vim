@@ -15,7 +15,7 @@ syn match cabalColon ":" contained
 syn match cabalNumber "\<[0-9][0-9\.]*\>"
 syn match cabalDelimiter "[,()]"
 syn keyword cabalBool True False
-syn keyword cabalConditional if
+syn keyword cabalConditional if else
 syn match cabalCompilerFlag "\s\+-[^ -][^ ]*"
 syn match cabalBulletPoint "^\s\+\*"
 syn match cabalSection "^\([eE]xecutable\|[lL]ibrary\|[fF]lag\|[sS]ource-repository\)"
