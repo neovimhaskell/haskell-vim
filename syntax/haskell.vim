@@ -33,7 +33,7 @@ syn region haskellStandaloneDeriving start="\<deriving\>\s\+\<instance\>" end="$
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
 syn region haskellForeignImport start="\<foreign\>" contains=haskellString,haskellOperators,haskellForeignKeywords,haskellIdentifier end="::" keepend
-syn region haskellImport start="\<import\>" contains=haskellDelimiter,haskellType,haskellDot,haskellImportKeywords end="\((\|$\)" keepend
+syn region haskellImport start="\<import\>" contains=haskellDelimiter,haskellType,haskellDot,haskellImportKeywords,haskellString end="\((\|$\)" keepend
 syn keyword haskellStatement do case of in
 syn keyword haskellWhere where
 syn keyword haskellLet let
