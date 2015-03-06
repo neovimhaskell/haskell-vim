@@ -12,7 +12,7 @@ elseif exists("b:current_syntax")
 endif
 
 syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
-syn match haskellTopLevelDecl "^\s*\([_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\s*::\|[_a-z][a-zA-Z0-9_']*\n\s\+::\)" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellLet,haskellDefault
+syn match haskellTopLevelDecl "^\s*[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellLet,haskellDefault
 syn keyword haskellBlockKeywords data type family module where class instance deriving contained
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellModuleBlock start="\<module\>" end="\<where\>"
