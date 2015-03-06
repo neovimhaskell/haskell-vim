@@ -46,7 +46,7 @@ syn keyword haskellBottom undefined error
 syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\|\s\+'\{1,2}\)"
 syn match haskellDot "\."
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
-syn match haskellBacktick "`[A-Za-z][A-Za-z0-9_\.]*'*`"
+syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.]*'*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
 syn region haskellPragma start="{-#" end="#-}"
