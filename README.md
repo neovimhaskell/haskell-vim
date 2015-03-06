@@ -13,7 +13,7 @@ I hope you find this useful.
 
 * Covers a broader spectrum of keywords
 * Highlighting for new features like type families, pattern synonyms, arrow syntax, recursive do, role annotations, QuasiQuotation
-* More contextual highlighting (e.g. highlight 'as' or 'family' only in approriate places)
+* More contextual highlighting (e.g. highlight 'as' or 'family' only in appropriate places)
 * Smarter indentation
 * Better Cabal support (WIP)
 
