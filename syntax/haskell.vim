@@ -43,7 +43,9 @@ syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|{\|}"
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
-syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\|\s\+'\{1,2}\)"
+syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
+syn match haskellTHQuote "'" contained
+syn region haskellTHQuoted start="'\([_a-z][^']*\|'[A-Z][^']*\)" end="\s" contains=haskellType,haskellTHQuote
 syn match haskellDot "\."
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
 syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.]*'*`"
@@ -100,6 +102,7 @@ highlight def link haskellFloat Float
 highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
+highlight def link haskellTHQuote Operator
 highlight def link haskellDot Operator
 highlight def link haskellType Include
 highlight def link haskellLineComment Comment
