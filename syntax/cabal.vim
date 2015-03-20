@@ -12,7 +12,7 @@ syn match cabalLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@S
 syn match cabalIdentifier "[A-Za-z\-]*" contained
 syn match cabalOperator "[<=>&|]"
 syn match cabalColon ":" contained
-syn match cabalNumber "\<[0-9][0-9\.]*\>"
+syn match cabalNumber "\s\+[0-9][0-9\.*]*"
 syn match cabalDelimiter "[,()]"
 syn keyword cabalBool True False
 syn keyword cabalConditional if else
