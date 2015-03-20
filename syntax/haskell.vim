@@ -60,7 +60,7 @@ syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{[^-]" end="[^-]}" k
 syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_]*'*|\||\]" contained
 syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_]*'*|" end="|\]" contains=haskellQuasiQuoteDelimiters keepend
 syn match haskellTHQuasiQuotes "\[||\|||\]\|\[|\||\]\|\[\(d\|t\|p\)|"
-syn region haskellPreProc start="^#" end="$"
+syn match haskellPreProc "^#.*$"
 
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles type role phantom representational nominal contained
