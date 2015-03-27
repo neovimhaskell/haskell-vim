@@ -37,6 +37,9 @@ syn region haskellImport start="\<import\>" contains=haskellDelimiter,haskellTyp
 syn keyword haskellStatement do case of in
 syn keyword haskellWhere where
 syn keyword haskellLet let
+if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
+  syn keyword haskellStatic static
+endif
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
@@ -127,6 +130,9 @@ if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synon
 endif
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   highlight def link haskellTypeRoles Structure
+endif
+if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
+  highlight def link haskellStatic Statement
 endif
 
 let b:current_syntax = "haskell"
