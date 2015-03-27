@@ -41,7 +41,7 @@ if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointer
   syn keyword haskellStatic static
 endif
 syn keyword haskellConditional if then else
-syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>"
+syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>\|\<0[bB][10]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|{\|}"
 syn keyword haskellInfix infix infixl infixr
