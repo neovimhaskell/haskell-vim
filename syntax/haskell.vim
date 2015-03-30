@@ -11,7 +11,7 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn match haskellRecordField "[_a-z][a-zA-z0-9_]*'*\s*::" contains=haskellIdentifier,haskellOperators contained
+syn match haskellRecordField "[_a-z][a-zA-Z0-9_']*\s*::" contains=haskellIdentifier,haskellOperators contained
 syn match haskellTopLevelDecl "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)" contains=haskellIdentifier,haskellOperators,haskellDelimiter,haskellWhere,haskellLet,haskellDefault
 syn keyword haskellBlockKeywords data type family module where class instance deriving contained
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
@@ -46,22 +46,23 @@ syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|{\|}"
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
-syn match haskellOperators "\([-!#$%&\*\+/<=>\?@\\^|~:]\|\<_\>\)"
-syn match haskellTHQuote "'" contained
-syn region haskellTHQuoted start="'\([_a-z][^']*\|'[A-Z][^']*\)" end="\s" contains=haskellType,haskellTHQuote
+syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:]\+\|\<_\>"
+syn match haskellQuote "\<'\+" contained
+syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
+syn region haskellQuoted start="\<'\+" end="\s\|$" contains=haskellType,haskellQuote,haskellQuotedType,haskellDelimiter,haskellOperators,haskellIdentifier
 syn match haskellDot "\."
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
-syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.]*'*`"
+syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
 syn region haskellPragma start="{-#" end="#-}"
-syn match haskellIdentifier "[_a-z][a-zA-z0-9_]*'*" contained
-syn match haskellChar "'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'"
-syn match haskellType "\<[A-Z][a-zA-Z0-9_]*\>'*"
-syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9]*'*\s\+{[^-]" end="[^-]}" keepend
+syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
+syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
+syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>"
+syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\s\+{[^-]" end="[^-]}" keepend
   \ contains=haskellType,haskellDelimiter,haskellOperators,haskellDot,haskellRecordField,haskellString,haskellChar,haskellFloat,haskellNumber,haskellBacktick,haskellLineComment, haskellBlockComment,haskellPragma,haskellBottom,haskellConditional,haskellStatement,haskellWhere,haskellLet
-syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_]*'*|\||\]" contained
-syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_]*'*|" end="|\]" contains=haskellQuasiQuoteDelimiters keepend
+syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_']*|\||\]" contained
+syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_']*|" end="|\]" contains=haskellQuasiQuoteDelimiters keepend
 syn match haskellTHQuasiQuotes "\[||\|||\]\|\[|\||\]\|\[\(d\|t\|p\)|"
 syn match haskellPreProc "^#.*$"
 
@@ -105,7 +106,8 @@ highlight def link haskellFloat Float
 highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
-highlight def link haskellTHQuote Operator
+highlight def link haskellQuote Operator
+highlight def link haskellQuotedType Include
 highlight def link haskellDot Operator
 highlight def link haskellType Include
 highlight def link haskellLineComment Comment
