@@ -45,18 +45,22 @@ function! s:flagTmpl(name)
   return s:makeSection(l:flagtmpl)
 endfunction
 
-function! cabal#addExecutable(name, src)
-  exe "normal Go" . s:exeTmpl(a:name, a:src)
+function! cabal#addExecutable()
+  let l:name = input("Enter executable name: ")
+  let l:src  = input("Enter source file: ")
+  exe "normal Go" . s:exeTmpl(l:name, l:src)
 endfunction
 
-function! cabal#addLibrary(name)
-  exe "normal Go" . s:libTmpl(a:name)
+function! cabal#addLibrary()
+  let l:name = input("Enter library name: ")
+  exe "normal Go" . s:libTmpl(l:name)
 endfunction
 
-function! cabal#addFlag(name)
-  exe "normal Go" . s:flagTmpl(a:name)
+function! cabal#addFlag()
+  let l:name = input("Enter flag name: ")
+  exe "normal Go" . s:flagTmpl(l:name)
 endfunction
 
-command! -buffer -nargs=* CabalAddExecutable call cabal#addExecutable(<f-args>)
-command! -buffer -nargs=1 CabalAddLibrary call cabal#addLibrary(<f-args>)
-command! -buffer -nargs=1 CabalAddFlag call cabal#addFlag(<f-args>)
+command! -buffer CabalAddExecutable call cabal#addExecutable()
+command! -buffer CabalAddLibrary call cabal#addLibrary()
+command! -buffer CabalAddFlag call cabal#addFlag()
