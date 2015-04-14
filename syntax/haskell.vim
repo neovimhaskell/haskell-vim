@@ -51,10 +51,10 @@ syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
 syn region haskellQuoted start="\<'\+" end="\s\|$" contains=haskellType,haskellQuote,haskellQuotedType,haskellDelimiter,haskellOperators,haskellIdentifier
 syn match haskellDot "\."
-syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
+syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=haskellTodo,@Spell
 syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
-syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,@Spell
+syn region haskellBlockComment start="{-" end="-}" contains=haskellBlockComment,haskellTodo,@Spell
 syn region haskellPragma start="{-#" end="#-}"
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
 syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
@@ -65,6 +65,7 @@ syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_']*|\||\]" contained
 syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_']*|" end="|\]" contains=haskellQuasiQuoteDelimiters keepend
 syn match haskellTHQuasiQuotes "\[||\|||\]\|\[|\||\]\|\[\(d\|t\|p\)|"
 syn match haskellPreProc "^#.*$"
+syn keyword haskellTodo TODO FIXME contained
 
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles type role phantom representational nominal contained
@@ -117,6 +118,7 @@ highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
 highlight def link haskellPreProc Macro
+highlight def link haskellTodo Todo
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
