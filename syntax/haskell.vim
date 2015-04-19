@@ -52,7 +52,7 @@ else
     \ haskellPragma,
     \ haskellPreProc
 endif
-syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\)" keepend
+syn region haskellBlock start="^\s*\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\|^\<\)" keepend
   \ contains=
   \ haskellType,
   \ haskellDelimiter,
@@ -64,7 +64,7 @@ syn region haskellBlock start="\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\
   \ haskellBlockComment,
   \ haskellPragma,
   \ haskellQuoted
-syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\)" keepend
+syn region haskellDataBlock start="^\s*\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\|^\<\)" keepend
   \ contains=
   \ haskellType,
   \ haskellDelimiter,
