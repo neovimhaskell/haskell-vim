@@ -168,13 +168,7 @@ if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
     \ haskellTypeRoles
 endif
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn keyword haskellForall forall contained
-  syn match haskellQuantification "\<\(forall\)\>\s\+[^.=]*\."
-    \ contains=
-    \ haskellForall,
-    \ haskellOperators,
-    \ haskellDot,
-    \ haskellDelimiter
+  syn keyword haskellForall forall
 endif
 if exists('g:haskell_enable_recursivedo') && g:haskell_enable_recursivedo == 1
   syn keyword haskellRecursiveDo mdo rec
