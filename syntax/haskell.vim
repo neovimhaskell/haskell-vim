@@ -49,7 +49,7 @@ syn keyword haskellBottom undefined error
 syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:]\+\|\<_\>"
 syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
-syn region haskellQuoted start="\<'\+" end="\s\|$" contains=haskellType,haskellQuote,haskellQuotedType,haskellDelimiter,haskellOperators,haskellIdentifier
+syn region haskellQuoted start="\<'\+" end="\>" contains=haskellType,haskellQuote,haskellQuotedType,haskellDelimiter,haskellOperators,haskellIdentifier
 syn match haskellDot "\."
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=haskellTodo,@Spell
 syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*`"
