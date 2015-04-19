@@ -23,7 +23,7 @@ syn match haskellTopLevelDecl "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a
   \ haskellWhere,
   \ haskellLet,
   \ haskellDefault
-syn keyword haskellBlockKeywords data type family module where class instance deriving contained
+syn keyword haskellBlockKeywords data type family module where class instance contained
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellModuleBlock start="\<module\>" end="\<where\>" keepend
     \ contains=
@@ -75,16 +75,9 @@ syn region haskellDataBlock start="\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellPragma
-syn keyword haskellStandaloneDerivingKeywords deriving instance contained
-syn keyword haskellStructure newtype deriving
+syn keyword haskellNewtype newtype
+syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
 syn keyword haskellDefault default
-syn region haskellStandaloneDeriving start="\<deriving\>\s\+\<instance\>" end="$"
-  \ contains=
-  \ haskellType,
-  \ haskellDelimiter,
-  \ haskellDot,
-  \ haskellOperators,
-  \ haskellStandaloneDerivingKeywords
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
 syn region haskellForeignImport start="\<foreign\>" end="::" keepend
@@ -202,11 +195,11 @@ highlight def link haskellBottom Macro
 highlight def link haskellQuasiQuoteDelimiters Boolean
 highlight def link haskellTHQuasiQuotes Boolean
 highlight def link haskellBlockKeywords Structure
-highlight def link haskellStandaloneDerivingKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellImportKeywords Structure
 highlight def link haskellForeignKeywords Structure
-highlight def link haskellStructure Structure
+highlight def link haskellNewtype Structure
+highlight def link haskellDeriving Structure
 highlight def link haskellStatement Statement
 highlight def link haskellWhere Statement
 highlight def link haskellLet Statement
