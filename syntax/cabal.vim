@@ -19,9 +19,9 @@ syn keyword cabalConditional if else
 syn match cabalCompilerFlag "\s\+-[^ -][^ ]*"
 syn match cabalBulletPoint "^\s\+\*"
 syn match cabalSection "^\c\(executable\|library\|flag\|source-repository\|test-suite\)"
-syn match cabalEntry "^\s\{0,4}[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
+syn match cabalEntry "^\s*[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
 
-syn region cabalDescription start="^\s\{0,4}[dD]escription:" end="^\s\{0,4}[A-Za-z][a-zA-Z\-]*:" contains=cabalEntry,cabalLineComment,cabalBulletPoint keepend
+syn region cabalDescription start="^\s*[dD]escription:" end="^\<" contains=cabalEntry,cabalLineComment,cabalBulletPoint keepend
 
 highlight def link cabalIdentifier Identifier
 highlight def link cabalLineComment Comment
