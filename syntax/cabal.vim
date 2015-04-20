@@ -19,6 +19,7 @@ syn keyword cabalConditional if else
 syn match cabalCompilerFlag "\s\+-[^ -][^ ]*"
 syn match cabalDocBulletPoint "^\s\+\*"
 syn match cabalDocHeadline "^\s\+=.*$"
+syn match cabalDocCode "^\s\+>.*$"
 syn match cabalDocNewline "^\s\+\.\s*$"
 syn match cabalSection "^\c\(executable\|library\|flag\|source-repository\|test-suite\)"
 syn match cabalEntry "^\s*[A-Za-z][a-zA-Z\-]*:" contains=cabalIdentifier,cabalColon
@@ -29,7 +30,8 @@ syn region cabalDescription start="^\s*[dD]escription:" end="^\<" keepend
   \ cabalLineComment,
   \ cabalDocBulletPoint,
   \ cabalDocHeadline,
-  \ cabalDocNewline
+  \ cabalDocNewline,
+  \ cabalDocCode
 
 highlight def link cabalIdentifier Identifier
 highlight def link cabalLineComment Comment
@@ -44,5 +46,6 @@ highlight def link cabalConditional Conditional
 highlight def link cabalDocBulletPoint Structure
 highlight def link cabalDocHeadline Include
 highlight def link cabalDocNewline Operator
+highlight def link cabalDocCode Macro
 
 let b:current_syntax = "cabal"
