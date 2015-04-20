@@ -75,17 +75,7 @@ syn region haskellDataBlock start="^\<\(data\|type\)\>\(\s\+\<family\>\)\?" end=
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellPragma
-syn region haskellAssocType start="\s\+\<\(data\|type\)\>" end="\([=]\|::\)" keepend
-  \ contains=
-  \ haskellType,
-  \ haskellDelimiter,
-  \ haskellDot,
-  \ haskellOperators,
-  \ haskellModule,
-  \ haskellBlockKeywords,
-  \ haskellLineComment,
-  \ haskellBlockComment,
-  \ haskellPragma
+syn match haskellAssocType "\s\+\<\(data\|type\)\>"
 syn keyword haskellNewtype newtype
 syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
 syn keyword haskellDefault default
@@ -226,6 +216,7 @@ highlight def link haskellChar String
 highlight def link haskellBacktick Operator
 highlight def link haskellPreProc Macro
 highlight def link haskellTodo Todo
+highlight def link haskellAssocType Structure
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
