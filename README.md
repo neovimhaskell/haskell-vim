@@ -30,7 +30,6 @@ Be sure that the following lines are in your
 
 
     syntax on
-    filetype on
     filetype plugin indent on
 
 ### Manual Installation
