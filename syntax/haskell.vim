@@ -87,10 +87,12 @@ syn region haskellForeignImport start="\<foreign\>" end="::" keepend
   \ haskellOperators,
   \ haskellForeignKeywords,
   \ haskellIdentifier
-syn region haskellImport start="\<import\>" end="\((\|$\)" keepend
+syn region haskellImport start="\<import\>" end="\((\|$\|--* .*$\)" keepend
   \ contains=
   \ haskellDelimiter,
   \ haskellType,
+  \ haskellLineComment,
+  \ haskellBlockComment,
   \ haskellDot,
   \ haskellImportKeywords,
   \ haskellString
