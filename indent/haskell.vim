@@ -63,6 +63,10 @@ function! GetHaskellIndent()
     return match(l:prevline, '\S')
   endif
 
+  if l:prevline =~ '^\s*$'
+      return 0
+  endif
+
   let l:line = getline(v:lnum)
 
   if l:line =~ '\C^\s*\<where\>'
