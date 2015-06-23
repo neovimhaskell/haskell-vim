@@ -22,8 +22,8 @@ function! s:exeTmpl(name, src)
   return s:makeSection(l:exetmpl)
 endfunction
 
-function! s:libTmpl(name)
-  let l:libtmpl = [ 'library ' . a:name,
+function! s:libTmpl()
+  let l:libtmpl = [ 'library',
                   \ '-- ghc-options:',
                   \ '-- other-modules:',
                   \ '-- other-extensions:',
@@ -52,8 +52,7 @@ function! cabal#addExecutable()
 endfunction
 
 function! cabal#addLibrary()
-  let l:name = input("Enter library name: ")
-  exe "normal Go" . s:libTmpl(l:name)
+  exe "normal Go" . s:libTmpl()
 endfunction
 
 function! cabal#addFlag()
