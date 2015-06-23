@@ -15,7 +15,7 @@ I hope you find this useful.
 * Highlighting for new features like type families, pattern synonyms, arrow syntax, recursive do, role annotations, QuasiQuotation
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in appropriate places)
 * Smarter indentation
-* Better Cabal support (WIP)
+* Better Cabal support
 
 ## Installation
 
