@@ -137,7 +137,7 @@ syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
 syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
 syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>"
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\n\?\s\+{[^-]" end="[^-]}" keepend
+  syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\n\?\s*{[^-}]" end="}" keepend
     \ contains=
     \ haskellType,
     \ haskellDelimiter,
@@ -159,7 +159,7 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
     \ haskellLet,
     \ haskellForall
 else
-  syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\n\?\s\+{[^-]" end="[^-]}" keepend
+  syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\n\?\s*{[^-}]" end="}" keepend
     \ contains=
     \ haskellType,
     \ haskellDelimiter,
