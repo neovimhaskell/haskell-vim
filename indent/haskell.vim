@@ -71,13 +71,13 @@ function! GetHaskellIndent()
 
   if l:line =~ '\C^\s*\<where\>'
     let l:s = match(l:prevline, '\S')
-    return l:s + 2
+    return l:s + &shiftwidth
   endif
 
   if l:line =~ '\C^\s*\<deriving\>'
     let l:s = match(l:prevline, '\C\<\(newtype\|data\)\>')
     if l:s >= 0
-      return l:s + 2
+      return l:s + &shiftwidth
     endif
   endif
 
@@ -103,7 +103,7 @@ function! GetHaskellIndent()
       if match(l:prevline, '^\s*|\s') >= 0
         return match(l:prevline, '|')
       else
-        return 2
+        return &shiftwidth
       endif
     endif
   endif
@@ -118,7 +118,7 @@ function! GetHaskellIndent()
   if l:prevline =~ '\s\+[!#$%&*+./<>?@\\^|~-]\+\s*$'
     let l:s = match(l:prevline, '\S')
     if l:s > 0
-      return l:s + 2
+      return l:s + &shiftwidth
     endif
   endif
 
