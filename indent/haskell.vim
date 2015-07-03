@@ -126,6 +126,10 @@ function! GetHaskellIndent()
     return match(l:prevline, '[{([]')
   endif
 
+  if l:prevline =~ '\C\<let\>\s\+[^=]\+=\s*$'
+    return match(l:prevline, '\C\<let\>') + g:haskell_indent_let + &shiftwidth
+  endif
+
   if l:prevline =~ '\C\<let\>\s\+.\+\(\<in\>\)\?\s*$'
     return match(l:prevline, '\C\<let\>') + g:haskell_indent_let
   endif
