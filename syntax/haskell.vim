@@ -11,6 +11,26 @@ elseif exists("b:current_syntax")
   finish
 endif
 
+if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
+  syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
+    \ contains=
+    \ haskellDelimiter,
+    \ haskellType,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellDot,
+    \ haskellParens,
+    \ haskellPatternKeyword
+else
+  syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
+    \ contains=
+    \ haskellDelimiter,
+    \ haskellType,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellDot,
+    \ haskellParens
+end
 syn match haskellRecordField "[_a-z][a-zA-Z0-9_']*\s*::" contained
   \ contains=
   \ haskellIdentifier,
@@ -20,61 +40,46 @@ syn match haskellTopLevelDecl "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a
   \ haskellIdentifier,
   \ haskellOperators,
   \ haskellDelimiter,
+  \ haskellParens,
+  \ haskellBrackets,
   \ haskellWhere,
   \ haskellLet,
   \ haskellDefault
-syn keyword haskellBlockKeywords data type family module where class instance contained
-if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  syn region haskellModuleBlock start="\<module\>" end="\<where\>" keepend
-    \ contains=
-    \ haskellType,
-    \ haskellDelimiter,
-    \ haskellDot,
-    \ haskellOperators,
-    \ haskellModule,
-    \ haskellBlockKeywords,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellPreProc,
-    \ haskellPatternKeyword
-else
-  syn region haskellModuleBlock start="\<module\>" end="\<where\>" keepend
-    \ contains=
-    \ haskellType,
-    \ haskellDelimiter,
-    \ haskellDot,
-    \ haskellOperators,
-    \ haskellModule,
-    \ haskellBlockKeywords,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellPreProc
-endif
-syn region haskellBlock start="^\<\(class\|instance\)\>" end="\(\<where\>\|^\s*$\|^\<\)" keepend
+syn region haskellModuleBlock matchgroup=haskellBlockKeywords start="\<module\>" end="\<where\>"
+  \ contains=haskellType,haskellDot,haskellImportList
+syn region haskellClassBlock
+  \ matchgroup=haskellBlockKeywords
+  \ start="^\<\(class\|instance\)\>"
+  \ end="\(\<where\>\|^\s*$\|^\<\)"
   \ contains=
   \ haskellType,
   \ haskellDelimiter,
+  \ haskellParens,
+  \ haskellBrackets,
   \ haskellDot,
   \ haskellOperators,
-  \ haskellModule,
-  \ haskellBlockKeywords,
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellPragma,
   \ haskellQuoted
-syn region haskellDataBlock start="^\<\(data\|type\)\>\(\s\+\<family\>\)\?" end="\([=]\|\<where\>\|^\s*$\|^\<\)" keepend
+syn region haskellDataBlock
+  \ matchgroup=haskellBlockKeywords
+  \ start="^\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?"
+  \ end="\(\<where\>\|^\s*$\|^\<\)"
   \ contains=
   \ haskellType,
+  \ haskellRecordBlock,
   \ haskellDelimiter,
+  \ haskellParens,
+  \ haskellBrackets,
+  \ haskellSumBlock,
   \ haskellDot,
   \ haskellOperators,
-  \ haskellModule,
-  \ haskellBlockKeywords,
   \ haskellLineComment,
   \ haskellBlockComment,
-  \ haskellPragma
+  \ haskellPragma,
+  \ haskellQuoted,
+  \ haskellDeriving
 syn match haskellAssocType "\s\+\<\(data\|type\)\>"
 syn keyword haskellNewtype newtype
 syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
@@ -87,15 +92,16 @@ syn region haskellForeignImport start="\<foreign\>" end="::" keepend
   \ haskellOperators,
   \ haskellForeignKeywords,
   \ haskellIdentifier
-syn region haskellImport start="\<import\>" end="\((\|$\|--* .*$\)" keepend
+syn match
+  \ haskellImport
+  \ "^import\s\+\(safe\s\+\)\?\(qualified\s\+\)\?\S\+\(\s\+as\s\+\S\+\)\?\(\s\+hiding\)\?\(\n\s\+\|\s*\)"
+  \ nextgroup=haskellImportList
   \ contains=
-  \ haskellDelimiter,
   \ haskellType,
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellDot,
-  \ haskellImportKeywords,
-  \ haskellString
+  \ haskellImportKeywords
 syn keyword haskellStatement do case of in
 syn keyword haskellWhere where
 syn keyword haskellLet let
@@ -105,7 +111,10 @@ endif
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>\|\<0[bB][10]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
-syn match haskellDelimiter  "(\|)\|\[\|\]\|,\|;\|{\|}"
+syn match haskellDelimiter  "[,;]"
+syn region haskellParens matchgroup=haskellDelimiter start="(" end=")" contains=TOP
+syn region haskellBrackets matchgroup=haskellDelimiter start="\[" end="]" contains=TOP
+" syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=TOP
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
 syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:]\+\|\<_\>"
@@ -117,6 +126,8 @@ syn region haskellQuoted start="\<'\+" end="\>"
   \ haskellQuote,
   \ haskellQuotedType,
   \ haskellDelimiter,
+  \ haskellParens,
+  \ haskellBrackets,
   \ haskellOperators,
   \ haskellIdentifier
 syn match haskellDot "\."
@@ -127,59 +138,40 @@ syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
 syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
+syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
+syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
+syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>"
+if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
+    \ contains=
+    \ haskellType,
+    \ haskellDelimiter,
+    \ haskellParens,
+    \ haskellBrackets,
+    \ haskellRecordField,
+    \ haskellOperators,
+    \ haskellDot,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellPragma,
+    \ haskellForall
+else
+  syn region haskellRecordBlock start="{" end="}"
+    \ contains=
+    \ haskellType,
+    \ haskellIdentifier,
+    \ haskellOperators,
+    \ haskellDot,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellPragma
+endif
 syn region haskellBlockComment start="{-" end="-}"
   \ contains=
   \ haskellBlockComment,
   \ haskellTodo,
   \ @Spell
 syn region haskellPragma start="{-#" end="#-}"
-syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
-syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
-syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>"
-if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\n\?\s*{[^-}]" end="[^-]}" keepend
-    \ contains=
-    \ haskellType,
-    \ haskellDelimiter,
-    \ haskellOperators,
-    \ haskellDot,
-    \ haskellRecordField,
-    \ haskellString,
-    \ haskellChar,
-    \ haskellFloat,
-    \ haskellNumber,
-    \ haskellBacktick,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellBottom,
-    \ haskellConditional,
-    \ haskellStatement,
-    \ haskellWhere,
-    \ haskellLet,
-    \ haskellForall
-else
-  syn region haskellRecordBlock start="[A-Z][a-zA-Z0-9']*\n\?\s*{[^-}]" end="[^-]}" keepend
-    \ contains=
-    \ haskellType,
-    \ haskellDelimiter,
-    \ haskellOperators,
-    \ haskellDot,
-    \ haskellRecordField,
-    \ haskellString,
-    \ haskellChar,
-    \ haskellFloat,
-    \ haskellNumber,
-    \ haskellBacktick,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellBottom,
-    \ haskellConditional,
-    \ haskellStatement,
-    \ haskellWhere,
-    \ haskellLet
-endif
 syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_']*|\||\]" contained
 syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_']*|" end="|\]" keepend
   \ contains=haskellQuasiQuoteDelimiters
@@ -216,7 +208,6 @@ highlight def link haskellQuasiQuoteDelimiters Boolean
 highlight def link haskellTHQuasiQuotes Boolean
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
-highlight def link haskellImportKeywords Structure
 highlight def link haskellForeignKeywords Structure
 highlight def link haskellNewtype Structure
 highlight def link haskellDeriving Structure
@@ -243,6 +234,8 @@ highlight def link haskellBacktick Operator
 highlight def link haskellPreProc Macro
 highlight def link haskellTodo Todo
 highlight def link haskellAssocType Structure
+highlight def link haskellImportBlock Delimiter
+highlight def link haskellImportKeywords Structure
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
