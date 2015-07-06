@@ -11,6 +11,31 @@ elseif exists("b:current_syntax")
   finish
 endif
 
+if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
+    \ contains=
+    \ haskellType,
+    \ haskellDelimiter,
+    \ haskellParens,
+    \ haskellBrackets,
+    \ haskellRecordField,
+    \ haskellOperators,
+    \ haskellDot,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellPragma,
+    \ haskellForall
+else
+  syn region haskellRecordBlock start="{" end="}"
+    \ contains=
+    \ haskellType,
+    \ haskellIdentifier,
+    \ haskellOperators,
+    \ haskellDot,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellPragma
+endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
     \ contains=
@@ -114,7 +139,7 @@ syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 syn match haskellDelimiter  "[,;]"
 syn region haskellParens matchgroup=haskellDelimiter start="(" end=")" contains=TOP
 syn region haskellBrackets matchgroup=haskellDelimiter start="\[" end="]" contains=TOP
-" syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=TOP
+syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=TOP
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
 syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:]\+\|\<_\>"
@@ -140,32 +165,7 @@ syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
 syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
-syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>"
-if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
-    \ contains=
-    \ haskellType,
-    \ haskellDelimiter,
-    \ haskellParens,
-    \ haskellBrackets,
-    \ haskellRecordField,
-    \ haskellOperators,
-    \ haskellDot,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellForall
-else
-  syn region haskellRecordBlock start="{" end="}"
-    \ contains=
-    \ haskellType,
-    \ haskellIdentifier,
-    \ haskellOperators,
-    \ haskellDot,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma
-endif
+syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>\s*" nextgroup=haskellRecordBlock
 syn region haskellBlockComment start="{-" end="-}"
   \ contains=
   \ haskellBlockComment,
