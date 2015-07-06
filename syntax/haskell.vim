@@ -180,8 +180,8 @@ syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" cont
 syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
-  syn keyword haskellTypeRoles type role phantom representational nominal contained
-  syn region haskellTypeRoleBlock start="type\s\+role" end="$" keepend
+  syn keyword haskellTypeRoles phantom representational nominal contained
+  syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="$" keepend
     \ contains=
     \ haskellType,
     \ haskellTypeRoles
