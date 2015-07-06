@@ -174,10 +174,10 @@ syn region haskellBlockComment start="{-" end="-}"
   \ haskellTodo,
   \ @Spell
 syn region haskellPragma start="{-#" end="#-}"
-syn match haskellQuasiQuoteDelimiters "\[[_a-z][a-zA-z0-9_']*|\||\]" contained
-syn region haskellQuasiQuote start="\[[_a-z][a-zA-z0-9_']*|" end="|\]" keepend
+syn region haskellQuasiQuote matchgroup= haskellTH start="\[[_a-z][a-zA-z0-9_']*|" end="|\]" keepend
   \ contains=haskellQuasiQuoteDelimiters
-syn match haskellTHQuasiQuotes "\[||\|||\]\|\[|\||\]\|\[\(d\|t\|p\)|"
+syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]" contains=TOP
+syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" contains=TOP
 syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
@@ -206,8 +206,7 @@ if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synon
 endif
 
 highlight def link haskellBottom Macro
-highlight def link haskellQuasiQuoteDelimiters Boolean
-highlight def link haskellTHQuasiQuotes Boolean
+highlight def link haskellTH Boolean
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
