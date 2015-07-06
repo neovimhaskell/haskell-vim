@@ -15,7 +15,7 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
   syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
     \ contains=
     \ haskellType,
-    \ haskellDelimiter,
+    \ haskellSeparator,
     \ haskellParens,
     \ haskellBrackets,
     \ haskellRecordField,
@@ -29,7 +29,7 @@ else
   syn region haskellRecordBlock start="{" end="}"
     \ contains=
     \ haskellType,
-    \ haskellDelimiter,
+    \ haskellSeparator,
     \ haskellParens,
     \ haskellBrackets,
     \ haskellRecordField,
@@ -42,7 +42,7 @@ endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
     \ contains=
-    \ haskellDelimiter,
+    \ haskellSeparator,
     \ haskellType,
     \ haskellLineComment,
     \ haskellBlockComment,
@@ -52,7 +52,7 @@ if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synon
 else
   syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
     \ contains=
-    \ haskellDelimiter,
+    \ haskellSeparator,
     \ haskellType,
     \ haskellLineComment,
     \ haskellBlockComment,
@@ -67,7 +67,7 @@ syn match haskellTopLevelDecl "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a
   \ contains=
   \ haskellIdentifier,
   \ haskellOperators,
-  \ haskellDelimiter,
+  \ haskellSeparator,
   \ haskellParens,
   \ haskellBrackets,
   \ haskellWhere,
@@ -81,7 +81,7 @@ syn region haskellClassBlock
   \ end="\(\<where\>\|^\s*$\|^\<\)"
   \ contains=
   \ haskellType,
-  \ haskellDelimiter,
+  \ haskellSeparator,
   \ haskellParens,
   \ haskellBrackets,
   \ haskellDot,
@@ -97,7 +97,7 @@ syn region haskellDataBlock
   \ contains=
   \ haskellType,
   \ haskellRecordBlock,
-  \ haskellDelimiter,
+  \ haskellSeparator,
   \ haskellParens,
   \ haskellBrackets,
   \ haskellSumBlock,
@@ -139,7 +139,7 @@ endif
 syn keyword haskellConditional if then else
 syn match haskellNumber "\<[0-9]\+\>\|\<0[xX][0-9a-fA-F]\+\>\|\<0[oO][0-7]\+\>\|\<0[bB][10]\+\>"
 syn match haskellFloat "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
-syn match haskellDelimiter  "[,;]"
+syn match haskellSeparator  "[,;]"
 syn region haskellParens matchgroup=haskellDelimiter start="(" end=")" contains=TOP
 syn region haskellBrackets matchgroup=haskellDelimiter start="\[" end="]" contains=TOP
 syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=TOP
@@ -153,7 +153,7 @@ syn region haskellQuoted start="\<'\+" end="\>"
   \ haskellType,
   \ haskellQuote,
   \ haskellQuotedType,
-  \ haskellDelimiter,
+  \ haskellSeparator,
   \ haskellParens,
   \ haskellBrackets,
   \ haskellOperators,
@@ -221,6 +221,7 @@ highlight def link haskellDefault Statement
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
 highlight def link haskellFloat Float
+highlight def link haskellSeparator Delimiter
 highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
