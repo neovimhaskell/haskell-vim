@@ -154,7 +154,6 @@ syn region haskellQuoted start="\<'\+" end="\>"
   \ haskellQuotedType,
   \ haskellSeparator,
   \ haskellParens,
-  \ haskellBrackets,
   \ haskellOperators,
   \ haskellIdentifier
 syn match haskellDot "\."
