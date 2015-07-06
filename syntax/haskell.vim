@@ -173,8 +173,7 @@ syn region haskellBlockComment start="{-" end="-}"
   \ haskellTodo,
   \ @Spell
 syn region haskellPragma start="{-#" end="#-}"
-syn region haskellQuasiQuote matchgroup= haskellTH start="\[[_a-z][a-zA-z0-9_']*|" end="|\]" keepend
-  \ contains=haskellQuasiQuoteDelimiters
+syn region haskellQuasiQuote matchgroup=haskellTH start="\[[_a-z][a-zA-z0-9_']*|" end="|\]"
 syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]" contains=TOP
 syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" contains=TOP
 syn match haskellPreProc "^#.*$"
