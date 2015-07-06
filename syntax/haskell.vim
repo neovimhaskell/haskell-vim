@@ -26,7 +26,7 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
     \ haskellPragma,
     \ haskellForall
 else
-  syn region haskellRecordBlock start="{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
