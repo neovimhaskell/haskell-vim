@@ -29,7 +29,10 @@ else
   syn region haskellRecordBlock start="{" end="}"
     \ contains=
     \ haskellType,
-    \ haskellIdentifier,
+    \ haskellDelimiter,
+    \ haskellParens,
+    \ haskellBrackets,
+    \ haskellRecordField,
     \ haskellOperators,
     \ haskellDot,
     \ haskellLineComment,
