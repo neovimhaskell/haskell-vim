@@ -100,7 +100,6 @@ syn region haskellDataBlock
   \ haskellSeparator,
   \ haskellParens,
   \ haskellBrackets,
-  \ haskellSumBlock,
   \ haskellDot,
   \ haskellOperators,
   \ haskellLineComment,
