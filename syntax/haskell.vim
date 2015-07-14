@@ -90,10 +90,10 @@ syn region haskellClassBlock
   \ haskellBlockComment,
   \ haskellPragma,
   \ haskellQuoted
-syn region haskellDataBlock
+syn region haskellDeclBlock
   \ matchgroup=haskellBlockKeywords
-  \ start="^\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?"
-  \ end="\(\<where\>\|^\s*$\|^\<\)"
+  \ start="^\(newtype\|\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?\)"
+  \ end="\<where\>\|\<deriving\>\|^\<"
   \ contains=
   \ haskellType,
   \ haskellRecordBlock,
@@ -105,10 +105,8 @@ syn region haskellDataBlock
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellPragma,
-  \ haskellQuoted,
-  \ haskellDeriving
-syn match haskellAssocType "\s\+\<\(data\|type\)\>"
-syn keyword haskellNewtype newtype
+  \ haskellQuoted
+syn match haskellAssocType "\s\+\<\(data\|type\|newtype\)\>"
 syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
@@ -119,16 +117,16 @@ syn region haskellForeignImport start="\<foreign\>" end="::" keepend
   \ haskellOperators,
   \ haskellForeignKeywords,
   \ haskellIdentifier
-syn match
-  \ haskellImport
-  \ "^import\s\+\(safe\s\+\)\?\(qualified\s\+\)\?\S\+\(\s\+as\s\+\S\+\)\?\(\s\+hiding\)\?\(\n\s\+\|\s*\)"
-  \ nextgroup=haskellImportList
+syn region haskellImport
+  \ start="^import"
+  \ end="^\<"
   \ contains=
+  \ haskellImportKeywords,
+  \ haskellImportList,
   \ haskellType,
   \ haskellLineComment,
   \ haskellBlockComment,
-  \ haskellDot,
-  \ haskellImportKeywords
+  \ haskellDot
 syn keyword haskellStatement do case of in
 syn keyword haskellWhere where
 syn keyword haskellLet let
@@ -180,7 +178,7 @@ syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles phantom representational nominal contained
-  syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="$" keepend
+  syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="^\<" keepend
     \ contains=
     \ haskellType,
     \ haskellTypeRoles
@@ -195,7 +193,7 @@ if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   syn keyword haskellArrowSyntax proc
 endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  syn region haskellPatternSynonyms start="^\s*pattern\s\+[A-Z][A-za-z0-9_]*\s*" end="=\|<-\|$" keepend
+  syn region haskellPatternSynonym start="^\<pattern\>" end="=\|<-" keepend
     \ contains=
     \ haskellPatternKeyword,
     \ haskellType,
@@ -208,7 +206,6 @@ highlight def link haskellTH Boolean
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
-highlight def link haskellNewtype Structure
 highlight def link haskellDeriving Structure
 highlight def link haskellStatement Statement
 highlight def link haskellWhere Statement
