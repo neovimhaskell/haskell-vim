@@ -91,22 +91,42 @@ syn region haskellClassBlock
   \ haskellBlockComment,
   \ haskellPragma,
   \ haskellQuoted
-syn region haskellDeclBlock
-  \ matchgroup=haskellBlockKeywords
-  \ start="^\(newtype\|\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?\)"
-  \ end="\<where\>\|\<deriving\>\|^\<"
-  \ contains=
-  \ haskellType,
-  \ haskellRecordBlock,
-  \ haskellSeparator,
-  \ haskellParens,
-  \ haskellBrackets,
-  \ haskellDot,
-  \ haskellOperators,
-  \ haskellLineComment,
-  \ haskellBlockComment,
-  \ haskellPragma,
-  \ haskellQuoted
+if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
+  syn region haskellDeclBlock
+    \ matchgroup=haskellBlockKeywords
+    \ start="^\(newtype\|\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?\)"
+    \ end="\<where\>\|\<deriving\>\|^\<"
+    \ contains=
+    \ haskellType,
+    \ haskellRecordBlock,
+    \ haskellSeparator,
+    \ haskellParens,
+    \ haskellBrackets,
+    \ haskellDot,
+    \ haskellOperators,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellPragma,
+    \ haskellQuoted,
+    \ haskellForall
+else
+  syn region haskellDeclBlock
+    \ matchgroup=haskellBlockKeywords
+    \ start="^\(newtype\|\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?\)"
+    \ end="\<where\>\|\<deriving\>\|^\<"
+    \ contains=
+    \ haskellType,
+    \ haskellRecordBlock,
+    \ haskellSeparator,
+    \ haskellParens,
+    \ haskellBrackets,
+    \ haskellDot,
+    \ haskellOperators,
+    \ haskellLineComment,
+    \ haskellBlockComment,
+    \ haskellPragma,
+    \ haskellQuoted
+endif
 syn match haskellAssocType "\s\+\<\(data\|type\|newtype\)\>"
 syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
 syn keyword haskellDefault default
