@@ -12,7 +12,7 @@ elseif exists("b:current_syntax")
 endif
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="\s*{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
@@ -26,7 +26,7 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
     \ haskellPragma,
     \ haskellForall
 else
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="\s*{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
@@ -79,54 +79,31 @@ syn region haskellModuleBlock matchgroup=haskellBlockKeywords start="\<module\>"
 syn region haskellClassBlock
   \ matchgroup=haskellBlockKeywords
   \ start="^\<\(class\|instance\)\>"
-  \ end="\(\<where\>\|^\s*$\|^\<\)"
+  \ end="\<where\>\|^\<"
   \ contains=
   \ haskellType,
   \ haskellSeparator,
+  \ haskellParens,
+  \ haskellDot,
+  \ haskellOperators,
+  \ haskellLineComment,
+  \ haskellBlockComment,
+  \ haskellPragma
+syn keyword haskellDeclKeyword newtype data type family instance where deriving contained
+syn region haskellDeclBlock keepend
+  \ start="^\<\(newtype\|data\|type\)\>\s\+\(\<\(family\|instance\)\>\)\?"
+  \ end="\<where\>\|=\|\<deriving\>\|^\<"
+  \ contains=
+  \ haskellDeclKeyword,
+  \ haskellType,
+  \ haskellQuoted,
   \ haskellParens,
   \ haskellBrackets,
   \ haskellDot,
   \ haskellOperators,
   \ haskellLineComment,
   \ haskellBlockComment,
-  \ haskellPragma,
-  \ haskellQuoted
-if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellDeclBlock
-    \ matchgroup=haskellBlockKeywords
-    \ start="^\(newtype\|\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?\)"
-    \ end="\<where\>\|\<deriving\>\|^\<"
-    \ contains=
-    \ haskellType,
-    \ haskellRecordBlock,
-    \ haskellSeparator,
-    \ haskellParens,
-    \ haskellBrackets,
-    \ haskellDot,
-    \ haskellOperators,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellQuoted,
-    \ haskellForall
-else
-  syn region haskellDeclBlock
-    \ matchgroup=haskellBlockKeywords
-    \ start="^\(newtype\|\<\(data\|type\)\>\(\s\+\<\(family\|instance\)\>\)\?\)"
-    \ end="\<where\>\|\<deriving\>\|^\<"
-    \ contains=
-    \ haskellType,
-    \ haskellRecordBlock,
-    \ haskellSeparator,
-    \ haskellParens,
-    \ haskellBrackets,
-    \ haskellDot,
-    \ haskellOperators,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellPragma,
-    \ haskellQuoted
-endif
+  \ haskellPragma
 syn match haskellAssocType "\s\+\<\(data\|type\|newtype\)\>"
 syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
 syn keyword haskellDefault default
@@ -185,7 +162,7 @@ syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
 syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
-syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>\s*" nextgroup=haskellRecordBlock
+syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>\n\?" nextgroup=haskellRecordBlock
 syn region haskellBlockComment start="{-" end="-}"
   \ contains=
   \ haskellBlockComment,
@@ -254,6 +231,7 @@ highlight def link haskellTodo Todo
 highlight def link haskellAssocType Structure
 highlight def link haskellImportBlock Delimiter
 highlight def link haskellImportKeywords Structure
+highlight def link haskellDeclKeyword Structure
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
