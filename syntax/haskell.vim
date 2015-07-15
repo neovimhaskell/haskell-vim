@@ -89,10 +89,10 @@ syn region haskellClassBlock
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellPragma
-syn keyword haskellDeclKeyword newtype data type family instance where deriving contained
+syn keyword haskellDeclKeyword newtype data type family instance where contained
 syn region haskellDeclBlock keepend
   \ start="^\<\(newtype\|data\|type\)\>\s\+\(\<\(family\|instance\)\>\)\?"
-  \ end="\<where\>\|=\|\<deriving\>\|^\<"
+  \ end="\<where\>\|=\|^\<"
   \ contains=
   \ haskellDeclKeyword,
   \ haskellType,
