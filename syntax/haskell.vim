@@ -12,7 +12,7 @@ elseif exists("b:current_syntax")
 endif
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="\s*{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
@@ -26,7 +26,7 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
     \ haskellPragma,
     \ haskellForall
 else
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="\s*{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
@@ -162,7 +162,7 @@ syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
 syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
-syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>\n\?" nextgroup=haskellRecordBlock
+syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>\n\?\s*" nextgroup=haskellRecordBlock
 syn region haskellBlockComment start="{-" end="-}"
   \ contains=
   \ haskellBlockComment,
