@@ -12,7 +12,7 @@ elseif exists("b:current_syntax")
 endif
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="\s*{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
@@ -26,7 +26,7 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
     \ haskellPragma,
     \ haskellForall
 else
-  syn region haskellRecordBlock matchgroup=haskellDelimiter start="\s*{" end="}"
+  syn region haskellRecordBlock matchgroup=haskellDelimiter start="{" end="}"
     \ contains=
     \ haskellType,
     \ haskellSeparator,
