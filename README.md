@@ -96,11 +96,6 @@ To configure indentation in `haskell-vim` you can use the following variables to
         executable name
         >>main-is:             Main.hs
 
-
-[Pathogen]: https://github.com/tpope/vim-pathogen
-[idris-vim]: https://github.com/idris-hackers/idris-vim
-[Neovim]: http://neovim.io
-
 ### Plugin Support
 
 #### Haskell
@@ -131,6 +126,8 @@ This feature is disable by default and requires `ghc-modi`. To enable `ghc-modi`
 `haskell_enable_ghc_modi` to `1` in your `.nvimrc`.
 
 You can configure an explicit path to your `ghg-modi` binary if needed by setting `g:ghc_modi_executable`.
+
+[Demo][]
 
 #### Cabal
 
@@ -163,3 +160,8 @@ You can configure an explicit path to your `ghg-modi` binary if needed by settin
           description:
           default:      False
           manual:       True
+
+[Pathogen]: https://github.com/tpope/vim-pathogen
+[idris-vim]: https://github.com/idris-hackers/idris-vim
+[Neovim]: http://neovim.io
+[Demo]: https://vimeo.com/134767975
