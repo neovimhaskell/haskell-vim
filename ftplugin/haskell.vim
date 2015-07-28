@@ -20,7 +20,7 @@ endfunction
 
 command! -buffer -nargs=0 HaskellAddModuleComment call haskell#makeModuleCommentBlock()
 
-if (has('nvim'))
+if has('nvim') && exists('g:haskell_enable_ghc_modi') && g:haskell_enable_ghc_modi
   if !exists('g:ghc_modi_executable')
     let g:ghc_modi_executable = "ghc-modi"
   endif
