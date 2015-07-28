@@ -128,7 +128,7 @@ With Neovim you get additional features such as:
 * `HaskellRefine`: prompts for an expression and refines the hole under the cursor (saves current file)
 
 This feature is disable by default and requires `ghc-modi`. To enable `ghc-modi` support set
-`haskell_enable_ghc_mod` to `1` in your `.nvimrc`.
+`haskell_enable_ghc_modi` to `1` in your `.nvimrc`.
 
 You can configure an explicit path to your `ghg-modi` binary if needed by setting `g:ghc_modi_executable`.
 
