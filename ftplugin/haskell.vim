@@ -27,21 +27,24 @@ if (has('nvim'))
     if (a:event == "stdout")
       let s:stdout_buffer = s:stdout_buffer + a:data
     elseif (a:event == "exit")
-      let l:mrk = getpos("'a")
       let l:res = join(s:stdout_buffer, "\n")
       let l:exp = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
       let l:mth = matchlist(l:res, l:exp)
 
-      call cursor(l:mth[3], l:mth[4])
-      normal ma
-      call cursor(l:mth[1], l:mth[2])
-      normal d`ax
+      if (len(l:mth) >= 6)
+        let l:mrk = getpos("'a")
 
-      exe "normal i" . l:mth[5]
-      call cursor(l:mth[1], l:mth[2])
+        call cursor(l:mth[3], l:mth[4])
+        normal ma
+        call cursor(l:mth[1], l:mth[2])
+        normal d`ax
+        exe "normal i" . l:mth[5]
+        call cursor(l:mth[1], l:mth[2])
+
+        call setpos("'a", l:mrk)
+      endif
 
       let s:stdout_buffer = []
-      call setpos("'a", l:mrk)
     endif
   endfunction
 
@@ -60,5 +63,6 @@ if (has('nvim'))
 
     let l:ghcmod = jobstart(l:cmd, l:handlers)
   endfunction
+
   command! -buffer -nargs=0 HaskellCaseSplit call haskell#caseSplit()
 endif
