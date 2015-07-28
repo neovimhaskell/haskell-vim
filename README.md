@@ -16,6 +16,7 @@ I hope you find this useful.
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in appropriate places)
 * Smarter indentation
 * Better Cabal support
+* [Neovim][] support (WIP)
 
 ## Installation
 
@@ -98,6 +99,7 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
+[Neovim]: http://neovim.io
 
 ### Plugin Support
 
@@ -116,6 +118,13 @@ To configure indentation in `haskell-vim` you can use the following variables to
         Stability   : 
         Portability : 
         -}
+
+##### Neovim
+
+With Neovim you get additional features such as
+
+* `HaskellCaseSplit`: split the pattern variable under the cursur (saves current file)
+* `HaskellAddDecl`: inserting function declaration based on type signature under the cursur (saves current file)
 
 #### Cabal
 
