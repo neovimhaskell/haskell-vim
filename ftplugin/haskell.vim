@@ -27,29 +27,45 @@ if (has('nvim'))
 
   let s:stdout_buffer = []
 
-  function! haskell#caseSplitHandler(job, data, event)
+  function! s:replaceBlock(cmd, mth)
+    call cursor(a:mth[3], a:mth[4])
+    normal ma
+    call cursor(a:mth[1], a:mth[2])
+    normal d`ax
+    exe a:cmd . a:mth[5]
+    call cursor(a:mth[1], a:mth[2])
+  endfunction
+
+  function! s:insertBlock(cmd, mth)
+        call cursor(a:mth[3], a:mth[4])
+        exe a:cmd . a:mth[5]
+        call cursor(a:mth[1], a:mth[2])
+  endfunction
+
+  function! s:mkJobHandler(regex, cmd, data, event, action)
     if (a:event == "stdout")
       let s:stdout_buffer = s:stdout_buffer + a:data
     elseif (a:event == "exit")
       let l:res = join(s:stdout_buffer, "\n")
-      let l:exp = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
-      let l:mth = matchlist(l:res, l:exp)
+      let l:mth = matchlist(l:res, a:regex)
 
       if (len(l:mth) >= 6)
         let l:mrk = getpos("'a")
 
-        call cursor(l:mth[3], l:mth[4])
-        normal ma
-        call cursor(l:mth[1], l:mth[2])
-        normal d`ax
-        exe "normal i" . l:mth[5]
-        call cursor(l:mth[1], l:mth[2])
+        call a:action(a:cmd, l:mth)
 
         call setpos("'a", l:mrk)
       endif
 
       let s:stdout_buffer = []
     endif
+  endfunction
+
+  function! haskell#caseSplitHandler(job, data, event)
+    let l:exp = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
+    let l:cmd = "normal i"
+
+    call s:mkJobHandler(l:exp, l:cmd, a:data, a:event, function('s:replaceBlock'))
   endfunction
 
   function! haskell#caseSplit()
@@ -71,21 +87,10 @@ if (has('nvim'))
   endfunction
 
   function! haskell#addDeclHandler(job, data, event)
-    if (a:event == "stdout")
-      let s:stdout_buffer = s:stdout_buffer + a:data
-    elseif (a:event == "exit")
-      let l:res = join(s:stdout_buffer, "\n")
-      let l:exp = '^function\n\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\)\n\(.*\)'
-      let l:mth = matchlist(l:res, l:exp)
+    let l:exp = '^function\n\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\)\n\(.*\)'
+    let l:cmd = "normal o"
 
-      if (len(l:mth) >= 6)
-        call cursor(l:mth[3], l:mth[4])
-        exe "normal o" . l:mth[5]
-        call cursor(l:mth[1], l:mth[2])
-      endif
-
-      let s:stdout_buffer = []
-    endif
+    call s:mkJobHandler(l:exp, l:cmd, a:data, a:event, function('s:insertBlock'))
   endfunction
 
   function! haskell#addDecl()
@@ -105,28 +110,10 @@ if (has('nvim'))
   endfunction
 
   function! haskell#refineHandler(job, data,event)
-    if (a:event == "stdout")
-      let s:stdout_buffer = s:stdout_buffer + a:data
-    elseif (a:event == "exit")
-      let l:res = join(s:stdout_buffer, "\n")
-      let l:exp = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
-      let l:mth = matchlist(l:res, l:exp)
+    let l:exp = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
+    let l:cmd = "normal a"
 
-      if (len(l:mth) >= 6)
-        let l:mrk = getpos("'a")
-
-        call cursor(l:mth[3], l:mth[4])
-        normal ma
-        call cursor(l:mth[1], l:mth[2])
-        normal d`ax
-        exe "normal a" . l:mth[5]
-        call cursor(l:mth[1], l:mth[2])
-
-        call setpos("'a", l:mrk)
-      endif
-
-      let s:stdout_buffer = []
-    endif
+    call s:mkJobHandler(l:exp, l:cmd, a:data, a:event, function('s:replaceBlock'))
   endfunction
 
   function! haskell#refine()
