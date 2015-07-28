@@ -1,5 +1,5 @@
-Haskell Syntax/Indentation
-==========================
+Haskell Integration
+===================
 
 I was unhappy with the Haskell scripts that are
 shipped with vim, therefore I decided to make my
