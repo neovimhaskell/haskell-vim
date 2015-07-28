@@ -21,6 +21,10 @@ endfunction
 command! -buffer -nargs=0 HaskellAddModuleComment call haskell#makeModuleCommentBlock()
 
 if (has('nvim'))
+  if !exists('g:ghc_mod_executable')
+    let g:ghc_mod_executable = "ghc-mod"
+  endif
+
   let s:stdout_buffer = []
 
   function! haskell#caseSplitHandler(job, data, event)
@@ -50,7 +54,7 @@ if (has('nvim'))
 
   function! haskell#caseSplit()
     update
-    let l:cmd    = [ "ghc-mod",
+    let l:cmd    = [ g:ghc_mod_executable,
                    \ "-b",
                    \ '\n',
                    \ "split",
