@@ -16,7 +16,7 @@ I hope you find this useful.
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in appropriate places)
 * Smarter indentation
 * Better Cabal support
-* `ghc-mod` integration for [Neovim][]
+* `ghc-modi` integration for [Neovim][]
 
 ## Installation
 
@@ -127,9 +127,9 @@ With Neovim you get additional features such as:
 * `HaskellAddDecl`: inserting function declaration based on type signature under the cursor (saves current file)
 * `HaskellRefine`: prompts for an expression and refines the hole under the cursor (saves current file)
 
-This requires `ghc-mod`.
+This requires `ghc-modi`.
 
-You can configure an explicit path to your `ghg-mod` binary if needed by setting `g:ghc_mod_executable`.
+You can configure an explicit path to your `ghg-modi` binary if needed by setting `g:ghc_modi_executable`.
 
 #### Cabal
 
