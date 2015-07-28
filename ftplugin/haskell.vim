@@ -54,13 +54,13 @@ if (has('nvim'))
 
   function! haskell#caseSplit()
     update
-    let l:cmd    = [ g:ghc_mod_executable,
-                   \ "-b",
-                   \ '\n',
-                   \ "split",
-                   \ expand('%'),
-                   \ line("."),
-                   \ virtcol(".") ]
+    let l:cmd = [ g:ghc_mod_executable,
+                \ "-b",
+                \ '\n',
+                \ "split",
+                \ expand('%'),
+                \ line("."),
+                \ virtcol(".") ]
 
     let l:handlers = { 'on_stdout': function('haskell#caseSplitHandler'),
                      \ 'on_exit': function('haskell#caseSplitHandler') }
@@ -88,11 +88,11 @@ if (has('nvim'))
 
   function! haskell#addDecl()
     update
-    let l:cmd    = [ g:ghc_mod_executable,
-                   \ "sig",
-                   \ expand('%'),
-                   \ line("."),
-                   \ virtcol(".") ]
+    let l:cmd = [ g:ghc_mod_executable,
+                \ "sig",
+                \ expand('%'),
+                \ line("."),
+                \ virtcol(".") ]
 
     let l:handlers = { 'on_stdout': function('haskell#addDeclHandler'),
                      \ 'on_exit': function('haskell#addDeclHandler') }
