@@ -125,7 +125,7 @@ With Neovim you get additional features such as:
 This feature is disable by default and requires `ghc-modi`. To enable `ghc-modi` support set
 `haskell_enable_ghc_modi` to `1` in your `.nvimrc`.
 
-You can configure an explicit path to your `ghg-modi` binary if needed by setting `g:ghc_modi_executable`.
+You can configure an explicit path to your `ghc-modi` binary if needed by setting `g:ghc_modi_executable`.
 
 [Demo][]
 
