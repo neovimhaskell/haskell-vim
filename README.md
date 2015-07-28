@@ -121,10 +121,14 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
 ##### Neovim
 
-With Neovim you get additional features such as
+With Neovim you get additional features such as:
 
 * `HaskellCaseSplit`: split the pattern variable under the cursur (saves current file)
 * `HaskellAddDecl`: inserting function declaration based on type signature under the cursur (saves current file)
+
+This requires `ghc-mod`.
+
+You can configure an explicit path to your `ghg-mod` binary if needed by setting `g:ghc_mod_executable`.
 
 #### Cabal
 
