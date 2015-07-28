@@ -16,7 +16,7 @@ I hope you find this useful.
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in appropriate places)
 * Smarter indentation
 * Better Cabal support
-* [Neovim][] support (WIP)
+* `ghc-mod` integration for [Neovim][]
 
 ## Installation
 
@@ -123,8 +123,9 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
 With Neovim you get additional features such as:
 
-* `HaskellCaseSplit`: split the pattern variable under the cursur (saves current file)
-* `HaskellAddDecl`: inserting function declaration based on type signature under the cursur (saves current file)
+* `HaskellCaseSplit`: split the pattern variable under the cursor (saves current file)
+* `HaskellAddDecl`: inserting function declaration based on type signature under the cursor (saves current file)
+* `HaskellRefine`: prompts for an expression and refines the hole under the cursor (saves current file)
 
 This requires `ghc-mod`.
 
