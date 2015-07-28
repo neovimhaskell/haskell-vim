@@ -66,6 +66,8 @@ if (has('nvim'))
                      \ 'on_exit': function('haskell#caseSplitHandler') }
 
     let l:ghcmod = jobstart(l:cmd, l:handlers)
+
+    call jobwait([l:ghcmod])
   endfunction
 
   function! haskell#addDeclHandler(job, data, event)
@@ -98,6 +100,8 @@ if (has('nvim'))
                      \ 'on_exit': function('haskell#addDeclHandler') }
 
     let l:ghcmod = jobstart(l:cmd, l:handlers)
+
+    call jobwait([l:ghcmod])
   endfunction
 
   function! haskell#refineHandler(job, data,event)
@@ -139,6 +143,8 @@ if (has('nvim'))
                      \ 'on_exit': function('haskell#refineHandler') }
 
     let l:ghcmod = jobstart(l:cmd, l:handlers)
+
+    call jobwait([l:ghcmod])
   endfunction
 
   command! -buffer -nargs=0 HaskellCaseSplit call haskell#caseSplit()
