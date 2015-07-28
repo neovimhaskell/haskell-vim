@@ -27,6 +27,16 @@ if (has('nvim'))
 
   let s:stdout_buffer = []
 
+  function! s:runJob(cmd, handler)
+    update
+    let l:handlers = { 'on_stdout': function(a:handler),
+                     \ 'on_exit': function(a:handler) }
+
+    let l:ghcmod = jobstart(a:cmd, l:handlers)
+
+    call jobwait([l:ghcmod])
+  endfunction
+
   function! s:replaceBlock(cmd, mth)
     call cursor(a:mth[3], a:mth[4])
     normal ma
@@ -37,9 +47,9 @@ if (has('nvim'))
   endfunction
 
   function! s:insertBlock(cmd, mth)
-        call cursor(a:mth[3], a:mth[4])
-        exe a:cmd . a:mth[5]
-        call cursor(a:mth[1], a:mth[2])
+    call cursor(a:mth[3], a:mth[4])
+    exe a:cmd . a:mth[5]
+    call cursor(a:mth[1], a:mth[2])
   endfunction
 
   function! s:mkJobHandler(regex, cmd, data, event, action)
@@ -69,7 +79,7 @@ if (has('nvim'))
   endfunction
 
   function! haskell#caseSplit()
-    update
+    let l:hdl = 'haskell#caseSplitHandler'
     let l:cmd = [ g:ghc_mod_executable,
                 \ "-b",
                 \ '\n',
@@ -78,12 +88,7 @@ if (has('nvim'))
                 \ line("."),
                 \ virtcol(".") ]
 
-    let l:handlers = { 'on_stdout': function('haskell#caseSplitHandler'),
-                     \ 'on_exit': function('haskell#caseSplitHandler') }
-
-    let l:ghcmod = jobstart(l:cmd, l:handlers)
-
-    call jobwait([l:ghcmod])
+    call s:runJob(l:cmd, l:hdl)
   endfunction
 
   function! haskell#addDeclHandler(job, data, event)
@@ -94,19 +99,14 @@ if (has('nvim'))
   endfunction
 
   function! haskell#addDecl()
-    update
+    let l:hdl = 'haskell#addDeclHandler'
     let l:cmd = [ g:ghc_mod_executable,
                 \ "sig",
                 \ expand('%'),
                 \ line("."),
                 \ virtcol(".") ]
 
-    let l:handlers = { 'on_stdout': function('haskell#addDeclHandler'),
-                     \ 'on_exit': function('haskell#addDeclHandler') }
-
-    let l:ghcmod = jobstart(l:cmd, l:handlers)
-
-    call jobwait([l:ghcmod])
+    call s:runJob(l:cmd, l:hdl)
   endfunction
 
   function! haskell#refineHandler(job, data,event)
@@ -117,21 +117,16 @@ if (has('nvim'))
   endfunction
 
   function! haskell#refine()
-    update
     let l:expr = input("Enter expression: ")
-    let l:cmd = [ g:ghc_mod_executable,
-                \ "refine",
-                \ expand('%'),
-                \ line("."),
-                \ virtcol("."),
-                \ l:expr ]
+    let l:hdl  = 'haskell#refineHandler'
+    let l:cmd  = [ g:ghc_mod_executable,
+                 \ "refine",
+                 \ expand('%'),
+                 \ line("."),
+                 \ virtcol("."),
+                 \ l:expr ]
 
-    let l:handlers = { 'on_stdout': function('haskell#refineHandler'),
-                     \ 'on_exit': function('haskell#refineHandler') }
-
-    let l:ghcmod = jobstart(l:cmd, l:handlers)
-
-    call jobwait([l:ghcmod])
+    call s:runJob(l:cmd, l:hdl)
   endfunction
 
   command! -buffer -nargs=0 HaskellCaseSplit call haskell#caseSplit()
