@@ -100,6 +100,48 @@ if (has('nvim'))
     let l:ghcmod = jobstart(l:cmd, l:handlers)
   endfunction
 
+  function! haskell#refineHandler(job, data,event)
+    if (a:event == "stdout")
+      let s:stdout_buffer = s:stdout_buffer + a:data
+    elseif (a:event == "exit")
+      let l:res = join(s:stdout_buffer, "\n")
+      let l:exp = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
+      let l:mth = matchlist(l:res, l:exp)
+
+      if (len(l:mth) >= 6)
+        let l:mrk = getpos("'a")
+
+        call cursor(l:mth[3], l:mth[4])
+        normal ma
+        call cursor(l:mth[1], l:mth[2])
+        normal d`ax
+        exe "normal a" . l:mth[5]
+        call cursor(l:mth[1], l:mth[2])
+
+        call setpos("'a", l:mrk)
+      endif
+
+      let s:stdout_buffer = []
+    endif
+  endfunction
+
+  function! haskell#refine()
+    update
+    let l:expr = input("Enter expression: ")
+    let l:cmd = [ g:ghc_mod_executable,
+                \ "refine",
+                \ expand('%'),
+                \ line("."),
+                \ virtcol("."),
+                \ l:expr ]
+
+    let l:handlers = { 'on_stdout': function('haskell#refineHandler'),
+                     \ 'on_exit': function('haskell#refineHandler') }
+
+    let l:ghcmod = jobstart(l:cmd, l:handlers)
+  endfunction
+
   command! -buffer -nargs=0 HaskellCaseSplit call haskell#caseSplit()
   command! -buffer -nargs=0 HaskellAddDecl call haskell#addDecl()
+  command! -buffer -nargs=0 HaskellRefine call haskell#refine()
 endif
