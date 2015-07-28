@@ -21,8 +21,8 @@ endfunction
 command! -buffer -nargs=0 HaskellAddModuleComment call haskell#makeModuleCommentBlock()
 
 if (has('nvim'))
-  if !exists('g:ghc_mod_executable')
-    let g:ghc_mod_executable = "ghc-mod"
+  if !exists('g:ghc_modi_executable')
+    let g:ghc_modi_executable = "ghc-modi"
   endif
 
   let s:resp1 = '^\([0-9]\+\) \([0-9]\+\) \([0-9]\+\) \([0-9]\+\) "\(.*\)"'
@@ -70,10 +70,10 @@ if (has('nvim'))
     endfor
   endfunction
 
-  let s:ghc_modi_job = jobstart( ["ghc-modi"],
-                                 \ { 'on_stdout': function('s:ghc_modi_handler'),
-                                 \   'on_exit': function('s:ghc_modi_handler') }
-                              \)
+  let s:ghc_modi_job = jobstart( [g:ghc_modi_executable],
+       \ { 'on_stdout': function('s:ghc_modi_handler'),
+       \   'on_exit': function('s:ghc_modi_handler') }
+    \)
 
   function! s:runCmd(cmd)
     update
