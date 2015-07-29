@@ -31,25 +31,16 @@ if has('nvim') && exists('g:haskell_enable_ghc_modi') && g:haskell_enable_ghc_mo
   let s:ghc_modi_buffer = []
   let s:command_queue   = []
 
-  function! s:process_cmd(rsp, exp, cmd, action)
-    let l:mth = matchlist(a:rsp, a:exp)
-    if (len(l:mth) >= 6)
-      call a:action(a:cmd, l:mth)
-    endif
-  endfunction
-
   function! s:process_ghc_modi_buffer()
     let l:rsp = join(s:ghc_modi_buffer, "\n")
     let l:cmd = s:command_queue[0]
 
     let s:command_queue = s:command_queue[1:]
 
-    if l:cmd == "sig"
-      call s:process_cmd(l:rsp, s:resp2, "normal o", function('s:insertBlock'))
-    elseif l:cmd == "refine"
-      call s:process_cmd(l:rsp, s:resp1, "normal a", function('s:replaceBlock'))
-    elseif l:cmd == "split"
-      call s:process_cmd(l:rsp, s:resp1, "normal i", function('s:replaceBlock'))
+    let l:mth = matchlist(l:rsp, l:cmd.pattern)
+
+    if (len(l:mth) >= 6)
+      call l:cmd.func(l:cmd.cmd, l:mth)
     endif
   endfunction
 
@@ -75,9 +66,9 @@ if has('nvim') && exists('g:haskell_enable_ghc_modi') && g:haskell_enable_ghc_mo
        \   'on_exit': function('s:ghc_modi_handler') }
     \)
 
-  function! s:runCmd(cmd)
+  function! s:runCmd(cmd, args)
     update
-    let s:command_queue += [a:cmd[0]]
+    let s:command_queue += [a:args]
     call jobsend(s:ghc_modi_job, join(a:cmd, " ") . "\n")
   endfunction
 
@@ -104,18 +95,30 @@ if has('nvim') && exists('g:haskell_enable_ghc_modi') && g:haskell_enable_ghc_mo
     let l:cmd = [ "split",
                 \ expand('%'),
                 \ line("."),
-                \ virtcol(".") ]
+                \ virtcol("."),
+                \ ]
 
-    call s:runCmd(l:cmd)
+    let l:args = { 'pattern': s:resp1,
+                 \ 'cmd': 'normal i',
+                 \ 'func': function('s:replaceBlock'),
+                 \ }
+
+    call s:runCmd(l:cmd, l:args)
   endfunction
 
   function! haskell#addDecl()
     let l:cmd = [ "sig",
                 \ expand('%'),
                 \ line("."),
-                \ virtcol(".") ]
+                \ virtcol("."),
+                \ ]
 
-    call s:runCmd(l:cmd)
+    let l:args = { 'pattern': s:resp2,
+                 \ 'cmd': 'normal o',
+                 \ 'func': function('s:insertBlock'),
+                 \ }
+
+    call s:runCmd(l:cmd, l:args)
   endfunction
 
   function! haskell#refine()
@@ -124,9 +127,15 @@ if has('nvim') && exists('g:haskell_enable_ghc_modi') && g:haskell_enable_ghc_mo
                  \ expand('%'),
                  \ line("."),
                  \ virtcol("."),
-                 \ l:expr ]
+                 \ l:expr,
+                 \ ]
 
-    call s:runCmd(l:cmd)
+    let l:args = { 'pattern': s:resp1,
+                 \ 'cmd': 'normal a',
+                 \ 'func': function('s:replaceBlock'),
+                 \ }
+
+    call s:runCmd(l:cmd, l:args)
   endfunction
 
   command! -buffer -nargs=0 HaskellCaseSplit call haskell#caseSplit()
