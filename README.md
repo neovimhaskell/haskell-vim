@@ -1,5 +1,5 @@
-Haskell Integration
-===================
+Syntax Highlighting and Indentation for Haskell and Cabal
+=========================================================
 
 I was unhappy with the Haskell scripts that are
 shipped with vim, therefore I decided to make my
@@ -16,7 +16,6 @@ I hope you find this useful.
 * More contextual highlighting (e.g. highlight 'as' or 'family' only in appropriate places)
 * Smarter indentation
 * Better Cabal support
-* `ghc-modi` integration for [Neovim][]
 
 ## Installation
 
@@ -105,29 +104,14 @@ To configure indentation in `haskell-vim` you can use the following variables to
 * `HaskellAddModuleComment`: Adds a module comment block to the top of your haskell file
 
         {-|
-        Module      : 
-        Description : 
-        Copyright   : 
-        License     : 
-        Maintainer  : 
-        Stability   : 
-        Portability : 
+        Module      :
+        Description :
+        Copyright   :
+        License     :
+        Maintainer  :
+        Stability   :
+        Portability :
         -}
-
-##### Neovim
-
-With Neovim you get additional features such as:
-
-* `HaskellCaseSplit`: split the pattern variable under the cursor (saves current file)
-* `HaskellAddDecl`: inserting function declaration based on type signature under the cursor (saves current file)
-* `HaskellRefine`: prompts for an expression and refines the hole under the cursor (saves current file)
-
-This feature is disable by default and requires `ghc-modi`. To enable `ghc-modi` support set
-`haskell_enable_ghc_modi` to `1` in your `.nvimrc`.
-
-You can configure an explicit path to your `ghc-modi` binary if needed by setting `g:ghc_modi_executable`.
-
-[Demo][]
 
 #### Cabal
 
@@ -163,5 +147,3 @@ You can configure an explicit path to your `ghc-modi` binary if needed by settin
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
-[Neovim]: http://neovim.io
-[Demo]: https://vimeo.com/134767975
