@@ -23,7 +23,7 @@ I recommend using [Pathogen][] for installation. Simply clone
 this repo into your `~/.vim/bundle` directory and you are ready to go.
 
     cd ~/.vim/bundle
-    git clone https://github.com/raichoo/haskell-vim.git
+    git clone https://github.com/neovimhaskell/haskell-vim.git
 
 Be sure that the following lines are in your
 `.vimrc`
