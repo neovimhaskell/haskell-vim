@@ -122,7 +122,7 @@ syn region haskellQuoted start="\<'\+" end="\>"
   \ haskellOperators,
   \ haskellIdentifier
 syn match haskellDot "\."
-syn region haskellLineComment start="--" end="$" keepend extend
+syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
   \ contains=
   \ haskellTodo,
   \ @Spell
