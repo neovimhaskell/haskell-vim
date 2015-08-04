@@ -36,7 +36,7 @@ syn match haskellRecordField "[_a-z][a-zA-Z0-9_']*\s*::" contained
   \ haskellIdentifier,
   \ haskellOperators
 syn match haskellTypeSig
-  \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)\s"
+  \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)\s*"
   \ contains=
   \ haskellIdentifier,
   \ haskellOperators,
