@@ -94,7 +94,8 @@ syn region haskellImport
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellDot,
-  \ haskellPreProc
+  \ haskellPreProc,
+  \ haskellPragma
 syn keyword haskellStatement do case of in
 syn keyword haskellWhere where
 syn keyword haskellLet let
