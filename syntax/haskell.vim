@@ -11,26 +11,6 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
-    \ contains=
-    \ haskellSeparator,
-    \ haskellType,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellDot,
-    \ haskellParens,
-    \ haskellPatternKeyword
-else
-  syn region haskellImportList matchgroup=haskellDelimiter start="(" end=")"
-    \ contains=
-    \ haskellSeparator,
-    \ haskellType,
-    \ haskellLineComment,
-    \ haskellBlockComment,
-    \ haskellDot,
-    \ haskellParens
-end
 syn match haskellRecordField "[_a-z][a-zA-Z0-9_']*\s*::" contained
   \ contains=
   \ haskellIdentifier,
@@ -42,39 +22,8 @@ syn match haskellTypeSig
   \ haskellOperators,
   \ haskellSeparator,
   \ haskellParens,
-syn region haskellModuleBlock matchgroup=haskellBlockKeywords start="\<module\>" end="\<where\>"
-  \ contains=haskellType,haskellDot,haskellImportList
-syn region haskellTypeClassBlock
-  \ matchgroup=haskellBlockKeywords
-  \ start="^\<\(class\|instance\)\>"
-  \ end="\<where\>\|^\<"
-  \ contains=
-  \ haskellType,
-  \ haskellSeparator,
-  \ haskellParens,
-  \ haskellDot,
-  \ haskellOperators,
-  \ haskellLineComment,
-  \ haskellBlockComment,
-  \ haskellPragma
-syn keyword haskellDeclKeyword newtype data type family instance where contained
-syn region haskellDeclBlock keepend
-  \ start="^\<\(newtype\|data\|type\)\>\s\+\(\<\(family\|instance\)\>\)\?"
-  \ end="\<where\>\|=\|^\<\|\<deriving\>"
-  \ contains=
-  \ haskellDeclKeyword,
-  \ haskellType,
-  \ haskellQuoted,
-  \ haskellParens,
-  \ haskellBrackets,
-  \ haskellDot,
-  \ haskellOperators,
-  \ haskellLineComment,
-  \ haskellBlockComment,
-  \ haskellPragma,
-  \ haskellDeriving
-syn match haskellAssocType "\s\+\<\(data\|type\|newtype\)\>"
-syn match haskellDeriving "\(deriving\s\+instance\|deriving\)"
+syn keyword haskellDeclKeyword module class instance where let newtype deriving in
+syn match haskellDecl "\(type\|data\)\s\+\(family\)\?"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
@@ -84,19 +33,15 @@ syn region haskellForeignImport start="\<foreign\>" end="::" keepend
   \ haskellOperators,
   \ haskellForeignKeywords,
   \ haskellIdentifier
-syn region haskellImport
-  \ start="^import"
-  \ end="^\<"
+syn match haskellImport "^\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+\)\?.\+\(\s\+\<as\>\s\+.\+\)\?\(\s\+\<hiding\>\)\?"
   \ contains=
+  \ haskellParens,
+  \ haskellOperators,
   \ haskellImportKeywords,
-  \ haskellImportList,
   \ haskellType,
   \ haskellLineComment,
   \ haskellBlockComment,
-  \ haskellDot
-syn keyword haskellStatement do case of in
-syn keyword haskellWhere where
-syn keyword haskellLet let
+syn keyword haskellStatement do case of
 if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
   syn keyword haskellStatic static
 endif
@@ -109,7 +54,7 @@ syn region haskellBrackets matchgroup=haskellDelimiter start="\[" end="]" contai
 syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=TOP
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
-syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:]\+\|\<_\>"
+syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
 syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
 syn region haskellQuoted start="\<'\+" end="\>"
@@ -121,7 +66,6 @@ syn region haskellQuoted start="\<'\+" end="\>"
   \ haskellParens,
   \ haskellOperators,
   \ haskellIdentifier
-syn match haskellDot "\."
 syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
   \ contains=
   \ haskellTodo,
@@ -145,7 +89,7 @@ syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles phantom representational nominal contained
-  syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="^\<" keepend
+  syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="$" keepend
     \ contains=
     \ haskellType,
     \ haskellTypeRoles
@@ -160,12 +104,7 @@ if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   syn keyword haskellArrowSyntax proc
 endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  syn region haskellPatternSynonym start="^\<pattern\>" end="=\|<-" keepend
-    \ contains=
-    \ haskellPatternKeyword,
-    \ haskellType,
-    \ haskellOperators
-  syn keyword haskellPatternKeyword pattern contained
+  syn keyword haskellPatternKeyword pattern
 endif
 
 highlight def link haskellBottom Macro
@@ -175,8 +114,6 @@ highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
 highlight def link haskellDeriving Structure
 highlight def link haskellStatement Statement
-highlight def link haskellWhere Statement
-highlight def link haskellLet Statement
 highlight def link haskellDefault Statement
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
@@ -187,7 +124,6 @@ highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
 highlight def link haskellQuote Operator
 highlight def link haskellQuotedType Include
-highlight def link haskellDot Operator
 highlight def link haskellType Include
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
@@ -201,6 +137,7 @@ highlight def link haskellAssocType Structure
 highlight def link haskellImportBlock Delimiter
 highlight def link haskellImportKeywords Structure
 highlight def link haskellDeclKeyword Structure
+highlight def link haskellDecl Structure
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
