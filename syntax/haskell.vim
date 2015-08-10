@@ -15,7 +15,7 @@ syn match haskellRecordField "[_a-z][a-zA-Z0-9_']*\s*::" contained
   \ contains=
   \ haskellIdentifier,
   \ haskellOperators
-syn match haskellRecordField containedin=haskellBrackets
+syn match haskellRecordField contained containedin=haskellBrackets
   \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)"
   \ contains=
   \ haskellIdentifier,
