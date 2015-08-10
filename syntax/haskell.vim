@@ -25,11 +25,15 @@ syn match haskellRecordField contained containedin=haskellBrackets
 syn match haskellTypeSig
   \ "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)"
   \ contains=
+  \ haskellWhere,
+  \ haskellLet,
   \ haskellIdentifier,
   \ haskellOperators,
   \ haskellSeparator,
   \ haskellParens,
-syn keyword haskellDeclKeyword module class instance where let newtype deriving in
+syn keyword haskelLWhere where
+syn keyword haskellLet let
+syn keyword haskellDeclKeyword module class instance newtype deriving in
 syn match haskellDecl "\(type\|data\)\s\+\(family\)\?"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
@@ -145,6 +149,8 @@ highlight def link haskellImportBlock Delimiter
 highlight def link haskellImportKeywords Structure
 highlight def link haskellDeclKeyword Structure
 highlight def link haskellDecl Structure
+highlight def link haskellWhere Structure
+highlight def link haskellLet Structure
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
