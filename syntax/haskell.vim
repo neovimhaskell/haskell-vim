@@ -11,11 +11,7 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn match haskellRecordField "[_a-z][a-zA-Z0-9_']*\s*::" contained
-  \ contains=
-  \ haskellIdentifier,
-  \ haskellOperators
-syn match haskellRecordField contained containedin=haskellBrackets
+syn match haskellRecordField contained containedin=haskellBlock
   \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)"
   \ contains=
   \ haskellIdentifier,
