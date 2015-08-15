@@ -48,6 +48,7 @@ syn match haskellImport "^\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+\)\
   \ haskellType,
   \ haskellLineComment,
   \ haskellBlockComment,
+  \ haskellPragma,
 syn keyword haskellStatement do case of
 if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
   syn keyword haskellStatic static
