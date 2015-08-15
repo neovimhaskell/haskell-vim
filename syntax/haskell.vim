@@ -30,7 +30,7 @@ syn match haskellTypeSig
 syn keyword haskelLWhere where
 syn keyword haskellLet let
 syn keyword haskellDeclKeyword module class instance newtype deriving in
-syn match haskellDecl "\(type\|data\)\s\+\(family\)\?"
+syn match haskellDecl "\<\(type\|data\)\>\s\+\(\<family\>\)\?"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
