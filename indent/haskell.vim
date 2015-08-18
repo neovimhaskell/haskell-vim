@@ -63,6 +63,15 @@ function! GetHaskellIndent()
     return match(l:prevline, '\S')
   endif
 
+  if synIDattr(synID(line("."), col("."), 1), "name") == 'haskellBlockComment'
+      for l:c in range(v:lnum - 1, 0, -1)
+          let l:bline = getline(l:c)
+          if l:bline =~ '{-'
+              return 1 + match(l:bline, '{-')
+      endfor
+      return 1
+  endif
+
   if l:prevline =~ '^\s*$'
       return 0
   endif
