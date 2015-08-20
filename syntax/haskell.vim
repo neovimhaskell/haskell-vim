@@ -90,6 +90,7 @@ syn region haskellBlockComment start="{-" end="-}"
   \ haskellTodo,
   \ @Spell
 syn region haskellPragma start="{-#" end="#-}"
+syn match haskellQuasiQuoted "." containedin=haskellQuasiQuote contained
 syn region haskellQuasiQuote matchgroup=haskellTH start="\[[_a-z][a-zA-z0-9_']*|" end="|\]"
 syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]" contains=TOP
 syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" contains=TOP
@@ -148,6 +149,7 @@ highlight def link haskellDeclKeyword Structure
 highlight def link haskellDecl Structure
 highlight def link haskellWhere Structure
 highlight def link haskellLet Structure
+highlight def link haskellQuasiQuoted String
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
