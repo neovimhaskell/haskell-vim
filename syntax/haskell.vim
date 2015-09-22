@@ -96,6 +96,8 @@ syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]"
 syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" contains=TOP
 syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
+" Treat a shebang line at the start of the file as a comment
+syn match haskellShebang "\%^#!.*$"
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles phantom representational nominal contained
   syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="$" keepend
@@ -134,6 +136,7 @@ highlight def link haskellOperators Operator
 highlight def link haskellQuote Operator
 highlight def link haskellQuotedType Include
 highlight def link haskellType Include
+highlight def link haskellShebang Comment
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
 highlight def link haskellPragma SpecialComment
