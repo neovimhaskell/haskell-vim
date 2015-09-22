@@ -28,8 +28,8 @@ syn match haskellTypeSig
   \ haskellSeparator,
   \ haskellParens,
 syn keyword haskelLWhere where
-syn keyword haskellLet let
-syn keyword haskellDeclKeyword module class instance newtype deriving in
+syn keyword haskellLet let in
+syn keyword haskellDeclKeyword module class instance newtype deriving
 syn match haskellDecl "\<\(type\|data\)\>\s\+\(\<family\>\)\?"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
@@ -78,6 +78,7 @@ syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
   \ contains=
   \ haskellTodo,
   \ @Spell
+
 syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
@@ -95,7 +96,7 @@ syn region haskellQuasiQuote matchgroup=haskellTH start="\[[_a-z][a-zA-z0-9_']*|
 syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]" contains=TOP
 syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" contains=TOP
 syn match haskellPreProc "^#.*$"
-syn keyword haskellTodo TODO FIXME contained
+syn keyword haskellTodo XXX TODO FIXME contained
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   syn keyword haskellTypeRoles phantom representational nominal contained
   syn region haskellTypeRoleBlock matchgroup=haskellTypeRoles start="type\s\+role" end="$" keepend
@@ -116,12 +117,12 @@ if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synon
   syn keyword haskellPatternKeyword pattern
 endif
 
-highlight def link haskellBottom Macro
-highlight def link haskellTH Boolean
+highlight def link haskellBottom Statement
+highlight def link haskellTH Macro
 highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
-highlight def link haskellDeriving Structure
+highlight def link haskellDeriving Keyword
 highlight def link haskellStatement Statement
 highlight def link haskellDefault Statement
 highlight def link haskellConditional Conditional
@@ -132,24 +133,25 @@ highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix PreProc
 highlight def link haskellOperators Operator
 highlight def link haskellQuote Operator
-highlight def link haskellQuotedType Include
-highlight def link haskellType Include
+highlight def link haskellQuotedType Type
+highlight def link haskellType Type
+highlight def link haskellPragma SpecialComment
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
-highlight def link haskellPragma SpecialComment
 highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
-highlight def link haskellPreProc Macro
+highlight def link haskellPreProc PreProc
 highlight def link haskellTodo Todo
 highlight def link haskellAssocType Structure
 highlight def link haskellImportBlock Delimiter
-highlight def link haskellImportKeywords Structure
-highlight def link haskellDeclKeyword Structure
-highlight def link haskellDecl Structure
-highlight def link haskellWhere Structure
-highlight def link haskellLet Structure
+highlight def link haskellImportKeywords Include
+highlight def link haskellDeclKeyword Keyword
+highlight def link haskellDecl Keyword
+highlight def link haskellWhere Keyword
+highlight def link haskellLet Keyword
 highlight def link haskellQuasiQuoted String
+
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
