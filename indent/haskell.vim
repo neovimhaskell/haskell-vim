@@ -170,12 +170,13 @@ function! GetHaskellIndent()
     let l:synid = synIDattr(l:hl, 'name')
 
     if l:synid == 'haskellBlockComment'
-        for l:c in range(v:lnum - 1, 0, -1)
-            let l:bline = getline(l:c)
-            if l:bline =~ '{-'
-                return 1 + match(l:bline, '{-')
-        endfor
-        return 1
+      for l:c in range(v:lnum - 1, 0, -1)
+        let l:bline = getline(l:c)
+        if l:bline =~ '{-'
+          return 1 + match(l:bline, '{-')
+        endif
+      endfor
+      return 1
     endif
 
     if l:synid == 'haskellBlock'
