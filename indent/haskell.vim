@@ -54,7 +54,7 @@ if !exists('g:haskell_indent_in')
 endif
 
 setlocal indentexpr=GetHaskellIndent()
-setlocal indentkeys=0{,0},!^F,o,O,0\|,0\=,0=where,0=in,0=let,0=deriving,0=->,0=\=>
+setlocal indentkeys=0{,0},!^F,o,O,0\|,0\=,0=where,0=let,0=deriving,0=->,0=\=>,<Space>
 
 function! GetHaskellIndent()
   let l:prevline = getline(v:lnum - 1)
@@ -88,7 +88,7 @@ function! GetHaskellIndent()
     endif
   endif
 
-  if l:line =~ '\C^\s*\<in\>'
+  if l:line =~ '\C^\s*\<in\>\s'
     let l:s = match(l:prevline, '\C\<let\>')
     if l:s >= 0
       return l:s + g:haskell_indent_in
