@@ -54,29 +54,20 @@ if !exists('g:haskell_indent_in')
 endif
 
 setlocal indentexpr=GetHaskellIndent()
-setlocal indentkeys=!^F,o,O,0\|,0=where,0=in,0=let,0=deriving,0=->,0=\=>,<CR>,0}
+setlocal indentkeys=0{,0},!^F,o,O,0\|,0\=,0=where,0=in,0=let,0=deriving,0=->,0=\=>
 
 function! GetHaskellIndent()
   let l:prevline = getline(v:lnum - 1)
-
-  if l:prevline =~ '^\s*--'
-    return match(l:prevline, '\S')
-  endif
-
-  if synIDattr(synID(line("."), col("."), 1), "name") == 'haskellBlockComment'
-      for l:c in range(v:lnum - 1, 0, -1)
-          let l:bline = getline(l:c)
-          if l:bline =~ '{-'
-              return 1 + match(l:bline, '{-')
-      endfor
-      return 1
-  endif
 
   if l:prevline =~ '^\s*$'
       return 0
   endif
 
-  let l:line = getline(v:lnum)
+  let l:line     = getline(v:lnum)
+
+  if l:prevline =~ '^\s*--'
+    return match(l:prevline, '\S')
+  endif
 
   if l:line =~ '\C^\s*\<where\>'
     let l:s = match(l:prevline, '\S')
@@ -107,13 +98,19 @@ function! GetHaskellIndent()
     endif
   endif
 
+  if l:line =~ '^\s*='
+    if l:prevline =~ '\C^\<data\>\s\+[^=]\+\s*$'
+        return match(l:prevline, '\C\<data\>') + &shiftwidth
+    endif
+  endif
+
   if l:line =~ '^\s*|'
-    if match(l:prevline, '^\s*data') < 0
-      if match(l:prevline, '^\s*|\s') >= 0
+    if l:prevline =~ '\C^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
+      return match(l:prevline, '=')
+    elseif match(l:prevline, '^\s*|\s') >= 0
         return match(l:prevline, '|')
-      else
-        return &shiftwidth
-      endif
+    else
+      return &shiftwidth
     endif
   endif
 
@@ -129,10 +126,6 @@ function! GetHaskellIndent()
     if l:s > 0
       return l:s + &shiftwidth
     endif
-  endif
-
-  if l:prevline =~ '[{([][^})\]]\+$'
-    return match(l:prevline, '[{([]')
   endif
 
   if l:prevline =~ '\C\<let\>\s\+[^=]\+=\s*$'
@@ -155,7 +148,7 @@ function! GetHaskellIndent()
     endif
   endif
 
-  if l:prevline =~ '\C\(\<where\>\|\<do\>\|=\|[{([]\)\s*$'
+  if l:prevline =~ '\C\(\<where\>\|\<do\>\|=\)\s*$'
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
@@ -167,19 +160,43 @@ function! GetHaskellIndent()
     return match(l:prevline, '\C\<do\>') + g:haskell_indent_do
   endif
 
-  if l:prevline =~ '\C^\s*\<data\>\s\+[^=]\+\s\+=\s\+\S\+.*$'
-    if l:line =~ '^\s*|'
-      return match(l:prevline, '=')
-    endif
-  endif
-
   if l:prevline =~ '\C\<case\>\s\+.\+\<of\>\s*$'
     return match(l:prevline, '\C\<case\>') + g:haskell_indent_case
   endif
 
-  if l:prevline =~ '\C^\s*\<\data\>\s\+\S\+\s*$'
-    return match(l:prevline, '\C\<data\>') + &shiftwidth
-  endif
+  let l:hlstack = reverse(synstack(line('.'), col('.')))
+
+  for l:hl in l:hlstack
+    let l:synid = synIDattr(l:hl, 'name')
+
+    if l:synid == 'haskellBlockComment'
+        for l:c in range(v:lnum - 1, 0, -1)
+            let l:bline = getline(l:c)
+            if l:bline =~ '{-'
+                return 1 + match(l:bline, '{-')
+        endfor
+        return 1
+    endif
+
+    if l:synid == 'haskellBlock'
+      if l:line =~ '^\s*{'
+        let l:s = match(l:prevline, '\S')
+        if l:s >= 0
+          return l:s + &shiftwidth
+        endif
+      endif
+
+      return match(l:prevline, '{')
+    endif
+
+    if l:synid == 'haskellParens'
+      return match(l:prevline, '(')
+    endif
+
+    if l:synid == 'haskellBrackets'
+      return match(l:prevline, '[')
+    endif
+  endfor
 
   return match(l:prevline, '\S')
 endfunction
