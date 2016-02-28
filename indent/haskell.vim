@@ -114,6 +114,10 @@ function! GetHaskellIndent()
     endif
   endif
 
+  if l:line =~ '^\s*::\s'
+    return match(l:prevline, '\S') + &shiftwidth
+  endif
+
   if l:line =~ '^\s*[=-]>'
     let l:s = match(l:prevline, ' :: ')
     if l:s >= 0
@@ -198,6 +202,15 @@ function! GetHaskellIndent()
       return match(l:prevline, '[')
     endif
   endfor
+
+  if l:prevline =~ '^\s*\([=-]>\|::\)\s' && l:line !~ '^\s*[-=]>'
+    return 0
+  endif
+
+  if l:prevline =~ '^\s*)' && l:line =~ '^\s*=>'
+    let l:s = match(l:prevline, ')')
+    return l:s - (&shiftwidth + 1)
+  endif
 
   return match(l:prevline, '\S')
 endfunction
