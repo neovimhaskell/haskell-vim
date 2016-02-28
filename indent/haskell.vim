@@ -70,8 +70,11 @@ function! GetHaskellIndent()
   endif
 
   if l:line =~ '\C^\s*\<where\>'
-    let l:s = match(l:prevline, '\S')
-    return l:s + &shiftwidth
+    if match(l:prevline, '^\s\+in\s\+') == 0
+      return match(l:prevline, 'in') - g:haskell_indent_in
+    endif
+
+    return match(l:prevline, '\S') + &shiftwidth
   endif
 
   if l:line =~ '\C^\s*\<deriving\>'
