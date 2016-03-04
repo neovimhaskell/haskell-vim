@@ -183,8 +183,16 @@ function! GetHaskellIndent()
 
   " foo :: Int
   " >>>>-> Int
-  if l:prevline =~ '\s::\s' && l:line =~ '^\s*[-=]>'
-    return match(l:prevline, '\s::\s') + 1
+  "
+  " foo
+  "   :: Int
+  " foo
+  if l:prevline =~ '\s::\s'
+    if l:line =~ '^\s*[-=]>'
+      return match(l:prevline, '::\s')
+    else
+      return match(l:prevline, '::\s') - &shiftwidth
+    endif
   endif
 
   " foo :: Int
