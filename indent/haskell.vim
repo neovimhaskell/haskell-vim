@@ -188,7 +188,7 @@ function! GetHaskellIndent()
   if l:prevline =~ '\s::\s'
     if l:line =~ '^\s*[-=]>'
       return match(l:prevline, '::\s')
-    else
+    elseif match(l:prevline, '^\s\+::') > -1
       return match(l:prevline, '::\s') - &shiftwidth
     endif
   endif
