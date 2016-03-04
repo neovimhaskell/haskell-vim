@@ -265,6 +265,12 @@ function! GetHaskellIndent()
     endif
   endif
 
+  "   bar
+  " _ -> quux
+  if l:line =~ '^\s*\S\+\s\+->\s\+' && l:prevline !~ '^\s*\S\+\s\+->\s\+'
+    return match(l:prevline, '\S') - &shiftwidth
+  endif
+
   " indent closing brace, paren or bracket
   if l:line =~ '^\s*}'
     call search('}', 'b')
