@@ -61,27 +61,25 @@ setlocal indentexpr=GetHaskellIndent()
 setlocal indentkeys=0{,0},!^F,o,O,0\|,0\=,0=where,0=let,0=deriving,0=->,0=\=>,<Space>
 
 function! GetHaskellIndent()
-  let l:hlstack = synstack(line('.'), col('.'))
+  let l:hlstack = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
   " blockcomment handling
-  for l:hl in l:hlstack
-    if synIDattr(l:hl, "name") == 'haskellBlockComment'
-      for l:c in range(v:lnum - 1, 0, -1)
-        let l:line = getline(l:c)
-        if l:line =~ '{-'
-          return 1 + match(l:line, '{-')
-        endif
-      endfor
-      return 1
-    endif
-  endfor
+  if index(l:hlstack, 'haskellBlockComment') > -1
+    for l:c in range(v:lnum - 1, 0, -1)
+      let l:line = getline(l:c)
+      if l:line =~ '{-'
+        return 1 + match(l:line, '{-')
+      endif
+    endfor
+    return 1
+  endif
 
   let l:prevline = getline(v:lnum - 1)
   let l:line     = getline(v:lnum)
 
   " reset
   if l:prevline =~ '^\s*$' && l:line !~ '^\s*\S'
-      return 0
+    return 0
   endif
 
   " comment indentation
@@ -155,7 +153,11 @@ function! GetHaskellIndent()
   "" where foo
   "" >>>>>>bar
   if l:prevline =~ '\C\<where\>\s\+\S\+.*$'
-    return match(l:prevline, '\C\<where\>') + g:haskell_indent_where
+    if  l:line =~ '^\s*[=-]>\s' && l:prevline =~ ' :: '
+      return match(l:prevline, ':: ')
+    else
+      return match(l:prevline, '\C\<where\>') + g:haskell_indent_where
+  endif
   endif
 
   " do foo
@@ -180,17 +182,42 @@ function! GetHaskellIndent()
   endif
 
   " foo :: Int
+  " >>>>-> Int
+  if l:prevline =~ '\s::\s' && l:line =~ '^\s*[-=]>'
+    return match(l:prevline, '\s::\s') + 1
+  endif
+
+  " foo :: Int
   "     -> Int
   " foo x = x
-  if l:prevline =~ '^\s*\([=-]>\|::\)\s' && l:line !~ '^\s*[-=]>'
-    return 0
+  if l:prevline =~ '^\s*[-=]>' && l:line !~ '^\s*[-=]>'
+    if index(l:hlstack, 'haskellParens') > -1 || index(l:hlstack, 'haskellBrackets') > -1 || index(l:hlstack, 'haskellBlock') > -1
+      return match(l:prevline, '[^\s-=>]')
+    else
+      let l:m = matchstr(l:line, '^\s*\zs\S\+\ze\s\+')
+      let l:l = l:prevline
+      let l:c = 1
+
+      while v:lnum != l:c
+        " fun decl
+        if match(l:l, l:m . '\s\+') >= 0
+          return match(l:l, l:m . '\s\+')
+        " empty line, stop looking
+        elseif l:l =~ '^$'
+           return 0
+        endif
+        let l:c += 1
+        let l:l = getline(v:lnum - l:c)
+      endwhile
+
+      return 0
+    endif
   endif
 
   " foo :: ( Monad m
   "        , Functor f
   "        )
-  "     => Int
-  "     -> Int
+  ">>>>>=> Int
   if l:prevline =~ '^\s*)' && l:line =~ '^\s*=>'
     let l:s = match(l:prevline, ')')
     return l:s - (&shiftwidth + 1)
@@ -254,15 +281,6 @@ function! GetHaskellIndent()
   " >>:: Int
   if l:line =~ '^\s*::\s'
     return match(l:prevline, '\S') + &shiftwidth
-  endif
-
-  " foo :: Int
-  " >>>>-> Int
-  if l:line =~ '^\s*[=-]>'
-    let l:s = match(l:prevline, ' :: ')
-    if l:s >= 0
-      return l:s + 1
-    endif
   endif
 
   "   bar
