@@ -1,7 +1,5 @@
 " indentation for haskell
 "
-" Based on idris indentation
-"
 " author: raichoo (raichoo@googlemail.com)
 "
 " Modify g:haskell_indent_if and g:haskell_indent_case to
