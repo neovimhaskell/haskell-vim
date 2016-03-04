@@ -189,7 +189,12 @@ function! GetHaskellIndent()
 
   " foo :: Int
   "     -> Int
-  " foo x = x
+  " foo x
+  "
+  " foo
+  "   :: Int
+  "   -> Int
+  " foo x
   if l:prevline =~ '^\s*[-=]>' && l:line !~ '^\s*[-=]>'
     if index(l:hlstack, 'haskellParens') > -1 || index(l:hlstack, 'haskellBrackets') > -1 || index(l:hlstack, 'haskellBlock') > -1
       return match(l:prevline, '[^\s-=>]')
@@ -200,8 +205,9 @@ function! GetHaskellIndent()
 
       while v:lnum != l:c
         " fun decl
-        if match(l:l, l:m . '\s\+') >= 0
-          return match(l:l, l:m . '\s\+')
+        let l:s = match(l:l, l:m)
+        if l:s >= 0
+          return l:s
         " empty line, stop looking
         elseif l:l =~ '^$'
            return 0
