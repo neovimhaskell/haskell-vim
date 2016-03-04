@@ -226,6 +226,12 @@ function! GetHaskellIndent()
     endif
   endif
 
+  "   | otherwise = ...
+  " foo
+  if l:prevline =~ '^\s\+|' && l:line !~ '^\s\+|'
+    return match(l:prevline, '|') - g:haskell_indent_guard
+  endif
+
   " foo :: ( Monad m
   "        , Functor f
   "        )
