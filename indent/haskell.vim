@@ -291,20 +291,17 @@ function! GetHaskellIndent()
 
   " indent closing brace, paren or bracket
   if l:line =~ '^\s*}'
-    call search('}', 'bc')
-    norm %
+    norm 0f}%
     return col('.') - 1
   endif
 
   if l:line =~ '^\s*)'
-    call search(')', 'bc')
-    norm %
+    norm 0f)%
     return col('.') - 1
   endif
 
   if l:line =~ '^\s*]'
-    call search(']', 'bc')
-    norm %
+    norm 0f]%
     return col('.') - 1
   endif
 
