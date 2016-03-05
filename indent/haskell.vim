@@ -92,8 +92,11 @@ function! s:indentGuard(pos, prevline)
       return match(l:l, '|')
     " found less deeper indentation (not starting with `,` or `=`)
     " stop looking
-    elseif l:l !~ '^\s*[=,]' && match(l:l, '\S') < a:pos
-      return match(l:l, '\S') + g:haskell_indent_guard
+    else
+      let l:m = match(l:l, '\S')
+      if l:l !~ '^\s*[=,]' && l:m < a:pos
+        return l:m + g:haskell_indent_guard
+      endif
     endif
     let l:c += 1
     let l:l = getline(v:lnum - l:c)
