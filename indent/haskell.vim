@@ -246,7 +246,7 @@ function! GetHaskellIndent()
   "
   "   | foo
   "   = bar
-  if l:prevline =~ '^\s\+|'
+  if l:prevline =~ '^\s\+|' && !s:isInBlock(l:hlstack)
     if l:line =~ '\s*[,=]'
       return match(l:prevline, '|')
     elseif l:line !~ '^\s*|'
