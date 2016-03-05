@@ -52,6 +52,8 @@ if !exists('g:haskell_indent_in')
 endif
 
 if !exists('g:haskell_indent_guard')
+  " function x y
+  " >>|
   let g:haskell_indent_guard = 2
 endif
 
