@@ -358,7 +358,9 @@ function! GetHaskellIndent()
     endif
   endif
 
-  " guard indentation
+  "   |
+  "   ...
+  " >>|
   if l:line =~ '^\s*|\s'
     let l:s = s:indentGuard(match(l:line, '|'), l:prevline)
     if l:s > -1
