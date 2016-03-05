@@ -316,13 +316,18 @@ function! GetHaskellIndent()
   "   |
   "   ...
   " >>=
+  "
+  " foo
+  " >>=
   if l:line =~ '^\s*='
     if l:prevline =~ '\C^\<data\>\s\+[^=]\+\s*$'
       return match(l:prevline, '\C\<data\>') + &shiftwidth
     else
       let l:s = s:indentGuard(match(l:line, '='), l:prevline)
-      if l:s > -1
+      if l:s > 0
         return l:s
+      else
+        return &shiftwidth
       endif
     endif
   endif
