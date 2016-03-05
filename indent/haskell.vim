@@ -320,17 +320,28 @@ function! GetHaskellIndent()
 
   "   { foo :: Int
   " >>,
-  if l:line =~ '^\s*,' && s:isInBlock(l:hlstack)
-    norm 0
-    call search(',', 'c')
-    let l:n = s:getNesting(l:hlstack)
-    call search('[(\[{]', 'b')
-
-    while l:n != s:getNesting(s:getHLStack())
+  "
+  "   |
+  "   ...
+  " >>,
+  if l:line =~ '^\s*,'
+    if s:isInBlock(l:hlstack)
+      norm 0
+      call search(',', 'c')
+      let l:n = s:getNesting(l:hlstack)
       call search('[(\[{]', 'b')
-    endwhile
 
-    return col('.') - 1
+      while l:n != s:getNesting(s:getHLStack())
+        call search('[(\[{]', 'b')
+      endwhile
+
+      return col('.') - 1
+    else
+      let l:s = s:indentGuard(match(l:line, ','), l:prevline)
+      if l:s > -1
+        return l:s
+      end
+    endif
   endif
 
   " guard indentation
