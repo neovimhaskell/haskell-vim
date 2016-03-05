@@ -70,6 +70,14 @@ function! s:getHLStack()
   return map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
+" indent matching character
+function! s:indentMatching(char)
+  norm 0
+  call search(a:char, 'c')
+  norm %
+  return col('.') - 1
+endfunction
+
 " backtrack to find guard clause
 function! s:indentGuard(pos, prevline)
   let l:l = a:prevline
@@ -382,18 +390,15 @@ function! GetHaskellIndent()
 
   " indent closing brace, paren or bracket
   if l:line =~ '^\s*}'
-    norm 0f}%
-    return col('.') - 1
+    return s:indentMatching('}')
   endif
 
   if l:line =~ '^\s*)'
-    norm 0f)%
-    return col('.') - 1
+    return s:indentMatching(')')
   endif
 
   if l:line =~ '^\s*]'
-    norm 0f]%
-    return col('.') - 1
+    return s:indentMatching(']')
   endif
 
   return match(l:prevline, '\S')
