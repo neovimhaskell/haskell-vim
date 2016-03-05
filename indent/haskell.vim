@@ -294,6 +294,21 @@ function! GetHaskellIndent()
     endif
   endif
 
+  "   { foo :: Int
+  " >>,
+  if l:line =~ '^\s*,' && s:isInBlock(l:hlstack)
+    norm 0
+    call search(',', 'c')
+    let l:n = s:getNesting(l:hlstack)
+    call search('[(\[{]', 'b')
+
+    while l:n != s:getNesting(s:getHLStack())
+      call search('[(\[{]', 'b')
+    endwhile
+
+    return col('.') - 1
+  endif
+
   " guard indentation
   if l:line =~ '^\s*|\s'
     let l:l = l:prevline
