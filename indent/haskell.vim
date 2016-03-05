@@ -58,8 +58,20 @@ endif
 setlocal indentexpr=GetHaskellIndent()
 setlocal indentkeys=0{,0},!^F,o,O,0\|,0\=,0=where,0=let,0=deriving,0=->,0=\=>,<Space>
 
+function! s:isInBlock(hlstack)
+  return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1
+endfunction
+
+function! s:getNesting(hlstack)
+  return filter(a:hlstack, 'v:val == "haskellBlock" || v:val == "haskellBrackets" || v:val == "haskellParens"')
+endfunction
+
+function! s:getHLStack()
+  return map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
+
 function! GetHaskellIndent()
-  let l:hlstack = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+  let l:hlstack = s:getHLStack()
 
   " blockcomment handling
   if index(l:hlstack, 'haskellBlockComment') > -1
@@ -202,7 +214,7 @@ function! GetHaskellIndent()
   "   -> Int
   " foo x
   if l:prevline =~ '^\s*[-=]>' && l:line !~ '^\s*[-=]>'
-    if index(l:hlstack, 'haskellParens') > -1 || index(l:hlstack, 'haskellBrackets') > -1 || index(l:hlstack, 'haskellBlock') > -1
+    if s:isInBlock(l:hlstack)
       return match(l:prevline, '[^\s-=>]')
     else
       let l:m = matchstr(l:line, '^\s*\zs\S\+\ze\s\+')
