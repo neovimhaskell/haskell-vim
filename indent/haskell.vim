@@ -70,6 +70,30 @@ function! s:getHLStack()
   return map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
+" backtrack to find guard clause
+function! s:indentGuard(pos, prevline)
+  let l:l = a:prevline
+  let l:c = 1
+
+  while v:lnum != l:c
+    " empty line, stop looking
+    if l:l =~ '^$'
+      return a:pos
+    " guard found
+    elseif l:l =~ '^\s*|\s\+'
+      return match(l:l, '|')
+    " found less deeper indentation (not starting with `,` or `=`)
+    " stop looking
+    elseif l:l !~ '^\s*[=,]' && match(l:l, '\S') < a:pos
+      return match(l:l, '\S') + g:haskell_indent_guard
+    endif
+    let l:c += 1
+    let l:l = getline(v:lnum - l:c)
+  endwhile
+
+  return -1
+endfunction
+
 function! GetHaskellIndent()
   let l:hlstack = s:getHLStack()
 
@@ -311,26 +335,10 @@ function! GetHaskellIndent()
 
   " guard indentation
   if l:line =~ '^\s*|\s'
-    let l:l = l:prevline
-    let l:c = 1
-
-    let l:p = match(l:line, '|')
-
-    while v:lnum != l:c
-      " empty line, stop looking
-      if l:l =~ '^$'
-        return l:p
-      " guard found
-      elseif l:l =~ '^\s*|\s\+'
-        return match(l:l, '|')
-      " found less deeper indentation (not starting with `,` or `=`)
-      " stop looking
-      elseif l:l !~ '^\s*[=,]' && match(l:l, '\S') < l:p
-        return match(l:l, '\S') + g:haskell_indent_guard
-      endif
-      let l:c += 1
-      let l:l = getline(v:lnum - l:c)
-    endwhile
+    let l:s = s:indentGuard(match(l:line, '|'), l:prevline)
+    if l:s > -1
+      return l:s
+    end
   endif
 
   " foo
