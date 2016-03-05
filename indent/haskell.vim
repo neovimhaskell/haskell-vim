@@ -325,7 +325,7 @@ function! GetHaskellIndent()
         return match(l:l, '|')
       " found less deeper indentation (not starting with `,` or `=`)
       " stop looking
-      elseif l:l !~ '^\s*[=,]' && match(l:l, '\S') <= l:p
+      elseif l:l !~ '^\s*[=,]' && match(l:l, '\S') < l:p
         return match(l:l, '\S') + g:haskell_indent_guard
       endif
       let l:c += 1
