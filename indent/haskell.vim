@@ -305,7 +305,7 @@ function! GetHaskellIndent()
 
   " let x = 1
   "     y = 2
-  ">>in x + 1
+  " >in x + 1
   if l:line =~ '\C^\s*\<in\>\s'
     return match(l:prevline, '\S') - (4 - g:haskell_indent_in)
   endif
