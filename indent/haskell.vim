@@ -94,7 +94,7 @@ function! s:indentGuard(pos, prevline)
     " stop looking
     else
       let l:m = match(l:l, '\S')
-      if l:l !~ '^\s*[=,]' && l:m < a:pos
+      if l:l !~ '^\s*[=,]' && l:m <= a:pos
         return l:m + g:haskell_indent_guard
       endif
     endif
