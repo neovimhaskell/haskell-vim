@@ -228,8 +228,18 @@ function! GetHaskellIndent()
 
   "   | otherwise = ...
   " foo
-  if l:prevline =~ '^\s\+|' && l:line !~ '^\s\+|'
-    return match(l:prevline, '|') - g:haskell_indent_guard
+  "
+  "   | foo
+  "   , bar
+  "
+  "   | foo
+  "   = bar
+  if l:prevline =~ '^\s\+|'
+    if l:line =~ '\s*[,=]'
+      return match(l:prevline, '|')
+    elseif l:line !~ '^\s*|'
+      return match(l:prevline, '|') - g:haskell_indent_guard
+    endif
   endif
 
   " foo :: ( Monad m
@@ -280,14 +290,15 @@ function! GetHaskellIndent()
     let l:p = match(l:line, '|')
 
     while v:lnum != l:c
-      " guard found
-      if match(l:l, '^\s*|\s\+') >= 0
-        return match(l:l, '|')
       " empty line, stop looking
-      elseif l:l =~ '^$'
-         return l:p
-      " found less deeper indentation, stop looking
-      elseif match(l:l, '\S') <= l:p
+      if l:l =~ '^$'
+        return l:p
+      " guard found
+      elseif l:l =~ '^\s*|\s\+'
+        return match(l:l, '|')
+      " found less deeper indentation (not starting with `,` or `=`)
+      " stop looking
+      elseif l:l !~ '^\s*[=,]' && match(l:l, '\S') <= l:p
         return match(l:l, '\S') + g:haskell_indent_guard
       endif
       let l:c += 1
