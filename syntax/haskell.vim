@@ -132,8 +132,6 @@ highlight def link haskellDelimiter Delimiter
 highlight def link haskellInfix Keyword
 highlight def link haskellOperators Operator
 highlight def link haskellQuote Operator
-highlight def link haskellQuotedType Include
-highlight def link haskellType Include
 highlight def link haskellShebang Comment
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
@@ -150,6 +148,8 @@ highlight def link haskellDeclKeyword Structure
 highlight def link haskellDecl Structure
 highlight def link haskellWhere Structure
 highlight def link haskellLet Structure
+highlight def link haskellQuotedType Include
+highlight def link haskellType Include
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
@@ -160,14 +160,14 @@ endif
 if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
   highlight def link haskellArrowSyntax Keyword
 endif
+if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
+  highlight def link haskellStatic Keyword
+endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   highlight def link haskellPatternKeyword Structure
 endif
 if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   highlight def link haskellTypeRoles Structure
-endif
-if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
-  highlight def link haskellStatic Keyword
 endif
 
 let b:current_syntax = "haskell"
