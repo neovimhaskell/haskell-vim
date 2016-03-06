@@ -120,10 +120,8 @@ endif
 
 highlight def link haskellBottom Macro
 highlight def link haskellTH Boolean
-highlight def link haskellBlockKeywords Structure
 highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
-highlight def link haskellDeriving Structure
 highlight def link haskellStatement Statement
 highlight def link haskellDefault Statement
 highlight def link haskellConditional Conditional
@@ -146,7 +144,6 @@ highlight def link haskellBacktick Operator
 highlight def link haskellPreProc Macro
 highlight def link haskellTodo Todo
 highlight def link haskellAssocType Structure
-highlight def link haskellImportBlock Delimiter
 highlight def link haskellImportKeywords Structure
 highlight def link haskellDeclKeyword Structure
 highlight def link haskellDecl Structure
