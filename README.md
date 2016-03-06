@@ -49,6 +49,11 @@ To enable the features you would like to use, just add the according line to you
 * `let g:haskell_enable_pattern_synonyms = 1` to enable highlighting of `pattern`
 * `let g:haskell_enable_typeroles = 1` to enable highlighting of type roles
 * `let g:haskell_enable_static_pointers = 1` to enable highlighting of `static`
+ 
+### Highlighting
+
+`haskell-vim` has an opinionated highlighting. If you do not like that you can swtich to
+a more traditional mode by setting `g:haskell_classic_highlighting` to `1`.
 
 ### Indentation
 
@@ -88,6 +93,13 @@ To configure indentation in `haskell-vim` you can use the following variables to
         let x = 1
         >in x
 
+* `let g:haskell_indent_guard = 2`
+
+        f x y
+        >>|
+  
+
+
 #### Cabal
 
 *  `let g:cabal_indent_section = 2` (limited to max. 4 spaces)
@@ -95,55 +107,6 @@ To configure indentation in `haskell-vim` you can use the following variables to
         executable name
         >>main-is:             Main.hs
 
-### Plugin Support
-
-#### Haskell
-
-`haskell-vim` comes with some helpful functionality for working with Haskell
-
-* `HaskellAddModuleComment`: Adds a module comment block to the top of your haskell file
-
-        {-|
-        Module      :
-        Description :
-        Copyright   :
-        License     :
-        Maintainer  :
-        Stability   :
-        Portability :
-        -}
-
-#### Cabal
-
-`haskell-vim` comes with a few helpful commands for working with Cabal
-
-* `CabalAddExecutable`: Adds a new executable section to the end of your cabal file. Prompts you for executable filename and source file.
-
-        executable name
-          -- ghc-options:
-          main-is:             Main.hs
-          -- other-modules:
-          -- other-extensions:
-          build-depends:       base
-          -- hs-source-dirs:
-          default-language:    Haskell2010
-
-* `CabalAddLibrary`: Adds a new library section to the end of your cabal file.
-
-        library
-          -- ghc-options:
-          -- other-modules:
-          -- other-extensions:
-          build-depends:       base
-          -- hs-source-dirs:
-          default-language:    Haskell2010
-
-* `CabalAddFlag`: Adds a new flag section to the end of your cabal file. Prompts you for flag name.
-
-        flag name
-          description:
-          default:      False
-          manual:       True
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
