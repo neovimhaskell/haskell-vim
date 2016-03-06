@@ -155,10 +155,10 @@ if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification 
   highlight def link haskellForall Operator
 endif
 if exists('g:haskell_enable_recursivedo') && g:haskell_enable_recursivedo == 1
-  highlight def link haskellRecursiveDo Operator
+  highlight def link haskellRecursiveDo Keyword
 endif
 if exists('g:haskell_enable_arrowsyntax') && g:haskell_enable_arrowsyntax == 1
-  highlight def link haskellArrowSyntax Operator
+  highlight def link haskellArrowSyntax Keyword
 endif
 if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
   highlight def link haskellPatternKeyword Structure
@@ -167,7 +167,7 @@ if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
   highlight def link haskellTypeRoles Structure
 endif
 if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
-  highlight def link haskellStatic Statement
+  highlight def link haskellStatic Keyword
 endif
 
 let b:current_syntax = "haskell"
