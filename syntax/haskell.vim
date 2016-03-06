@@ -141,15 +141,15 @@ highlight def link haskellPragma SpecialComment
 highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
-highlight def link haskellPreProc Macro
+highlight def link haskellQuasiQuoted String
 highlight def link haskellTodo Todo
+highlight def link haskellPreProc Macro
 highlight def link haskellAssocType Structure
 highlight def link haskellImportKeywords Structure
 highlight def link haskellDeclKeyword Structure
 highlight def link haskellDecl Structure
 highlight def link haskellWhere Structure
 highlight def link haskellLet Structure
-highlight def link haskellQuasiQuoted String
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
