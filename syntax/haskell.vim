@@ -123,7 +123,7 @@ highlight def link haskellTH Boolean
 highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
 highlight def link haskellStatement Statement
-highlight def link haskellDefault Statement
+highlight def link haskellDefault Keyword
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
 highlight def link haskellFloat Float
