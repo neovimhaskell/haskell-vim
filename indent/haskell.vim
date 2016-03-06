@@ -14,7 +14,7 @@ endif
 let b:did_indent = 1
 
 if !exists('g:haskell_indent_if')
-  " if bool
+  " if x
   " >>>then ...
   " >>>else ...
   let g:haskell_indent_if = 3
@@ -52,7 +52,7 @@ if !exists('g:haskell_indent_in')
 endif
 
 if !exists('g:haskell_indent_guard')
-  " function x y
+  " f x y
   " >>|
   let g:haskell_indent_guard = 2
 endif
