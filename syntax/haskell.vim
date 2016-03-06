@@ -49,7 +49,7 @@ syn match haskellImport "^\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+\)\
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellPragma,
-syn keyword haskellStatement do case of
+syn keyword haskellKeyword do case of
 if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
   syn keyword haskellStatic static
 endif
@@ -122,7 +122,7 @@ highlight def link haskellBottom Macro
 highlight def link haskellTH Boolean
 highlight def link haskellIdentifier Identifier
 highlight def link haskellForeignKeywords Structure
-highlight def link haskellStatement Statement
+highlight def link haskellKeyword Keyword
 highlight def link haskellDefault Keyword
 highlight def link haskellConditional Conditional
 highlight def link haskellNumber Number
