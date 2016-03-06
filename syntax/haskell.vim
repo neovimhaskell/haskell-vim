@@ -129,7 +129,7 @@ highlight def link haskellNumber Number
 highlight def link haskellFloat Float
 highlight def link haskellSeparator Delimiter
 highlight def link haskellDelimiter Delimiter
-highlight def link haskellInfix PreProc
+highlight def link haskellInfix Keyword
 highlight def link haskellOperators Operator
 highlight def link haskellQuote Operator
 highlight def link haskellQuotedType Include
