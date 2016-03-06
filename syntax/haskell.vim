@@ -141,15 +141,27 @@ highlight def link haskellChar String
 highlight def link haskellBacktick Operator
 highlight def link haskellQuasiQuoted String
 highlight def link haskellTodo Todo
-highlight def link haskellPreProc Macro
-highlight def link haskellAssocType Structure
-highlight def link haskellImportKeywords Structure
-highlight def link haskellDeclKeyword Structure
-highlight def link haskellDecl Structure
-highlight def link haskellWhere Structure
-highlight def link haskellLet Structure
-highlight def link haskellQuotedType Include
-highlight def link haskellType Include
+if exists('g:haskell_classic_highlighting') && g:haskell_classic_highlighting == 1
+  highlight def link haskellPreProc PreProc
+  highlight def link haskellAssocType Type
+  highlight def link haskellImportKeywords Include
+  highlight def link haskellDeclKeyword Keyword
+  highlight def link haskellDecl Keyword
+  highlight def link haskellWhere Keyword
+  highlight def link haskellLet Keyword
+  highlight def link haskellQuotedType Type
+  highlight def link haskellType Type
+else
+  highlight def link haskellPreProc Macro
+  highlight def link haskellAssocType Structure
+  highlight def link haskellImportKeywords Structure
+  highlight def link haskellDeclKeyword Structure
+  highlight def link haskellDecl Structure
+  highlight def link haskellWhere Structure
+  highlight def link haskellLet Structure
+  highlight def link haskellQuotedType Include
+  highlight def link haskellType Include
+endif
 
 if exists('g:haskell_enable_quantification') && g:haskell_enable_quantification == 1
   highlight def link haskellForall Operator
@@ -163,11 +175,20 @@ endif
 if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
   highlight def link haskellStatic Keyword
 endif
-if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
-  highlight def link haskellPatternKeyword Structure
-endif
-if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
-  highlight def link haskellTypeRoles Structure
+if exists('g:haskell_classic_highlighting') && g:haskell_classic_highlighting == 1
+  if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
+    highlight def link haskellPatternKeyword Keyword
+  endif
+  if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
+    highlight def link haskellTypeRoles Keyword
+  endif
+else
+  if exists('g:haskell_enable_pattern_synonyms') && g:haskell_enable_pattern_synonyms == 1
+    highlight def link haskellPatternKeyword Structure
+  endif
+  if exists('g:haskell_enable_typeroles') && g:haskell_enable_typeroles == 1
+    highlight def link haskellTypeRoles Structure
+  endif
 endif
 
 let b:current_syntax = "haskell"
