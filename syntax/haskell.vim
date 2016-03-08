@@ -17,7 +17,7 @@ syn match haskellRecordField contained containedin=haskellBlock
   \ haskellIdentifier,
   \ haskellOperators,
   \ haskellSeparator,
-  \ haskellParens,
+  \ haskellParens
 syn match haskellTypeSig
   \ "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)"
   \ contains=
@@ -27,7 +27,7 @@ syn match haskellTypeSig
   \ haskellIdentifier,
   \ haskellOperators,
   \ haskellSeparator,
-  \ haskellParens,
+  \ haskellParens
 syn keyword haskelLWhere where
 syn keyword haskellLet let
 syn keyword haskellDeclKeyword module class instance newtype deriving in
@@ -49,7 +49,7 @@ syn match haskellImport "^\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+\)\
   \ haskellType,
   \ haskellLineComment,
   \ haskellBlockComment,
-  \ haskellPragma,
+  \ haskellPragma
 syn keyword haskellKeyword do case of
 if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointers == 1
   syn keyword haskellStatic static
