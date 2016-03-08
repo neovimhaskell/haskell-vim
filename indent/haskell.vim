@@ -215,7 +215,7 @@ function! GetHaskellIndent()
 
   " case foo of
   " >>bar -> quux
-  if l:prevline =~ '\C\<case\>\s\+.\+\<of\>\s*$'
+  if l:prevline =~ '\C\<case\>.\+\<of\>\s*$'
     return match(l:prevline, '\C\<case\>') + g:haskell_indent_case
   endif
 
