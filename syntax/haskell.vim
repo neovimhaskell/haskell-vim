@@ -23,6 +23,7 @@ syn match haskellTypeSig
   \ contains=
   \ haskellWhere,
   \ haskellLet,
+  \ haskellDefault,
   \ haskellIdentifier,
   \ haskellOperators,
   \ haskellSeparator,
