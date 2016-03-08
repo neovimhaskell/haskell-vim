@@ -52,7 +52,7 @@ To enable the features you would like to use, just add the according line to you
  
 ### Highlighting
 
-`haskell-vim` has an opinionated highlighting. If you do not like that you can swtich to
+`haskell-vim` has an opinionated highlighting. If you do not like that you can switch to
 a more traditional mode by setting `g:haskell_classic_highlighting` to `1`.
 
 ### Indentation
