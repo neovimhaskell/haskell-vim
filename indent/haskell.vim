@@ -254,7 +254,7 @@ function! GetHaskellIndent()
     if s:isInBlock(l:hlstack)
       return match(l:prevline, '[^\s-=>]')
     else
-      let l:m = matchstr(l:line, '^\s*\zs\S\+\ze\s\+')
+      let l:m = matchstr(l:line, '^\s*\zs\<\S\+\>\ze')
       let l:l = l:prevline
       let l:c = 1
 
@@ -262,7 +262,11 @@ function! GetHaskellIndent()
         " fun decl
         let l:s = match(l:l, l:m)
         if l:s >= 0
-          return l:s
+          if match(l:l, '^\s*\<default\>') > -1
+            return l:s - 8
+          else
+            return l:s
+          endif
         " empty line, stop looking
         elseif l:l =~ '^$'
            return 0
