@@ -259,7 +259,7 @@ function! GetHaskellIndent()
         " fun decl
         let l:s = match(l:l, l:m)
         if l:s >= 0
-          if match(l:l, '^\s*\<default\>') > -1
+          if match(l:l, '\C^\s*\<default\>') > -1
             return l:s - 8
           else
             return l:s
@@ -316,7 +316,7 @@ function! GetHaskellIndent()
   "  in foo
   " where bar
   if l:line =~ '\C^\s*\<where\>'
-    if match(l:prevline, '^\s\+in\s\+') == 0
+    if match(l:prevline, '\C^\s\+in\s\+') == 0
       return match(l:prevline, 'in') - g:haskell_indent_in
     endif
 
