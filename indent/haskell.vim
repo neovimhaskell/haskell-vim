@@ -303,7 +303,7 @@ function! GetHaskellIndent()
 
   " module Foo
   " >>( bar
-  if l:prevline =~ '^module \S\+$'
+  if l:prevline =~ '\C^\<module\>'
     return &shiftwidth
   endif
 
