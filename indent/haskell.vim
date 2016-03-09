@@ -220,11 +220,8 @@ function! GetHaskellIndent()
   endif
 
   " newtype Foo = Foo
-  " >>{ bar :: Int }
-  "
-  " newtype Foo = Foo
   " >>deriving
-  if l:prevline =~ '\C\s*\<\(newtype\|data\)\>[^{]\+' && (l:line =~ '^\s*{' || l:line =~ '\C^\s*\<deriving\>')
+  if l:prevline =~ '\C\s*\<\(newtype\|data\)\>[^{]\+' && l:line =~ '\C^\s*\<deriving\>'
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
@@ -308,6 +305,12 @@ function! GetHaskellIndent()
   " >>( bar
   if l:prevline =~ '^module \S\+$'
     return &shiftwidth
+  endif
+
+  " foo
+  " >>{
+  if l:line =~ '^\s*{'
+    return match(l:prevline, '\S') + &shiftwidth
   endif
 
   "  in foo
