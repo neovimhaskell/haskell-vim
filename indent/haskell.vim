@@ -135,11 +135,8 @@ function! GetHaskellIndent()
   endif
 
   " operator at end of previous line
-  if l:prevline =~ '\s\+[!#$%&*+./<>?@\\^|~-]\+\s*$'
-    let l:s = match(l:prevline, '\S')
-    if l:s > 0
-      return l:s + &shiftwidth
-    endif
+  if l:prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
+    return match(l:prevline, '\S') + &shiftwidth
   endif
 
   " let foo =
