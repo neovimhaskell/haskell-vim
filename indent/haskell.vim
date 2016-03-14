@@ -398,7 +398,7 @@ function! GetHaskellIndent()
 
   "   bar
   " _ -> quux
-  if l:line =~ '^\s*\S\+\s\+->\s\+' && l:prevline !~ '^\s*\S\+\s\+->\s\+'
+  if l:line =~ '^\s*[^\\]\+\s\+->\s\+' && l:prevline !~ '^\s*\S\+\s\+->\s\+'
     return match(l:prevline, '\S') - g:haskell_indent_case
   endif
 
