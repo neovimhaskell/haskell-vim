@@ -110,6 +110,11 @@ endfunction
 function! GetHaskellIndent()
   let l:hlstack = s:getHLStack()
 
+  " do not indent in strings and quasiquotes
+  if index(l:hlstack, 'haskellString') > -1 || index(l:hlstack, 'haskellQuasiQuote') > -1
+    return -1
+  endif
+
   " blockcomment handling
   if index(l:hlstack, 'haskellBlockComment') > -1
     for l:c in range(v:lnum - 1, 0, -1)
