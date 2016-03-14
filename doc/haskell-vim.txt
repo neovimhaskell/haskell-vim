@@ -1,0 +1,138 @@
+*haskell-vim.txt*                                     Last Change 2016 March 14
+===============================================================================
+===============================================================================
+
+===============================================================================
+CONTENTS                                                   *haskell-vim-contents*
+
+  1. Features      |haskell-vim-features|
+  2. Configuration |haskell-vim-configuration|
+  3. Highlighting  |haskell-indentation|
+
+===============================================================================
+FEATURES                                                   *haskell-vim-features*
+
+  * Covers a broader spectrum of keywords
+  * Highlighting for new features like type families, pattern synonyms,
+    arrow syntax, recursive do, role annotations, QuasiQuotation
+  * More contextual highlighting
+    (e.g. highlight "as" or "family" only in appropriate places)
+  * Smarter indentation
+  * Better Cabal support
+
+===============================================================================
+CONFIGURATION                                         *haskell-vim-configuration*
+
+To enable the features you would like to use, just add the according line to
+your `.vimrc`.
+
+===============================================================================
+HIGHLIGHTING                                           *haskell-vim-highlighting*
+
+`haskell-vim` can highlight additional keywords. This is enabled by setting
+the according variable to 1 in the `.vimrc`.
+
+  * |haskell-enable-quantification|
+  * |haskell-enable-recursivedo|
+  * |haskell-enable-arrowsyntax|
+  * |haskell-enable-pattern-synonyms|
+  * |haskell-enable-typeroles|
+  * |haskell-enable-static-pointers|
+  * |haskell-classic-highlighting|
+
+                                                  *haskell-enable-quantification*
+`g:haskell_enable_quantification`   Enables highlighting of `forall`.
+
+                                                     *haskell-enable-recursivedo*
+`g:haskell_enable_recursivedo`      Enables highlighting of `mdo` and `rec`.
+
+                                                    *haskell-enable-arrowsyntax*
+`g:haskell_enable_arrowsyntax`      Enables highlighting of `proc`.
+
+                                               *haskell-enable-pattern-synonyms*
+`g:haskell_enable_pattern_synonyms` Enables highlighting of the `pattern` keyword.
+
+                                                       *haskell-enable-typeroles*
+`g:haskell_enable_typeroles`        Enables highlighting of the `role` keyword, as
+                                  well as `phantom`, `norminal` and
+                                  `representational`.
+
+                                                 *haskell-enable-static-pointers*
+`g:haskell_enable_static_pointers`  Enables highlighting of the `static` keyword.
+
+                                                   *haskell-classic-highlighting*
+`haskell-vim` has an opinionated highlighting. If you do not like that you can
+switch to a more traditional mode by setting `g:haskell_classic_highlighting`
+to 1.
+
+===============================================================================
+INDENTATION                                                 *haskell-indentation*
+
+To configure indentation in `haskell-vim` you can use the following variables to
+change indentation depth, just add the according line to your `.vimrc`.
+
+Haskell~
+
+  * |haskell-indent-if|
+  * |haskell-indent-case|
+  * |haskell-indent-let|
+  * |haskell-indent-where|
+  * |haskell-indent-do|
+  * |haskell-indent-in|
+  * |haskell-indent-guard|
+                                                              *haskell-indent-if*
+* let g:haskell_indent_if = 3 >
+
+        if bool
+        >>>then ...
+        >>>else ...
+<
+
+                                                            *haskell-indent-case*
+* let g:haskell_indent_case = 2 >
+
+        case xs of
+        >>[]     -> ...
+        >>(y:ys) -> ...
+<
+                                                             *haskell-indent-let*
+* let g:haskell_indent_let = 4 >
+
+        let x = 0 in
+        >>>>x
+<
+                                                           *haskell-indent-where*
+* let g:haskell_indent_where = 6 >
+
+        where f :: Int -> Int
+        >>>>>>f x = x
+<
+                                                              *haskell-indent-do*
+* let g:haskell_indent_do = 3 >
+
+        do x <- a
+        >>>y <- b
+<
+                                                              *haskell-indent-in*
+* let g:haskell_indent_in = 1 >
+
+        let x = 1
+        >in x
+<
+                                                           *haskell-indent-guard*
+* let g:haskell_indent_guard = 2 >
+
+        f x y
+        >>|
+<
+
+Cabal~
+
+  * |cabal-indent-section|
+
+                                                           *cabal-indent-section*
+* let g:cabal_indent_section = 2 (limited to max. 4 spaces) >
+
+        executable name
+        >>main-is:             Main.hs
+<
