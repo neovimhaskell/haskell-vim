@@ -419,5 +419,9 @@ function! GetHaskellIndent()
     return -1
   endif
 
+  if l:line !~ '^\s*[=-]>\s' && l:line =~ '^\s*[!#$%&*+./<>?@\\^|~-]\+'
+    return -1
+  endif
+
   return match(l:prevline, '\S')
 endfunction
