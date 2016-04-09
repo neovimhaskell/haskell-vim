@@ -75,7 +75,7 @@ endfunction
 " indent matching character
 function! s:indentMatching(char)
   normal! 0
-  call search(a:char, 'c')
+  call search(a:char, 'cW')
   normal! %
   return col('.') - 1
 endfunction
@@ -363,12 +363,12 @@ function! GetHaskellIndent()
   if l:line =~ '^\s*,'
     if s:isInBlock(l:hlstack)
       normal! 0
-      call search(',', 'c')
+      call search(',', 'cW')
       let l:n = s:getNesting(s:getHLStack())
-      call search('[(\[{]', 'b')
+      call search('[(\[{]', 'bW')
 
       while l:n != s:getNesting(s:getHLStack())
-        call search('[(\[{]', 'b')
+        call search('[(\[{]', 'bW')
       endwhile
 
       return col('.') - 1
