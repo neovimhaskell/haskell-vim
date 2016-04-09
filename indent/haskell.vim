@@ -59,7 +59,6 @@ endif
 
 setlocal indentexpr=GetHaskellIndent()
 setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\|,0\=,0=where,0=let,0=in\ ,0=deriving,0=->,0=\=>,0\,
-setlocal indentkeys=!^F,o,O,,0{,0},0(,0),0[,0],0\|,0\=,0=where,0=let,0=in\ ,0=deriving,0=->,0=\=>,0\,
 
 function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1
