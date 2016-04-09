@@ -364,7 +364,7 @@ function! GetHaskellIndent()
     if s:isInBlock(l:hlstack)
       normal! 0
       call search(',', 'c')
-      let l:n = s:getNesting(l:hlstack)
+      let l:n = s:getNesting(s:getHLStack())
       call search('[(\[{]', 'b')
 
       while l:n != s:getNesting(s:getHLStack())
