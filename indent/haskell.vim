@@ -115,17 +115,6 @@ function! GetHaskellIndent()
     return -1
   endif
 
-  " blockcomment handling
-  " if index(l:hlstack, 'haskellBlockComment') > -1
-  "   for l:c in range(v:lnum - 1, 0, -1)
-  "     let l:line = getline(l:c)
-  "     if l:line =~ '{-'
-  "       return 1 + match(l:line, '{-')
-  "     endif
-  "   endfor
-  "   return 1
-  " endif
-
   let l:prevline = getline(v:lnum - 1)
   let l:line     = getline(v:lnum)
 
