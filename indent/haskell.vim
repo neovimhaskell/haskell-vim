@@ -111,12 +111,21 @@ function! GetHaskellIndent()
   let l:hlstack = s:getHLStack()
 
   " do not indent in strings and quasiquotes
-  if index(l:hlstack, 'haskellString') > -1 || index(l:hlstack, 'haskellQuasiQuote') > -1 || index(l:hlstack, 'haskellBlockComment') > -1
+  if index(l:hlstack, 'haskellQuasiQuote') > -1 || index(l:hlstack, 'haskellBlockComment') > -1
     return -1
   endif
 
   let l:prevline = getline(v:lnum - 1)
   let l:line     = getline(v:lnum)
+
+  " indent multiline strings
+  if index(l:hlstack, 'haskellString') > -1
+    if l:line =~ '^\s*\\'
+      return match(l:prevline, '["\\]')
+    else
+      return - 1
+    endif
+  endif
 
   " reset
   if l:prevline =~ '^\s*$' && l:line !~ '^\s*\S'
