@@ -43,13 +43,15 @@ Copy content into your `~/.vim` directory.
 To enable the features you would like to use, just add the according line to your
 `.vimrc`.
 
-* `let g:haskell_enable_quantification = 1` to enable highlighting of `forall`
-* `let g:haskell_enable_recursivedo = 1` to enable highlighting of `mdo` and `rec`
-* `let g:haskell_enable_arrowsyntax = 1` to enable highlighting of `proc`
-* `let g:haskell_enable_pattern_synonyms = 1` to enable highlighting of `pattern`
-* `let g:haskell_enable_typeroles = 1` to enable highlighting of type roles
-* `let g:haskell_enable_static_pointers = 1` to enable highlighting of `static`
- 
+```viml
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+```
+
 ### Highlighting
 
 `haskell-vim` has an opinionated highlighting. If you do not like that you can switch to
@@ -97,7 +99,7 @@ To configure indentation in `haskell-vim` you can use the following variables to
 
         f x y
         >>|
-  
+
 
 
 #### Cabal
