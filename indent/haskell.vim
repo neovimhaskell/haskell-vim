@@ -140,6 +140,32 @@ function! GetHaskellIndent()
     endif
   endif
 
+  "   { foo :: Int
+  " >>,
+  "
+  "   |
+  "   ...
+  " >>,
+  if l:line =~ '^\s*,'
+    if s:isInBlock(l:hlstack)
+      normal! 0
+      call search(',', 'cW')
+      let l:n = s:getNesting(s:getHLStack())
+      call search('[([{]', 'bW')
+
+      while l:n != s:getNesting(s:getHLStack())
+        call search('[([{]', 'bW')
+      endwhile
+
+      return col('.') - 1
+    else
+      let l:s = s:indentGuard(match(l:line, ','), l:prevline)
+      if l:s > -1
+        return l:s
+      end
+    endif
+  endif
+
   " operator at end of previous line
   if l:prevline =~ '[!#$%&*+./<>?@\\^|~-]\s*$'
     return match(l:prevline, '\S') + &shiftwidth
@@ -360,32 +386,6 @@ function! GetHaskellIndent()
       else
         return &shiftwidth
       endif
-    endif
-  endif
-
-  "   { foo :: Int
-  " >>,
-  "
-  "   |
-  "   ...
-  " >>,
-  if l:line =~ '^\s*,'
-    if s:isInBlock(l:hlstack)
-      normal! 0
-      call search(',', 'cW')
-      let l:n = s:getNesting(s:getHLStack())
-      call search('[([{]', 'bW')
-
-      while l:n != s:getNesting(s:getHLStack())
-        call search('[([{]', 'bW')
-      endwhile
-
-      return col('.') - 1
-    else
-      let l:s = s:indentGuard(match(l:line, ','), l:prevline)
-      if l:s > -1
-        return l:s
-      end
     endif
   endif
 
