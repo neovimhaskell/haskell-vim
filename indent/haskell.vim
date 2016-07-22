@@ -371,10 +371,10 @@ function! GetHaskellIndent()
       normal! 0
       call search(',', 'cW')
       let l:n = s:getNesting(s:getHLStack())
-      call search('[(\[{]', 'bW')
+      call search('[([{]', 'bW')
 
       while l:n != s:getNesting(s:getHLStack())
-        call search('[(\[{]', 'bW')
+        call search('[([{]', 'bW')
       endwhile
 
       return col('.') - 1
