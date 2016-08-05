@@ -136,6 +136,9 @@ function! GetHaskellIndent()
   if l:line =~ '^\s*--'
     return match(l:prevline, '-- ')
   endif
+  if l:prevline =~ '^\s*--'
+    return match(l:prevline, '\S')
+  endif
 
   "   { foo :: Int
   " >>,
