@@ -61,11 +61,11 @@ setlocal indentexpr=GetHaskellIndent()
 setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\=,0=where,0=let,0=deriving,<space>
 
 function! s:isInBlock(hlstack)
-  return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1
+  return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
 endfunction
 
 function! s:getNesting(hlstack)
-  return filter(a:hlstack, 'v:val == "haskellBlock" || v:val == "haskellBrackets" || v:val == "haskellParens"')
+  return filter(a:hlstack, 'v:val == "haskellBlock" || v:val == "haskellBrackets" || v:val == "haskellParens" || v:val == "haskellBlockComment" || v:val == "haskellPragma" ')
 endfunction
 
 function! s:getHLStack()
