@@ -255,7 +255,10 @@ function! GetHaskellIndent()
   " do foo
   " >>>bar
   if l:prevline =~ '\C\<do\>\s\+\S\+.*$'
-    return match(l:prevline, '\C\<do\>') + g:haskell_indent_do
+    let l:s = match(l:prevline, '\C\<do\>')
+    if s:isSYN('haskellKeyword', v:lnum - 1, l:s + 1)
+      return l:s + g:haskell_indent_do
+    endif
   endif
 
   " case foo of
