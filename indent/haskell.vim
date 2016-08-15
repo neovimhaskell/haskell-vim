@@ -64,6 +64,10 @@ function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
 endfunction
 
+function! s:isSYN(grp, line, col)
+  return index(s:getHLStack(a:line, a:col), a:grp) != -1
+endfunction
+
 function! s:getNesting(hlstack)
   return filter(a:hlstack, 'v:val == "haskellBlock" || v:val == "haskellBrackets" || v:val == "haskellParens" || v:val == "haskellBlockComment" || v:val == "haskellPragma" ')
 endfunction
