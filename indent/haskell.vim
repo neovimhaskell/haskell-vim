@@ -245,7 +245,10 @@ function! GetHaskellIndent()
     if  l:line =~ '^\s*[=-]>\s' && l:prevline =~ ' :: '
       return match(l:prevline, ':: ')
     else
-      return match(l:prevline, '\C\<where\>') + g:haskell_indent_where
+      let l:s = match(l:prevline, '\C\<where\>')
+      if s:isSYN('haskellWhere', v:lnum - 1, l:s + 1)
+        return l:s + g:haskell_indent_where
+      endif
   endif
   endif
 
