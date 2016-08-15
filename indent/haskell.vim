@@ -197,11 +197,20 @@ function! GetHaskellIndent()
   " >>>>y = 2
   if l:prevline =~ '\C\<let\>\s\+.\+$'
     if l:line =~ '\C^\s*\<let\>'
-      return match(l:prevline, '\C\<let\>')
+      let l:s = match(l:prevline, '\C\<let\>')
+      if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
+        return l:s
+      endif
     elseif l:line =~ '\C^\s*\<in\>'
-      return match(l:prevline, '\C\<let\>') + g:haskell_indent_in
+      let l:s = match(l:prevline, '\C\<let\>')
+      if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
+        return l:s + g:haskell_indent_in
+      endif
     else
-      return match(l:prevline, '\C\<let\>') + g:haskell_indent_let
+      let l:s = match(l:prevline, '\C\<let\>')
+      if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
+        return l:s + g:haskell_indent_let
+      endif
     endif
   endif
 
