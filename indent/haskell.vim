@@ -68,8 +68,8 @@ function! s:getNesting(hlstack)
   return filter(a:hlstack, 'v:val == "haskellBlock" || v:val == "haskellBrackets" || v:val == "haskellParens" || v:val == "haskellBlockComment" || v:val == "haskellPragma" ')
 endfunction
 
-function! s:getHLStack()
-  return map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+function! s:getHLStack(line, col)
+  return map(synstack(a:line, a:col), 'synIDattr(v:val, "name")')
 endfunction
 
 " indent matching character
@@ -108,7 +108,7 @@ function! s:indentGuard(pos, prevline)
 endfunction
 
 function! GetHaskellIndent()
-  let l:hlstack = s:getHLStack()
+  let l:hlstack = s:getHLStack(line('.'), col('.'))
 
   " do not indent in strings and quasiquotes
   if index(l:hlstack, 'haskellQuasiQuote') > -1 || index(l:hlstack, 'haskellBlockComment') > -1
@@ -150,10 +150,10 @@ function! GetHaskellIndent()
     if s:isInBlock(l:hlstack)
       normal! 0
       call search(',', 'cW')
-      let l:n = s:getNesting(s:getHLStack())
+      let l:n = s:getNesting(s:getHLStack(line('.'), col('.')))
       call search('[([{]', 'bW')
 
-      while l:n != s:getNesting(s:getHLStack())
+      while l:n != s:getNesting(s:getHLStack(line('.'), col('.')))
         call search('[([{]', 'bW')
       endwhile
 
