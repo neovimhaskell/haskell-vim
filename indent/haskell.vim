@@ -264,6 +264,7 @@ function! GetHaskellIndent()
       if s:isSYN('haskellWhere', v:lnum - 1, l:s + 1)
         return l:s + g:haskell_indent_where
       endif
+    endif
   endif
 
   " newtype Foo = Foo
