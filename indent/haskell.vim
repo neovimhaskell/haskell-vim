@@ -239,19 +239,6 @@ function! GetHaskellIndent()
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
-  "" where foo
-  "" >>>>>>bar
-  if l:prevline =~ '\C\<where\>\s\+\S\+.*$'
-    if  l:line =~ '^\s*[=-]>\s' && l:prevline =~ ' :: '
-      return match(l:prevline, ':: ')
-    else
-      let l:s = match(l:prevline, '\C\<where\>')
-      if s:isSYN('haskellWhere', v:lnum - 1, l:s + 1)
-        return l:s + g:haskell_indent_where
-      endif
-  endif
-  endif
-
   " do foo
   " >>>bar
   if l:prevline =~ '\C\<do\>\s\+\S\+.*$'
@@ -265,6 +252,18 @@ function! GetHaskellIndent()
   " >>bar -> quux
   if l:prevline =~ '\C\<case\>.\+\<of\>\s*$'
     return match(l:prevline, '\C\<case\>') + g:haskell_indent_case
+  endif
+
+  "" where foo
+  "" >>>>>>bar
+  if l:prevline =~ '\C\<where\>\s\+\S\+.*$'
+    if  l:line =~ '^\s*[=-]>\s' && l:prevline =~ ' :: '
+      return match(l:prevline, ':: ')
+    else
+      let l:s = match(l:prevline, '\C\<where\>')
+      if s:isSYN('haskellWhere', v:lnum - 1, l:s + 1)
+        return l:s + g:haskell_indent_where
+      endif
   endif
 
   " newtype Foo = Foo
