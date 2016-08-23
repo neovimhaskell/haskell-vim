@@ -156,12 +156,16 @@ function! GetHaskellIndent()
       call search(',', 'cW')
       let l:n = s:getNesting(s:getHLStack(line('.'), col('.')))
       call search('[([{]', 'bW')
+      let l:cl = line('.')
+      let l:cc = col('.')
 
-      while l:n != s:getNesting(s:getHLStack(line('.'), col('.')))
+      while l:n != s:getNesting(s:getHLStack(l:cl, l:cc)) || s:isSYN('haskellString', l:cl, l:cc) || s:isSYN('haskellChar', l:cl, l:cc)
         call search('[([{]', 'bW')
+        let l:cl = line('.')
+        let l:cc = col('.')
       endwhile
 
-      return col('.') - 1
+      return l:cc - 1
     else
       let l:s = s:indentGuard(match(l:line, ','), l:prevline)
       if l:s > -1
