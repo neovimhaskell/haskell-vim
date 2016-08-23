@@ -64,6 +64,19 @@ function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
 endfunction
 
+function! s:stripTrailingComment(line)
+  if a:line =~ '^\s*--\(-\+\|\s\+\)' || a:line =~ '^\s*{-'
+    return a:line
+  else
+    let l:stripped = split(a:line, '-- ')
+    if len(l:stripped) > 1
+      return substitute(l:stripped[0], '\s*$', '', '')
+    else
+      return a:line
+    endif
+  endif
+endfunction
+
 function! s:isSYN(grp, line, col)
   return index(s:getHLStack(a:line, a:col), a:grp) != -1
 endfunction
@@ -119,7 +132,7 @@ function! GetHaskellIndent()
     return -1
   endif
 
-  let l:prevline = getline(v:lnum - 1)
+  let l:prevline = s:stripTrailingComment(getline(v:lnum - 1))
   let l:line     = getline(v:lnum)
 
   " indent multiline strings
