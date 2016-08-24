@@ -29,7 +29,7 @@ syn match haskellTypeSig
   \ haskellOperators,
   \ haskellSeparator,
   \ haskellParens
-syn keyword haskelLWhere where
+syn keyword haskellWhere where
 syn keyword haskellLet let
 syn keyword haskellDeclKeyword module class instance newtype deriving in
 syn match haskellDecl "\<\(type\|data\)\>\s\+\(\<family\>\)\?"
