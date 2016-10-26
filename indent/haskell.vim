@@ -268,7 +268,11 @@ function! GetHaskellIndent()
   " case foo of
   " >>bar -> quux
   if l:prevline =~ '\C\<case\>.\+\<of\>\s*$'
-    return match(l:prevline, '\C\<case\>') + g:haskell_indent_case
+    if exists('g:haskell_indent_case_alternative') && g:haskell_indent_case_alternative
+      return match(l:prevline, '\S') + &shiftwidth
+    else
+      return match(l:prevline, '\C\<case\>') + g:haskell_indent_case
+    endif
   endif
 
   "" where foo

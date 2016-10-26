@@ -100,6 +100,13 @@ To configure indentation in `haskell-vim` you can use the following variables to
         f x y
         >>|
 
+`haskell-vim` also supports an alterative style for `case` indentation.
+
+* `let g:haskell_indent_case_alternative = 1`
+
+        f xs ys = case xs of
+        >>[]     -> ...
+        >>(y:ys) -> ...
 
 
 #### Cabal
