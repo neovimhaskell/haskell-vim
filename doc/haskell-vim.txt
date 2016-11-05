@@ -7,7 +7,7 @@ CONTENTS                                                   *haskell-vim-contents
 
   1. Features      |haskell-vim-features|
   2. Configuration |haskell-vim-configuration|
-  3. Highlighting  |haskell-vim-ndentation|
+  3. Highlighting  |haskell-vim-indentation|
 
 ===============================================================================
 FEATURES                                                   *haskell-vim-features*
