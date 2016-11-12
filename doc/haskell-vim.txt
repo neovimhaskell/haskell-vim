@@ -39,6 +39,7 @@ the according variable to 1 in the `.vimrc`.
   * |haskell-vim-enable-typeroles|
   * |haskell-vim-enable-static-pointers|
   * |haskell-vim-classic-highlighting|
+  * |haskell-vim-disable-TH|
 
                                                *haskell-vim-enable-quantification*
 `g:haskell_enable_quantification`   Enables highlighting of `forall`.
@@ -64,6 +65,10 @@ the according variable to 1 in the `.vimrc`.
 `haskell-vim` has an opinionated highlighting. If you do not like that you can
 switch to a more traditional mode by setting `g:haskell_classic_highlighting`
 to 1.
+
+                                                *haskell-vim-disable-TH*
+Disabling Template Haskell and Quasiquoting syntax is possible by setting
+`g:haskell_disable_TH` to `1`.
 
 ===============================================================================
 INDENTATION                                             *haskell-vim-indentation*
