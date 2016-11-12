@@ -57,6 +57,9 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 `haskell-vim` has an opinionated highlighting. If you do not like that you can switch to
 a more traditional mode by setting `g:haskell_classic_highlighting` to `1`.
 
+Disabling Template Haskell and Quasiquoting syntax is possible by setting
+`g:haskell_disable_TH` to `1`.
+
 ### Indentation
 
 To configure indentation in `haskell-vim` you can use the following variables to change indentation depth, just add the according line to your `.vimrc`.
