@@ -84,7 +84,7 @@ syn match haskellLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
   \ contains=
   \ haskellTodo,
   \ @Spell
-syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*`"
+syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*#\?`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
 syn match haskellIdentifier "[_a-z][a-zA-z0-9_']*" contained
