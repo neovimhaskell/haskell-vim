@@ -13,6 +13,10 @@ endif
 
 let b:did_indent = 1
 
+if !exists('g:haskell_indent_disable')
+    let g:haskell_indent_disable = 0
+endif
+
 if !exists('g:haskell_indent_if')
   " if x
   " >>>then ...
@@ -57,8 +61,14 @@ if !exists('g:haskell_indent_guard')
   let g:haskell_indent_guard = 2
 endif
 
-setlocal indentexpr=GetHaskellIndent()
-setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\=,0=where,0=let,0=deriving,<space>
+if exists("g:haskell_indent_disable") && g:haskell_indent_disable == 0
+    setlocal indentexpr=GetHaskellIndent()
+    setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\=,0=where,0=let,0=deriving,<space>
+else
+    setlocal nocindent
+    setlocal nosmartindent
+    setlocal autoindent
+endif
 
 function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
