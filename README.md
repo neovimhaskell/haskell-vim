@@ -64,8 +64,7 @@ Disabling Template Haskell and Quasiquoting syntax is possible by setting
 
 To configure indentation in `haskell-vim` you can use the following variables to change indentation depth, just add the according line to your `.vimrc`.
 
-Given the current problems with indentation (being solved in the *indentation*
-branch) you can disable the indentation by setting `g:haskell_indent_disable` to
+If you dislike how indentation works you can disable it by setting `g:haskell_indent_disable` to
 `1`.
 
 Additionally you can use the
