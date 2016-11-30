@@ -76,6 +76,8 @@ INDENTATION                                             *haskell-vim-indentation
 To configure indentation in `haskell-vim` you can use the following variables to
 change indentation depth, just add the according line to your `.vimrc`.
 
+You can disable the indentation by setting `g:haskell_indent_disable` to `1`.
+
 Haskell~
 
   * |haskell-vim-indent-if|
