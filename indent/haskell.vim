@@ -336,8 +336,8 @@ function! GetHaskellIndent()
 
       while v:lnum != l:c
         " fun decl
-        let l:s = match(l:l, l:m)
-        if l:s >= 0
+        if l:l =~ ('^\s*' . l:m . '\(\s*::\|\n\s\+::\)')
+          let l:s = match(l:l, l:m)
           if match(l:l, '\C^\s*\<default\>') > -1
             return l:s - 8
           else
