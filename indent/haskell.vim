@@ -474,11 +474,6 @@ function! GetHaskellIndent()
   if l:line =~ '^\s*]'
     return s:indentMatching(']')
   endif
-  "
-  " indent import
-  if l:line =~ '\C^\s*import'
-    return 0
-  endif
 
   " do not reindent indented lines
   if match(l:prevline, '\S') < match(l:line, '\S')
