@@ -15,6 +15,11 @@ if !exists('g:haskell_disable_TH')
     let g:haskell_disable_TH = 0
 endif
 
+if exists('g:haskell_backpack') && g:haskell_backpack == 1
+  syn keyword haskellBackpackStructure unit signature
+  syn keyword haskellBackpackDependency dependency
+endif
+
 syn spell notoplevel
 syn match haskellRecordField contained containedin=haskellBlock
   \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\(\s*::\|\n\s\+::\)"
@@ -194,4 +199,8 @@ else
   endif
 endif
 
+if exists('g:haskell_backpack') && g:haskell_backpack == 1
+  highlight def link haskellBackpackStructure Structure
+  highlight def link haskellBackpackDependency Include
+endif
 let b:current_syntax = "haskell"
