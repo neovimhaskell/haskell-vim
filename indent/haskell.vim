@@ -71,7 +71,7 @@ else
 endif
 
 function! s:isInBlock(hlstack)
-  return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
+  return index(a:hlstack, 'haskellDelimiter') > -1 || index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
 endfunction
 
 function! s:stripTrailingComment(line)
@@ -174,7 +174,7 @@ function! GetHaskellIndent()
   "   ...
   " >>,
   if l:line =~ '^\s*,'
-    if s:isInBlock(l:hlstack)
+    if s:isInBlock(s:getHLStack(line('.'), col('.')))
       normal! 0
       call search(',', 'cW')
       let l:n = s:getNesting(s:getHLStack(line('.'), col('.')))
