@@ -37,10 +37,22 @@ if !exists('g:haskell_indent_let')
   let g:haskell_indent_let = 4
 endif
 
+if !exists('g:haskell_indent_before_where')
+  " f x = g
+  " >>where
+  let g:haskell_indent_before_where = &shiftwidth
+endif
+
 if !exists('g:haskell_indent_where')
   " where f :: Int -> Int
   " >>>>>>f x = x
   let g:haskell_indent_where = 6
+endif
+
+if !exists('g:haskell_indent_after_bare_where')
+  " where
+  " >>g y = x y
+  let g:haskell_indent_after_bare_where = &shiftwidth
 endif
 
 if !exists('g:haskell_indent_do')
@@ -243,12 +255,16 @@ function! GetHaskellIndent()
   " where
   " >>foo
   "
+  if l:prevline =~ '\C\<where\>\s*$'
+    return match(l:prevline, '\S') + g:haskell_indent_after_bare_where
+  endif
+
   " do
   " >>foo
   "
   " foo =
   " >>bar
-  if l:prevline =~ '\C\(\<where\>\|\<do\>\|=\)\s*$'
+  if l:prevline =~ '\C\(\<do\>\|=\)\s*$'
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
@@ -405,7 +421,7 @@ function! GetHaskellIndent()
       return match(l:prevline, 'in') - g:haskell_indent_in
     endif
 
-    return match(l:prevline, '\S') + &shiftwidth
+    return match(l:prevline, '\S') + g:haskell_indent_before_where
   endif
 
   " let x = 1
