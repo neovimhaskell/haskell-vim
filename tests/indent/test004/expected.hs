@@ -1,0 +1,4 @@
+foo =
+  { field = bar "("
+  , quux = ""
+  }

@@ -1,0 +1,3 @@
+foo =
+  { field = bar "("
+  }
