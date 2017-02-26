@@ -72,9 +72,9 @@ function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellDelimiter') > -1 || index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
 endfunction
 
-function! s:stripTrailingComment(line)
-  if a:line =~ '^\s*--\(-\+\|\s\+\)' || a:line =~ '^\s*{-'
-    return a:line
+function! s:stripComment(line)
+  if a:line =~ '^\s*---*\s\+'
+    return ''
   else
     let l:stripped = split(a:line, '-- ')
     if len(l:stripped) > 1
@@ -140,7 +140,7 @@ function! GetHaskellIndent()
     return -1
   endif
 
-  let l:prevline = s:stripTrailingComment(getline(v:lnum - 1))
+  let l:prevline = s:stripComment(getline(v:lnum - 1))
   let l:line     = getline(v:lnum)
 
   " indent multiline strings
@@ -157,13 +157,14 @@ function! GetHaskellIndent()
     return 0
   endif
 
-  " comment indentation
-  if l:line =~ '^\s*--'
-    return match(l:prevline, '-- ')
-  endif
-  if l:prevline =~ '^\s*--'
-    return match(l:prevline, '\S')
-  endif
+  " " comment indentation
+  " if l:line =~ '^\s*--'
+  "   let l:s = match(l:prevline, '-- ')
+  "   if l:s > -1
+  " endif
+  " " if l:prevline =~ '^\s*--'
+  " "   return match(l:prevline, '\S')
+  " " endif
 
   "   { foo :: Int
   " >>,
