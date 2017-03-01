@@ -66,7 +66,7 @@ if !exists('g:haskell_indent_guard')
 endif
 
 setlocal indentexpr=GetHaskellIndent()
-setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\=,0=where,0=let,0=deriving,<space>
+setlocal indentkeys=0},0),0],!^F,o,O,0\=,0=where,0=let,0=deriving,<space>
 
 function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellDelimiter') > -1 || index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1 || index(a:hlstack, 'haskellBlockComment') > -1 || index(a:hlstack, 'haskellPragma') > -1
