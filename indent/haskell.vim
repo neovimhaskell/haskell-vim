@@ -73,7 +73,7 @@ function! s:isInBlock(hlstack)
 endfunction
 
 function! s:stripComment(line)
-  if a:line =~ '^\s*---*\s\+'
+  if a:line =~ '^\s*--\(-*\s\+\|$\)'
     return ''
   else
     let l:stripped = split(a:line, '-- ')
