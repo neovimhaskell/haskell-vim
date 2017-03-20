@@ -474,14 +474,5 @@ function! GetHaskellIndent()
     return s:indentMatching(']')
   endif
 
-  " do not reindent indented lines
-  if match(l:prevline, '\S') < match(l:line, '\S')
-    return -1
-  endif
-
-  if l:line !~ '^\s*[=-]>\s' && l:line =~ '^\s*[!#$%&*+./<>?@\\^|~-]\+'
-    return -1
-  endif
-
-  return match(l:prevline, '\S')
+  return -1
 endfunction
