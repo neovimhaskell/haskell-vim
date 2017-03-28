@@ -105,7 +105,7 @@ syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
 " Treat a shebang line at the start of the file as a comment
 syn match haskellShebang "\%^#!.*$"
-if get(g:, 'haskell_disable_TH', 0)
+if !get(g:, 'haskell_disable_TH', 0)
     syn match haskellQuasiQuoted "." containedin=haskellQuasiQuote contained
     syn region haskellQuasiQuote matchgroup=haskellTH start="\[[_a-zA-Z][a-zA-z0-9._']*|" end="|\]"
     syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]" contains=TOP
