@@ -306,38 +306,50 @@ function! GetHaskellIndent()
 
   " foo :: Int
   "     -> Int
+  " >>>>-> Int
+  "
+  " foo :: Monad m
+  "     => Functor f
+  " >>>>=> Int
+  "
+  " foo :: Int
+  "     -> Int
   " foo x
   "
   " foo
   "   :: Int
   "   -> Int
   " foo x
-  if l:prevline =~ '^\s*[-=]>' && l:line !~ '^\s*[-=]>'
-    if s:isInBlock(l:hlstack)
-      return match(l:prevline, '[^\s-=>]')
+  if l:prevline =~ '^\s*[-=]>'
+    if l:line =~ '^\s*[-=]>'
+      return match(l:prevline, '[-=]')
     else
-      let l:m = matchstr(l:line, '^\s*\zs\<\S\+\>\ze')
-      let l:l = l:prevline
-      let l:c = 1
+      if s:isInBlock(l:hlstack)
+        return match(l:prevline, '[^-=]')
+      else
+        let l:m = matchstr(l:line, '^\s*\zs\<\S\+\>\ze')
+        let l:l = l:prevline
+        let l:c = 1
 
-      while v:lnum != l:c
-        " fun decl
-        if l:l =~ ('^\s*' . l:m . '\(\s*::\|\n\s\+::\)')
-          let l:s = match(l:l, l:m)
-          if match(l:l, '\C^\s*\<default\>') > -1
-            return l:s - 8
-          else
-            return l:s
+        while v:lnum != l:c
+          " fun decl
+          if l:l =~ ('^\s*' . l:m . '\(\s*::\|\n\s\+::\)')
+            let l:s = match(l:l, l:m)
+            if match(l:l, '\C^\s*\<default\>') > -1
+              return l:s - 8
+            else
+              return l:s
+            endif
+          " empty line, stop looking
+          elseif l:l =~ '^$'
+             return 0
           endif
-        " empty line, stop looking
-        elseif l:l =~ '^$'
-           return 0
-        endif
-        let l:c += 1
-        let l:l = getline(v:lnum - l:c)
-      endwhile
+          let l:c += 1
+          let l:l = getline(v:lnum - l:c)
+        endwhile
 
-      return 0
+        return 0
+      endif
     endif
   endif
 
