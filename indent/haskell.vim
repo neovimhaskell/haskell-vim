@@ -11,11 +11,7 @@ if exists('b:did_indent')
   finish
 endif
 
-if !exists('g:haskell_indent_disable')
-    let g:haskell_indent_disable = 0
-endif
-
-if g:haskell_indent_disable != 0
+if get(g:, 'haskell_indent_disable', 0)
   finish
 endif
 
