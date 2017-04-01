@@ -153,15 +153,6 @@ function! GetHaskellIndent()
     return 0
   endif
 
-  " " comment indentation
-  " if l:line =~ '^\s*--'
-  "   let l:s = match(l:prevline, '-- ')
-  "   if l:s > -1
-  " endif
-  " " if l:prevline =~ '^\s*--'
-  " "   return match(l:prevline, '\S')
-  " " endif
-
   "   { foo :: Int
   " >>,
   "
