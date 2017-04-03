@@ -84,6 +84,8 @@ Haskell~
   * |haskell-vim-indent-case|
   * |haskell-vim-indent-let|
   * |haskell-vim-indent-where|
+  * |haskell-vim-indent-before-where|
+  * |haskell-vim-indent-after-bare-where|
   * |haskell-vim-indent-do|
   * |haskell-vim-indent-in|
   * |haskell-vim-indent-guard|
@@ -113,6 +115,18 @@ Haskell~
 
         where f :: Int -> Int
         >>>>>>f x = x
+<
+                                                 *haskell-vim-indent-before-where*
+* let g:haskell_indent_before_where = 2 >
+
+        foo
+        >>where
+<
+                                             *haskell-vim-indent-after-bare-where*
+* let g:haskell_indent_after_bare_where = 2 >
+
+        where
+        >>foo
 <
                                                            *haskell-vim-indent-do*
 * let g:haskell_indent_do = 3 >

@@ -96,6 +96,16 @@ indentation using *hindent*.
         where f :: Int -> Int
         >>>>>>f x = x
 
+* `let g:haskell_indent_before_where = 2`
+
+        foo
+        >>where
+
+* `let g:haskell_indent_after_bare_where = 2`
+
+        where
+        >>foo
+
 * `let g:haskell_indent_do = 3`
 
         do x <- a
