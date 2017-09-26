@@ -96,6 +96,22 @@ syn region haskellBlockComment start="{-" end="-}"
   \ haskellBlockComment,
   \ haskellTodo,
   \ @Spell
+
+" FIXME: haddock block comments should be able to contain hsBlockComments, but
+" it doesn't seem to work at the moment.
+syn region haskellHaddockLineComment start='{-|' end='-}' contains=hsFIXME,@Spell
+syn match hsLineComment "--.*$" contains=hsFIXME,@Spell
+" Line-based haddock comments are trickier - they continue until
+" the next line that isn't part of the same block of comments.
+syn region haskellHaddockLineComment start='-- |' end='^\(\s*--\)\@!' contains=hsFIXME,@Spell
+syn region haskellHaddockLineComment start='-- \$\w\+' end='^\(\s*--\)\@!' contains=hsFIXME,@Spell
+syn region haskellHaddockLineComment start='-- ^' end='^\(\s*--\)\@!' contains=hsFIXME,@Spell
+" Haddock sections for import lists
+syn match hsHaddockSection '-- \*.*$'
+" Named documentation chunks (also for import lists)
+syn match hsHaddockSection '-- \$.*$'
+
+
 syn region haskellPragma start="{-#" end="#-}"
 syn match haskellPreProc "^#.*$"
 syn keyword haskellTodo TODO FIXME contained
@@ -145,6 +161,8 @@ highlight def link haskellShebang Comment
 highlight def link haskellLineComment Comment
 highlight def link haskellBlockComment Comment
 highlight def link haskellPragma SpecialComment
+highlight def link haskellHaddockLineComment SpecialComment
+highlight def link haskellHaddockBlockComment SpecialComment
 highlight def link haskellString String
 highlight def link haskellChar String
 highlight def link haskellBacktick Operator
