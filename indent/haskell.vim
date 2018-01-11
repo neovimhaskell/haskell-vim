@@ -469,8 +469,12 @@ function! GetHaskellIndent()
   "
   " data Foo = Bar
   " >>>>>>>>>|
+  "
+  " data Foo
+  "     = Bar
+  " >>>>|
   if l:line =~ '^\s*|\s'
-    if l:prevline =~ '\C^\s*\<data\>.\+=.\+$'
+    if l:prevline =~ '\C^\(\s*\<data\>.\+=.\+\|\s*=\s\+.\+\)$'
       return match(l:prevline, '=')
     else
       let l:s = s:indentGuard(match(l:line, '|'), l:prevline)
