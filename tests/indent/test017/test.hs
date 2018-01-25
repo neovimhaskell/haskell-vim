@@ -1,0 +1,1 @@
+where countUntilClosed (x:xs)
