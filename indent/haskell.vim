@@ -297,6 +297,9 @@ function! GetHaskellIndent()
   ""
   "" where foo :: Int
   "" >>>>>>>>>>-> Int
+  ""
+  "" where foo x
+  "" >>>>>>>>|
   if l:prevline =~ '\C\<where\>\s\+\S\+.*$'
     if  l:line =~ '^\s*[=-]>\s' && l:prevline =~ ' :: '
       return match(l:prevline, ':: ')
