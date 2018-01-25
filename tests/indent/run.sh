@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 for i in test???; do
-  pushd $i > /dev/null
+  cd $i
   nvim --headless -s test.vim test.hs 2> /dev/null
   diff expected.hs result.hs
   if [ $? -eq 0 ]; then
@@ -11,5 +11,5 @@ for i in test???; do
     echo "$(basename $PWD) failed"
     exit 1
   fi
-  popd > /dev/null
+  cd ..
 done
