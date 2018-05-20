@@ -449,7 +449,20 @@ function! GetHaskellIndent()
   "     y = 2
   " >in x + 1
   if l:line =~ '\C^\s*\<in\>'
-    return match(l:prevline, '\S') - (4 - g:haskell_indent_in)
+    let l:s = 0
+    let l:c = v:lnum - 1
+
+    while l:s <= 0 && l:c >= 1
+      let l:l = getline(l:c)
+      let l:s = match(l:l, '\C\<let\>')
+      if l:s >= 1 && s:isSYN('haskellLet', l:c, l:s + 1)
+        break
+      elseif l:l =~ '^\S'
+        return -1
+      endif
+      let l:c -= 1
+    endwhile
+    return l:s + g:haskell_indent_in
   endif
 
   " data Foo
