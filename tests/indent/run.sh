@@ -9,7 +9,6 @@ for i in test???; do
     rm result.hs
   else
     echo "$(basename $PWD) failed"
-    exit 1
   fi
   cd ..
 done
