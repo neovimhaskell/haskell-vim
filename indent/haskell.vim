@@ -205,7 +205,7 @@ function! GetHaskellIndent()
 
   " let x = 1 in
   " >>>>x
-  if l:prevline =~ '\C\<let\>\s\+.\+\<in\>\?$' && l:line !~ '\C^\s*\<in\>'
+  if l:prevline =~ '\C\<let\>.\{-}\<in\>\s*$' && l:line !~ '\C^\s*\<in\>'
     return match(l:prevline, '\C\<let\>') + g:haskell_indent_let
   endif
 
