@@ -113,25 +113,25 @@ endfunction
 " backtrack to find guard clause
 function! s:indentGuard(pos, prevline)
   let l:l = a:prevline
-  let l:c = 1
+  let l:c = v:lnum - 1
 
-  while v:lnum != l:c
-    " empty line, stop looking
-    if l:l =~ '^$'
-      return a:pos
-    " guard found
-    elseif l:l =~ '^\s*|\s\+'
-      return match(l:l, '|')
-    " found less deeper indentation (not starting with `,` or `=`)
-    " stop looking
+  while l:c >= 1
+    if l:l =~ '^\S'
+      " top-level start, stop looking
+      return g:haskell_indent_guard
+    elseif l:l =~ '^\s\+[|,=]\s\+'
+      " guard block found
+      return match(l:l, '[|,=]')
     else
       let l:m = match(l:l, '\S')
-      if l:l !~ '^\s*[=,]' && l:m <= a:pos
+      if l:m >= 0 && l:m <= a:pos
+        " found less deeper indentation (not starting with `,` or `=`)
+        " stop looking
         return l:m + g:haskell_indent_guard
       endif
     endif
-    let l:c += 1
-    let l:l = getline(v:lnum - l:c)
+    let l:c -= 1
+    let l:l = getline(l:c)
   endwhile
 
   return -1
