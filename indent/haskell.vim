@@ -213,9 +213,6 @@ function! GetHaskellIndent()
   " let y = 2
   "
   " let x = 1
-  " >in x
-  "
-  " let x = 1
   " >>>>y = 2
   "
   " let x = 1
@@ -226,20 +223,10 @@ function! GetHaskellIndent()
       if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
         return l:s
       endif
-    elseif l:line =~ '\C^\s*\<in\>'
-      let l:s = match(l:prevline, '\C\<let\>')
-      if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
-        return l:s + g:haskell_indent_in
-      endif
     elseif l:line =~ '\s=\s'
       let l:s = match(l:prevline, '\C\<let\>')
       if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
         return l:s + g:haskell_indent_let
-      endif
-    else
-      let l:s = match(l:prevline, '\C\<let\>')
-      if s:isSYN('haskellLet', v:lnum - 1, l:s + 1)
-        return l:s + g:haskell_indent_let_no_in
       endif
     endif
   endif
