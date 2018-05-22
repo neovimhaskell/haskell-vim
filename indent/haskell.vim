@@ -40,12 +40,6 @@ if !exists('g:haskell_indent_let')
   let g:haskell_indent_let = 4
 endif
 
-if !exists('g:haskell_indent_let_no_in')
-  " let x = 0
-  "     x
-  let g:haskell_indent_let_no_in = 4
-endif
-
 if !exists('g:haskell_indent_where')
   " where f :: Int -> Int
   " >>>>>>f x = x
