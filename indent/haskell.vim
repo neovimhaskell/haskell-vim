@@ -342,9 +342,9 @@ function! GetHaskellIndent()
       else
         let l:m = matchstr(l:line, '^\s*\zs\<\S\+\>\ze')
         let l:l = l:prevline
-        let l:c = 1
+        let l:c = v:lnum - 1
 
-        while v:lnum != l:c
+        while l:c >= 1
           " fun decl
           if l:l =~ ('^\s*' . l:m . '\(\s*::\|\n\s\+::\)')
             let l:s = match(l:l, l:m)
@@ -357,8 +357,8 @@ function! GetHaskellIndent()
           elseif l:l =~ '^$'
              return 0
           endif
-          let l:c += 1
-          let l:l = getline(v:lnum - l:c)
+          let l:c -= 1
+          let l:l = getline(l:c)
         endwhile
 
         return 0
