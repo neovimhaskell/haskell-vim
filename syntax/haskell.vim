@@ -74,7 +74,7 @@ syn keyword haskellBottom undefined error
 " unicode geometric symbols are listed here:
 "   https://www.w3schools.com/charsets/ref_utf_geometric.asp
 " ■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿
-syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.∷→←⇒⇐∀★¬∧∨≡≠≢≤≥∘•∙·∈∉∌∋⊥⧺⤚⤙⤛⤜⋅÷×‣†‡∵∴∶¡¿‖⊳⊲⋈∖∆⊆⊇∪∩∅⊕⊛↕↔⇔⊙⊚⋄■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿]\+\|\<_\>"
+syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.∷→←⇒⇐∀★¬∧∨≡≠≢≤≥∘•∙·∈∉∌∋⊥⧺⤚⤙⤛⤜−⋅÷×‣†‡∵∴∶¡¿‖⊳⊲⋈∖∆⊆⊇∪∩∅⊕⊛↕↔⇔⊙⊚⋄■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿]\+\|\<_\>"
 
 syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
