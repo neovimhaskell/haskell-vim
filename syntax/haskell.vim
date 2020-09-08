@@ -101,7 +101,7 @@ syn region haskellBlockComment start="{-" end="-}"
 syn region haskellPragma start="{-#" end="#-}"
 syn region haskellLiquid start="{-@" end="@-}"
 syn match haskellPreProc "^#.*$"
-syn keyword haskellTodo TODO FIXME contained
+syn keyword haskellTodo TODO FIXME XXX contained
 " Treat a shebang line at the start of the file as a comment
 syn match haskellShebang "\%^#!.*$"
 if !get(g:, 'haskell_disable_TH', 0)
