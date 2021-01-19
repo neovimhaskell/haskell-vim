@@ -18,14 +18,14 @@ endif
 
 syn spell notoplevel
 syn match haskellRecordField contained containedin=haskellBlock
-  \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\_s\+::\_s"
+  \ "[_a-z][a-zA-Z0-9_']*\(,\s*[_a-z][a-zA-Z0-9_']*\)*\_s\+\(::\|∷\)\_s"
   \ contains=
   \ haskellIdentifier,
   \ haskellOperators,
   \ haskellSeparator,
   \ haskellParens
 syn match haskellTypeSig
-  \ "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*#\?\(,\s*[_a-z][a-zA-Z0-9_']*#\?\)*\_s\+::\_s"
+  \ "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*#\?\(,\s*[_a-z][a-zA-Z0-9_']*#\?\)*\_s\+\(::\|∷\)\_s"
   \ contains=
   \ haskellWhere,
   \ haskellLet,
@@ -47,7 +47,7 @@ syn match haskellDecl "\<\(type\|data\)\>\s\+\(\<family\>\)\?"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
-syn region haskellForeignImport start="\<foreign\>" end="\_s\+::\s" keepend
+syn region haskellForeignImport start="\<foreign\>" end="\_s\+\(::\|∷\)\s" keepend
   \ contains=
   \ haskellString,
   \ haskellOperators,
@@ -76,7 +76,17 @@ syn region haskellBrackets matchgroup=haskellDelimiter start="\[" end="]" contai
 syn region haskellBlock matchgroup=haskellDelimiter start="{" end="}" contains=TOP,@Spell
 syn keyword haskellInfix infix infixl infixr
 syn keyword haskellBottom undefined error
-syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
+
+" unicode geometric symbols are listed here:
+"   https://www.w3schools.com/charsets/ref_utf_geometric.asp
+" ■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿
+" unicode arrows are listed here:
+"   https://en.wikipedia.org/wiki/Arrows_(Unicode_block)
+" ←↑→↓↔↕↖↗↘↙↚↛↜↝↞↟↠↡↢↣↤↥↦↧↨↩↪↫↬↭↮↯↰↱↲↳↴↵↶↷↸↹↺↻↼↽↾↿⇀⇁⇂⇃⇄⇅⇆⇇⇈⇉⇊⇋⇌⇍⇎⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇚⇛⇜⇝⇞⇟⇠⇡⇢⇣⇤⇥⇦⇧⇨⇩⇪⇫⇬⇭⇮⇯⇰⇱⇲⇳⇴⇵⇶⇷⇸⇹⇺⇻⇼⇽⇾⇿
+" see also about unicode arrows:
+"   https://www.unicode.org/charts/PDF/U2190.pdf
+syn match haskellOperators "[-!#$%&\*\+/<=>\?@\\^|~:.∷∀★¬∧∨≡≠≢≤≥∘•∙·∈∉∌∋⊥⧺⤚⤙⤛⤜−⋅÷×‣†‡∵∴∶¡¿‖⊳⊲⋈∖∆⊆⊇∪∩∅⊕⊛⊙⊚⋄■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿←↑→↓↔↕↖↗↘↙↚↛↜↝↞↟↠↡↢↣↤↥↦↧↨↩↪↫↬↭↮↯↰↱↲↳↴↵↶↷↸↹↺↻↼↽↾↿⇀⇁⇂⇃⇄⇅⇆⇇⇈⇉⇊⇋⇌⇍⇎⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇚⇛⇜⇝⇞⇟⇠⇡⇢⇣⇤⇥⇦⇧⇨⇩⇪⇫⇬⇭⇮⇯⇰⇱⇲⇳⇴⇵⇶⇷⇸⇹⇺⇻⇼⇽⇾⇿]\+\|\<_\>"
+
 syn match haskellQuote "\<'\+" contained
 syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
 syn region haskellQuoted start="\<'\+" end="\>"
