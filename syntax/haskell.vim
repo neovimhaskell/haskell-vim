@@ -47,7 +47,7 @@ syn match haskellDecl "\<\(type\|data\)\>\s\+\(\<family\>\)\?"
 syn keyword haskellDefault default
 syn keyword haskellImportKeywords import qualified safe as hiding contained
 syn keyword haskellForeignKeywords foreign export import ccall safe unsafe interruptible capi prim contained
-syn region haskellForeignImport start="\<foreign\>" end="\_s\+::\s" keepend
+syn region haskellForeignImport start="\<foreign\>" end="\_s\+::\_s" keepend
   \ contains=
   \ haskellString,
   \ haskellOperators,
