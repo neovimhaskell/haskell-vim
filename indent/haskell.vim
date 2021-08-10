@@ -403,6 +403,11 @@ function! GetHaskellIndent()
     return shiftwidth()
   endif
 
+  " {-# PRAGMA #-}
+  if l:line =~ '^\s*{-#' && l:line =~ '#-}\s*$'
+    return indent(v:lnum - 1)
+  endif
+
   " foo
   " >>{
   if l:line =~ '^\s*{'
