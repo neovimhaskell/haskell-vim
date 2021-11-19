@@ -96,7 +96,30 @@ syn match haskellBacktick "`[A-Za-z_][A-Za-z0-9_\.']*#\?`"
 syn region haskellString start=+"+ skip=+\\\\\|\\"+ end=+"+
   \ contains=@Spell
 syn match haskellIdentifier "[_a-z][a-zA-Z0-9_']*" contained
-syn match haskellChar "\<'[^'\\]'\|'\\.'\|'\\u[0-9a-fA-F]\{4}'\>"
+
+" Haskell character literal match
+" https://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-200002.6
+" http://book.realworldhaskell.org/read/characters-strings-and-escaping-rules.html
+syn match haskellCharPrintable           "[:print:]" contained
+syn match haskellCharSingleCharEsc       "\\[0abfnrtv"&'\\]" contained
+syn match haskellCharAsciiControlCodeEsc "\\\(NUL\|SOH\|STX\|ETX\|EOT\|ENQ\|ACK\|BEL\|BS\|HT\|LF\|VT\|FF\|CR\|SO\|SI\|DLE\|DC1\|DC2\|DC3\|DC4\|NAK\|SYN\|ETB\|CAN\|EM\|SUB\|ESC\|FS\|GS\|RS\|US\|SP\|DEL\)" contained
+syn match haskellCharAsciiControlCharEsc "\\\^[@A-Z\[\]\\\^_]" contained
+syn match haskellCharDeciEsc             "\\[0-9]\{1,7}" contained
+syn match haskellCharOctalEsc            "\\o[0-7]\{1,7}" contained
+syn match haskellCharHexEsc              "\\x[0-9a-fa-f]\{1,6}" contained
+
+syn cluster haskellCharGroup 
+  \ contains=
+  \ haskellCharPrintable,
+  \ haskellCharSingleCharEsc,
+  \ haskellCharAsciiControlCodeEsc,
+  \ haskellCharAsciiControlCharEsc,
+  \ haskellCharDeciEsc,
+  \ haskellCharOctalEsc,
+  \ haskellCharHexEsc
+syn region haskellChar start=+'+ end=+'+
+  \ contains=@haskellCharGroup
+
 syn match haskellType "\<[A-Z][a-zA-Z0-9_']*\>"
 syn region haskellBlockComment start="{-" end="-}"
   \ contains=
@@ -156,6 +179,13 @@ highlight def link haskellPragma SpecialComment
 highlight def link haskellLiquid SpecialComment
 highlight def link haskellString String
 highlight def link haskellChar String
+highlight def link haskellCharPrintable String
+highlight def link haskellCharSingleCharEsc SpecialChar
+highlight def link haskellCharAsciiControlCodeEsc SpecialChar
+highlight def link haskellCharAsciiControlCharEsc SpecialChar
+highlight def link haskellCharDeciEsc SpecialChar
+highlight def link haskellCharOctalEsc SpecialChar
+highlight def link haskellCharHexEsc SpecialChar
 highlight def link haskellBacktick Operator
 highlight def link haskellQuasiQuoted String
 highlight def link haskellTodo Todo
