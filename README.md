@@ -7,6 +7,9 @@ own based on [idris-vim][].
 
 I hope you find this useful.
 
+N.B. If you are looking for `UnicodeSyntax` language extension support
+take a look at a fork of this plugin: [haskell-with-unicode.vim][]
+
 ![Screenshot](http://raichoo.github.io/images/haskell-vim.png)
 
 ## Features
@@ -140,3 +143,4 @@ indentation using *hindent*.
 
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [idris-vim]: https://github.com/idris-hackers/idris-vim
+[haskell-with-unicode.vim]: https://github.com/wenzel-hoffman/haskell-with-unicode.vim
